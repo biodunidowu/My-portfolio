@@ -27,12 +27,12 @@ export default function Header() {
         </span>
       </a>
 
-      <nav className="hidden items-center gap-10 text-sm font-medium md:flex">
+      <nav className="hidden items-center gap-10 md:flex">
         {NAV_LINKS.map((link) => (
           <a
             key={link.href}
             href={link.href}
-            className="text-(--color-muted) transition-colors hover:text-(--color-text)"
+            className="font-noodle leading-none tracking-widest text-[#9CA3AF] uppercase transition-colors hover:text-black"
           >
             {link.label}
           </a>

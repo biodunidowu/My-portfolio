@@ -1,9 +1,19 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Figtree } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
 const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
+
+const noodle = localFont({
+  src: "./fonts/BigNoodleTitling-Regular.woff2",
+  weight: "400",
+  style: "normal",
+  display: "swap",
+  fallback: ["Arial Narrow", "Arial", "sans-serif"],
+  variable: "--font-noodle",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", figtree.variable)}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, noodle.variable, "font-sans", figtree.variable)}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
