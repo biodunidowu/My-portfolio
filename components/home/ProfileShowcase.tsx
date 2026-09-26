@@ -1,0 +1,40 @@
+import { experience } from "@/lib/constants/experience";
+import CopyEmail from "./CopyEmail";
+import ExperienceItem from "./ExperienceItem";
+import VideoPanel from "./VideoPanel";
+
+export default function ProfileShowcase() {
+  return (
+    <section id="about" className="grid md:grid-cols-2">
+      <VideoPanel />
+
+      <div className="flex flex-col justify-center gap-10 px-6 py-14 md:px-16">
+        <div className="max-w-md space-y-5">
+          <p className="text-lg leading-snug">
+            Hey I&apos;m Abiodun, a <strong>Product Designer</strong> and{" "}
+            <strong>tinkerer.</strong>
+          </p>
+
+          <p className="text-sm leading-relaxed text-(--color-muted)">
+            I help startups go from idea to MVP. Over the past 5 years,
+            I&apos;ve led research and product strategy across multiple
+            early-stage teams, working closely with founders to design and ship
+            products people actually use.
+          </p>
+
+          <CopyEmail email="Abiodunidowu1998@gmail.com" />
+        </div>
+
+        <div className="max-w-md space-y-8">
+          <span className="text-xs font-semibold uppercase tracking-wide text-(--color-muted)">
+            Experience
+          </span>
+
+          {experience.map((item) => (
+            <ExperienceItem key={item.company} {...item} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
