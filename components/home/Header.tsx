@@ -10,7 +10,7 @@ const NAV_LINKS = [
 export default function Header() {
   return (
     <header className="flex items-center justify-between border-b border-[#EAECF0] md:px-10">
-      <a href="#home" className="flex items-center gap-3">
+      <a href="#home" className="flex items-center gap-3 ">
         <Image
           src="/images/profile-img.svg"
           alt="Abiodun"
@@ -29,7 +29,7 @@ export default function Header() {
           <a
             key={link.href}
             href={link.href}
-            className="font-noodle leading-none tracking-widest border-x border-x-[#EAECF0] py-8 px-20 text-[#9CA3AF] uppercase transition-colors hover:text-black"
+            className="font-noodle text-lg border-r border-r-[#EAECF0] py-8 px-20 text-[#9CA3AF] uppercase transition-colors duration-200 hover:text-black"
           >
             {link.label}
           </a>

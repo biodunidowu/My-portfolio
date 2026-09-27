@@ -9,13 +9,13 @@ export default function ProfileShowcase() {
       <VideoPanel />
 
       <div className="flex flex-col justify-center gap-10 px-6 py-14 md:px-16">
-        <div className="max-w-md space-y-5">
-          <p className="text-lg leading-snug">
+        <div className="max-w-md space-y-3.5">
+          <p className="leading-snug">
             Hey I&apos;m Abiodun, a <strong>Product Designer</strong> and{" "}
             <strong>tinkerer.</strong>
           </p>
 
-          <p className="text-sm leading-relaxed text-(--color-muted)">
+          <p className="text-sm leading-relaxed text-[#475467]">
             I help startups go from idea to MVP. Over the past 5 years,
             I&apos;ve led research and product strategy across multiple
             early-stage teams, working closely with founders to design and ship
