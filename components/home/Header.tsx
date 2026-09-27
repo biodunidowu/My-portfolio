@@ -9,30 +9,27 @@ const NAV_LINKS = [
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between border-b border-(--color-line) px-6 py-4 md:px-10">
+    <header className="flex items-center justify-between border-b border-[#EAECF0] md:px-10">
       <a href="#home" className="flex items-center gap-3">
         <Image
-          src="/avatar.jpg"
+          src="/images/profile-img.svg"
           alt="Abiodun"
-          width={40}
-          height={40}
+          width={50}
+          height={50}
           className="h-10 w-10 rounded-full object-cover"
         />
 
-        <span
-          className="text-2xl leading-none"
-          style={{ fontFamily: "var(--font-script)" }}
-        >
+        <span className="font-script text-2xl leading-none text-[#98A2B3]">
           Abiodun
         </span>
       </a>
 
-      <nav className="hidden items-center gap-10 md:flex">
+      <nav className="hidden items-center md:flex">
         {NAV_LINKS.map((link) => (
           <a
             key={link.href}
             href={link.href}
-            className="font-noodle leading-none tracking-widest text-[#9CA3AF] uppercase transition-colors hover:text-black"
+            className="font-noodle leading-none tracking-widest border-x border-x-[#EAECF0] py-8 px-20 text-[#9CA3AF] uppercase transition-colors hover:text-black"
           >
             {link.label}
           </a>
@@ -40,9 +37,15 @@ export default function Header() {
       </nav>
 
       <div className="flex items-center gap-5">
-        pad
-        <span className="inline-flex items-center gap-2 rounded-full border border-(--color-line) px-4 py-2 text-sm font-medium">
-          <span className="h-2 w-2 rounded-full bg-(--color-accent)" />
+        <Image
+          src="/images/game-pad.svg"
+          alt="Abiodun"
+          width={24}
+          height={24}
+        />
+
+        <span className="inline-flex items-center gap-2 bg-[#F9FAFB] px-4 py-3 text-sm font-medium font-noodle">
+          <span className="h-2 w-2 rounded-full bg-[#22C55E]" />
           Open to work
         </span>
       </div>
