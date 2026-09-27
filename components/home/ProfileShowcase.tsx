@@ -26,7 +26,7 @@ export default function ProfileShowcase() {
         </div>
 
         <div className="max-w-md space-y-8">
-          <span className="text-xs font-semibold uppercase tracking-wide text-(--color-muted)">
+          <span className="text-sm font-semibold uppercase text-[#101828]">
             Experience
           </span>
 

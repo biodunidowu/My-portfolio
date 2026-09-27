@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Figtree, Meow_Script } from "next/font/google";
+import { Geist, Geist_Mono, Meow_Script, Spline_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
+const splineSans = Spline_Sans({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-sans",
+});
 
 const noodle = localFont({
   src: "./fonts/BigNoodleTitling-Regular.woff2",
@@ -40,7 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, noodle.variable, meowScript.variable, "font-sans", figtree.variable)}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, noodle.variable, meowScript.variable, splineSans.variable, "font-sans")}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
