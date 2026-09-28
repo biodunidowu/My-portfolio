@@ -9,7 +9,7 @@ const NAV_LINKS = [
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between border-b border-[#EAECF0] md:px-10">
+    <header className="flex items-center justify-between border-b border-[#EAECF0] md:px-10 sticky top-0 z-100 bg-white">
       <a href="#home" className="flex items-center gap-3 ">
         <Image
           src="/images/profile-img.svg"

@@ -20,7 +20,7 @@ export default function CopyEmail({ email }: { email: string }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="inline-flex items-center gap-3 rounded-full border border-(--color-line) px-5 py-2.5 text-sm transition-colors hover:border-(--color-text)"
+      className="inline-flex items-center gap-3 px-4 py-2 text-sm text-[#101828] transition-colors bg-[#F2F4F7] underline"
       aria-label="Copy email address"
     >
       {email}
@@ -28,7 +28,7 @@ export default function CopyEmail({ email }: { email: string }) {
       {copied ? (
         <Check className="h-4 w-4" strokeWidth={1.75} />
       ) : (
-        <Copy className="h-4 w-4" strokeWidth={1.75} />
+        <Copy className="h-4 w-4 cursor-pointer" strokeWidth={1.75} />
       )}
     </button>
   );

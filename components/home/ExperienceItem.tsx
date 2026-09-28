@@ -6,7 +6,7 @@ export default function ExperienceItem({
   points,
 }: Experience) {
   return (
-    <div className="grid grid-cols-[110px_1fr] gap-6 md:grid-cols-[140px_1fr]">
+    <div className="grid grid-cols-[130px_1fr] gap-3.5 mt-4">
       <span className="text-sm text-[#667085]">{period}</span>
 
       <div>
@@ -16,9 +16,9 @@ export default function ExperienceItem({
           {points.map((point) => (
             <li
               key={point}
-              className="flex gap-2 text-sm leading-relaxed text-(--color-text)"
+              className="flex gap-2 text-sm leading-relaxed text-[#667085]"
             >
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-(--color-muted)" />
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#667085]" />
               {point}
             </li>
           ))}
