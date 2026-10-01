@@ -7,7 +7,7 @@ export default function ProfileShowcase() {
   return (
     <section
       id="about"
-      className="grid grid-cols-1 items-stretch pl-30 md:grid-cols-[592px_1fr]"
+      className="grid grid-cols-1 items-stretch pl-30 md:grid-cols-[592px_1fr] md:mb-20"
     >
       <VideoPanel />
 

@@ -5,7 +5,7 @@ import WorksMarquee from "@/components/home/WorksMarquee";
 
 export default function Home() {
   return (
-    <main className="bg-[#F9FAFB]">
+    <main id="home" className="bg-[#F9FAFB]">
       <Header />
       <WorksMarquee />
       <ProfileShowcase />
