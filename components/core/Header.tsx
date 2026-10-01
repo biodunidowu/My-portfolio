@@ -1,52 +1,28 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "Works", href: "#works" },
-  { label: "About", href: "#about" },
-  { label: "Contact me", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Works", href: "/works" },
+  { label: "About", href: "/about" },
+  { label: "Contact me", href: "/contact" },
 ];
 
-const SCROLL_SPY_LINKS = NAV_LINKS.filter((link) => link.href !== "#home");
+function isActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export default function Header() {
-  const [activeHref, setActiveHref] = useState("#home");
-
-  useEffect(() => {
-    const sections = SCROLL_SPY_LINKS.map((link) =>
-      document.querySelector<HTMLElement>(link.href),
-    ).filter((section): section is HTMLElement => section !== null);
-
-    const visible = new Set<string>();
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const id = `#${entry.target.id}`;
-          if (entry.isIntersecting) visible.add(id);
-          else visible.delete(id);
-        }
-
-        const next = sections
-          .map((section) => `#${section.id}`)
-          .find((id) => visible.has(id));
-
-        setActiveHref(next ?? "#home");
-      },
-      { rootMargin: "-50% 0px -50% 0px", threshold: 0 },
-    );
-
-    for (const section of sections) observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
+  const pathname = usePathname();
 
   return (
     <header className="flex items-center justify-between border-b border-[#EAECF0] lg:px-10 px-4 py-5 lg:py-0 sticky top-0 z-100 bg-white">
-      <a href="#home" className="flex items-center gap-3 ">
+      <Link href="/" className="flex items-center gap-3 ">
         <Image
           src="/images/profile-img.svg"
           alt="Abiodun"
@@ -58,24 +34,24 @@ export default function Header() {
         <span className="font-script text-2xl leading-none text-[#98A2B3]">
           Abiodun
         </span>
-      </a>
+      </Link>
 
       <nav className="hidden items-center lg:flex">
         {NAV_LINKS.map((link) => {
-          const isActive = activeHref === link.href;
+          const active = isActive(pathname, link.href);
 
           return (
-            <a
+            <Link
               key={link.href}
               href={link.href}
-              aria-current={isActive ? "page" : undefined}
+              aria-current={active ? "page" : undefined}
               className={cn(
                 "font-noodle text-lg border-r border-r-[#EAECF0] first:border-l first:border-l-[#EAECF0] py-8 px-20 uppercase transition-colors duration-200",
-                isActive ? "text-black" : "text-[#9CA3AF] hover:text-black",
+                active ? "text-black" : "text-[#9CA3AF] hover:text-black",
               )}
             >
               {link.label}
-            </a>
+            </Link>
           );
         })}
       </nav>

@@ -20,7 +20,7 @@ export default function WorksMarquee() {
               alt={work.title}
               width={463}
               height={356}
-              className="object-contain"
+              className="h-65.75 w-auto object-contain md:h-auto"
               priority={index < works.length}
             />
           </div>
