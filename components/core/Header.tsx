@@ -45,7 +45,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="flex items-center justify-between border-b border-[#EAECF0] md:px-10 sticky top-0 z-100 bg-white">
+    <header className="flex items-center justify-between border-b border-[#EAECF0] md:px-10 px-4 py-5 md:py-0 sticky top-0 z-100 bg-white">
       <a href="#home" className="flex items-center gap-3 ">
         <Image
           src="/images/profile-img.svg"
@@ -80,7 +80,7 @@ export default function Header() {
         })}
       </nav>
 
-      <div className="flex items-center gap-5">
+      <div className="hidden md:flex items-center gap-5">
         <Image
           src="/images/game-pad.svg"
           alt="Abiodun"
