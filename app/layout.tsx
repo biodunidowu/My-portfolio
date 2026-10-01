@@ -19,6 +19,15 @@ const noodle = localFont({
   variable: "--font-noodle",
 });
 
+const calloveya = localFont({
+  src: "./fonts/Calloveya-Regular.woff",
+  weight: "400",
+  style: "normal",
+  display: "swap",
+  fallback: ["Brush Script MT", "Segoe Script", "cursive"],
+  variable: "--font-signature",
+});
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -44,7 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, noodle.variable, meowScript.variable, splineSans.variable, "font-sans")}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, noodle.variable, meowScript.variable, splineSans.variable, calloveya.variable, "font-sans")}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

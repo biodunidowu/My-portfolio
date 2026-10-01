@@ -1,5 +1,3 @@
-import React from "react";
-import GridLines from "./GridLines";
 import ContactLinks from "./ContactLinks";
 import GlowOrb from "./GlowOrb";
 
@@ -31,7 +29,7 @@ const FooterSection = () => {
 
         <p
           aria-hidden
-          className="font-signature pointer-events-none absolute inset-x-0 bottom-0 select-none text-center text-[6rem] leading-none text-(--color-text) opacity-20 sm:text-[8rem]"
+          className="font-signature pointer-events-none absolute inset-x-0 bottom-0 select-none text-center text-[182.08px] leading-[157.6px] font-normal text-[#98A2B3]"
         >
           Idowu Abiodun
         </p>
