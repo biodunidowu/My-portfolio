@@ -28,8 +28,8 @@ export default function ProfileShowcase() {
           <CopyEmail email="Abiodunidowu1998@gmail.com" />
         </div>
 
-        <div className="max-w-lg space-y-6">
-          <span className="text-sm font-semibold uppercase text-[#101828]">
+        <div className="max-w-lg space-y-6 mt-1 md:mt-0">
+          <span className="uppercase text-[#101828] md:font-medium">
             Experience
           </span>
 
