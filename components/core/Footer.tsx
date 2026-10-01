@@ -3,13 +3,10 @@ import GlowOrb from "./GlowOrb";
 
 const FooterSection = () => {
   return (
-    <footer
-      id="contact"
-      className="relative overflow-hidden py-10 lg:py-20"
-    >
+    <footer id="contact" className="relative overflow-hidden py-10 lg:py-20">
       <div className="relative flex md:flex-row flex-col items-start justify-between px-6 md:px-20">
         <div>
-          <h2 className="max-w-sm text-3xl font-medium mb-10">
+          <h2 className="max-w-sm text-2xl md:text-3xl font-medium mb-10">
             Let&apos;s start a conversation about your project.
           </h2>
 
@@ -29,13 +26,11 @@ const FooterSection = () => {
 
         <p
           aria-hidden
-          className="font-signature pointer-events-none absolute inset-x-0 bottom-0 select-none text-center text-[182.08px] leading-[157.6px] font-normal text-[#98A2B3]"
+          className="font-signature pointer-events-none absolute inset-x-0 bottom-0 select-none text-center lg:text-[182.08px] text-[90px] lg:leading-[157.6px] font-normal text-[#98A2B3]"
         >
           Idowu Abiodun
         </p>
 
-        {/* Accessible, visible text for screen readers / SEO since the
-            script rendering above is decorative and marked aria-hidden. */}
         <span className="sr-only">Idowu Abiodun</span>
       </div>
     </footer>

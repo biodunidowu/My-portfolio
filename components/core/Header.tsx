@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import MobileMenu from "./MobileMenu";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -21,7 +22,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="flex items-center justify-between border-b border-[#EAECF0] lg:px-10 px-4 py-5 lg:py-0 sticky top-0 z-100 bg-white">
+    <header className="flex items-center justify-between border-b border-[#EAECF0] lg:px-10 px-4 py-5 lg:py-0 sticky top-0 z-10 bg-white">
       <Link href="/" className="flex items-center gap-3 ">
         <Image
           src="/images/profile-img.svg"
@@ -35,6 +36,8 @@ export default function Header() {
           Abiodun
         </span>
       </Link>
+
+      <MobileMenu />
 
       <nav className="hidden items-center lg:flex">
         {NAV_LINKS.map((link) => {
