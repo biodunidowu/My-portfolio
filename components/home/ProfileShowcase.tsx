@@ -7,11 +7,11 @@ export default function ProfileShowcase() {
   return (
     <section
       id="about"
-      className="grid grid-cols-1 items-stretch lg:pl-30 md:grid-cols-[592px_1fr] md:mb-20"
+      className="grid grid-cols-1 items-stretch px-4 lg:pl-30 lg:grid-cols-[592px_1fr] md:mb-20"
     >
       <VideoPanel />
 
-      <div className="flex flex-col justify-center gap-10 px-4 py-14 pt-5 md:px-16">
+      <div className="flex flex-col justify-center gap-10 py-14 pt-5 md:px-16">
         <div className="max-w-lg space-y-3.5">
           <p className="leading-snug">
             Hey I&apos;m Abiodun, a <strong>Product Designer</strong> and{" "}
@@ -28,7 +28,7 @@ export default function ProfileShowcase() {
           <CopyEmail email="Abiodunidowu1998@gmail.com" />
         </div>
 
-        <div className="max-w-lg space-y-6 mt-1 md:mt-0">
+        <div className="max-w-xl space-y-6 mt-1 md:mt-0">
           <span className="uppercase text-[#101828] md:font-medium">
             Experience
           </span>

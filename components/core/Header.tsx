@@ -45,7 +45,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="flex items-center justify-between border-b border-[#EAECF0] md:px-10 px-4 py-5 md:py-0 sticky top-0 z-100 bg-white">
+    <header className="flex items-center justify-between border-b border-[#EAECF0] lg:px-10 px-4 py-5 lg:py-0 sticky top-0 z-100 bg-white">
       <a href="#home" className="flex items-center gap-3 ">
         <Image
           src="/images/profile-img.svg"
@@ -60,7 +60,7 @@ export default function Header() {
         </span>
       </a>
 
-      <nav className="hidden items-center md:flex">
+      <nav className="hidden items-center lg:flex">
         {NAV_LINKS.map((link) => {
           const isActive = activeHref === link.href;
 
@@ -80,7 +80,7 @@ export default function Header() {
         })}
       </nav>
 
-      <div className="hidden md:flex items-center gap-5">
+      <div className="hidden lg:flex items-center gap-5">
         <Image
           src="/images/game-pad.svg"
           alt="Abiodun"

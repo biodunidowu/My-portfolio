@@ -6,18 +6,18 @@ export default function ExperienceItem({
   points,
 }: Experience) {
   return (
-    <div className="mt-3 flex flex-col gap-1 md:mt-4 md:grid md:grid-cols-[130px_1fr] md:gap-3.5">
-      <span className="hidden text-sm text-[#667085] md:block">{period}</span>
+    <div className="mt-3 flex flex-col gap-1 lg:mt-4 lg:grid lg:grid-cols-[130px_1fr] lg:gap-3.5">
+      <span className="hidden text-sm text-[#667085] lg:block">{period}</span>
 
       <div>
         <h3 className="font-semibold">
           {company}{" "}
-          <span className="font-normal text-[#667085] md:hidden">
+          <span className="font-normal text-[#667085] lg:hidden">
             ({period})
           </span>
         </h3>
 
-        <ul className="mt-2 space-y-2.5 md:space-y-2">
+        <ul className="mt-2 space-y-2.5 lg:space-y-2">
           {points.map((point) => (
             <li
               key={point}

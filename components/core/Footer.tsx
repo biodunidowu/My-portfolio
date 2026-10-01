@@ -5,7 +5,7 @@ const FooterSection = () => {
   return (
     <footer
       id="contact"
-      className="relative overflow-hidden py-10 md:py-20"
+      className="relative overflow-hidden py-10 lg:py-20"
     >
       <div className="relative flex md:flex-row flex-col items-start justify-between px-6 md:px-20">
         <div>
