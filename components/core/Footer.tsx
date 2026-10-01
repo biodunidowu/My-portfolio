@@ -5,9 +5,9 @@ const FooterSection = () => {
   return (
     <footer
       id="contact"
-      className="relative overflow-hidden py-20"
+      className="relative overflow-hidden py-10 md:py-20"
     >
-      <div className="relative flex items-start justify-between px-6 md:px-20">
+      <div className="relative flex md:flex-row flex-col items-start justify-between px-6 md:px-20">
         <div>
           <h2 className="max-w-sm text-3xl font-medium mb-10">
             Let&apos;s start a conversation about your project.
