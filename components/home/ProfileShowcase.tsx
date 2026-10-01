@@ -5,10 +5,13 @@ import VideoPanel from "./VideoPanel";
 
 export default function ProfileShowcase() {
   return (
-    <section id="about" className="flex justify-betwee pl-30">
+    <section
+      id="about"
+      className="grid grid-cols-1 items-stretch pl-30 md:grid-cols-[592px_1fr]"
+    >
       <VideoPanel />
 
-      <div className="flex flex-col justify-center gap-10 px-6 py-14 md:px-16">
+      <div className="flex flex-col justify-center gap-10 px-6 py-14 pt-5 md:px-16">
         <div className="max-w-lg space-y-3.5">
           <p className="leading-snug">
             Hey I&apos;m Abiodun, a <strong>Product Designer</strong> and{" "}
