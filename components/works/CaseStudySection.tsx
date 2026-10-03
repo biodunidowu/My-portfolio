@@ -39,13 +39,15 @@ export default function CaseStudySection({ section }: { section: Section }) {
   }
 
   return (
-    <a
-      href={section.href}
-      target="_blank"
-      rel="noreferrer"
-      className="inline-block border border-[#101828] px-4 py-2 text-sm font-medium transition-opacity hover:opacity-70"
-    >
-      {section.label}
-    </a>
+    <div>
+      <a
+        href={section.href}
+        target="_blank"
+        rel="noreferrer"
+        className="bg-[#F2F4F7] my-9 px-4 py-3 w-16 text-sm font-medium transition-opacity hover:opacity-70 underline"
+      >
+        {section.label}
+      </a>
+    </div>
   );
 }

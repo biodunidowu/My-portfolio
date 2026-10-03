@@ -38,7 +38,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "cwito",
     brand: {
       name: "Cwito",
-      logoSrc: "/images/case-cwito.png",
+      logoSrc: "/images/cwito-logo.svg",
       role: "Product Designer (Full-time)",
     },
     visual: {
@@ -70,7 +70,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "liveLink",
         label: "Live Link",
-        href: "https://cwito.example.com",
+        href: "https://www.cwito.com/",
       },
       {
         type: "paragraph",
