@@ -10,7 +10,7 @@ export default function CaseStudyPage({ caseStudy }: { caseStudy: CaseStudy }) {
     <div>
       <Header />
 
-      <div className="grid grid-cols-1 gap-16 px-4 md:px-12 py-16 lg:grid-cols-2 lg:gap-12 bg-[#F9FAFB]">
+      <div className="grid grid-cols-1 gap-16 px-4 md:px-12 py-8 md:py-16 lg:grid-cols-2 lg:gap-12 bg-[#F9FAFB]">
         <div className="space-y-10">
           <CaseStudyHeader brand={caseStudy.brand} />
 

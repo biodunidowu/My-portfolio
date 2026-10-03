@@ -39,14 +39,14 @@ export default function CaseStudyVisual({
         type="button"
         onClick={onNext}
         aria-label="Next project"
-        className="absolute right-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg transition-transform hover:scale-105"
+        className="absolute right-17.5 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg transition-transform hover:scale-105"
       >
         <ChevronRight className="h-5 w-5" strokeWidth={1.75} />
       </button>
 
       <a
         href="#next-project"
-        className="absolute -bottom-24 right-0 border border-[#101828] bg-white px-5 py-2 text-xs font-semibold uppercase tracking-wide underline underline-offset-2"
+        className="absolute -bottom-8 right-0 shadow-sm hover:shadow-md transition-all duration-300 rounded-[12px] bg-white px-5 py-5 text-2xl font-noodle uppercase underline underline-offset-2"
       >
         Next project
       </a>
