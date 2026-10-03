@@ -33,7 +33,7 @@ const MobileMenu = () => {
         <button
           type="button"
           aria-label="Open menu"
-          className="p-2 bg-[#F9FAFB] lg:hidden"
+          className="p-2 bg-[#F9FAFB] xl:hidden"
         >
           <Image src="/images/menu.svg" width={24} height={24} alt="" />
         </button>
