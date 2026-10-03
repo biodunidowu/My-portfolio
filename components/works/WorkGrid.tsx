@@ -10,6 +10,7 @@ export default function WorksGrid() {
             alt="celler"
             height={546}
             width={379}
+            loading="eager"
           />
         </div>
 
