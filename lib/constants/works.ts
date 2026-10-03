@@ -14,3 +14,4 @@ export const works: Work[] = [
   { id: 7, title: "Image 7", src: "/images/Frame 21.png" },
   { id: 8, title: "Image 8", src: "/images/Frame 22.png" },
 ];
+
