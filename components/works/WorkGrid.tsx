@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function WorksGrid() {
   return (
     <div className="flex flex-col gap-11.5">
-      <div className="grid grid-cols-[repeat(3,max-content)] gap-6 place-content-center">
+      <div className="grid xl:grid-cols-[repeat(3,max-content)] md:grid-cols-2 gap-6 place-content-center">
         <div className="cursor-pointer">
           <Image
             src="/images/celler.svg"

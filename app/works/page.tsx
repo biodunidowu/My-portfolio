@@ -1,3 +1,4 @@
+import FooterSection from "@/components/core/Footer";
 import Header from "@/components/core/Header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WorksGrid from "@/components/works/WorkGrid";
@@ -33,7 +34,9 @@ const Works = () => {
 
           <TabsContent value="personal-explorations"></TabsContent>
         </Tabs>
-      </section>
+          </section>
+          
+          <FooterSection/>
     </div>
   );
 };
