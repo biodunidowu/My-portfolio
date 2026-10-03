@@ -1,14 +1,15 @@
 import Header from "@/components/core/Header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import WorksGrid from "@/components/works/WorkGrid";
 
 const Works = () => {
   return (
-    <div>
+    <div className="bg-[#F9FAFB]">
       <Header />
 
-      <section id="works" className="px-6 py-20">
+      <section id="works" className="px-6 lg:py-16 py-8">
         <Tabs defaultValue="case-studies" className="w-full">
-          <div className="mb-16 flex justify-center">
+          <div className="flex justify-center">
             <TabsList className="gap-1 rounded-[12px] p-3! h-16.25 border border-[#EAECF0] bg-white md:w-114">
               <TabsTrigger
                 value="case-studies"
@@ -27,7 +28,7 @@ const Works = () => {
           </div>
 
           <TabsContent value="case-studies">
-            {/* <WorksGrid items={caseStudies} /> */}
+            <WorksGrid />
           </TabsContent>
 
           <TabsContent value="personal-explorations"></TabsContent>

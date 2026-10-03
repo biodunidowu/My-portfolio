@@ -22,7 +22,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="flex items-center justify-between border-b border-[#EAECF0] lg:px-10 px-4 py-5 lg:py-0 sticky top-0 z-10 bg-white">
+    <header className="flex items-center justify-between border-b border-[#EAECF0] xl:px-10 px-4 py-5 xl:py-0 sticky top-0 z-10 bg-white">
       <Link href="/" className="flex items-center gap-3 ">
         <Image
           src="/images/profile-img.svg"
@@ -39,7 +39,7 @@ export default function Header() {
 
       <MobileMenu />
 
-      <nav className="hidden items-center lg:flex">
+      <nav className="hidden items-center xl:flex">
         {NAV_LINKS.map((link) => {
           const active = isActive(pathname, link.href);
 
@@ -59,7 +59,7 @@ export default function Header() {
         })}
       </nav>
 
-      <div className="hidden lg:flex items-center gap-5">
+      <div className="hidden xl:flex items-center gap-5">
         <Image
           src="/images/game-pad.svg"
           alt="Abiodun"
