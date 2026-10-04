@@ -38,6 +38,14 @@ export default function CaseStudySection({ section }: { section: Section }) {
     );
   }
 
+  if (section.type === "status") {
+    return (
+      <span className="inline-block bg-[#EAECF0] px-4 py-2 text-sm font-medium text-[#344054]">
+        {section.label}
+      </span>
+    );
+  }
+
   return (
     <div>
       <a

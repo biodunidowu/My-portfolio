@@ -18,6 +18,7 @@ export const works: Work[] = [
 export type CaseStudySection =
   | { type: "paragraph"; heading?: string; body: string }
   | { type: "list"; heading?: string; items: string[] }
+  | { type: "status"; label: string }
   | { type: "liveLink"; label: string; href: string };
 
 export type CaseStudy = {
@@ -81,6 +82,48 @@ export const caseStudies: CaseStudy[] = [
         type: "paragraph",
         heading: "What I took from it",
         body: "Design doesn't ship in a vacuum. It sharpened how I think about de-risking features early — pushing for clearer success metrics and go-to-market alignment before investing deep design effort.",
+      },
+    ],
+  },
+
+  {
+    slug: "tawq",
+    brand: {
+      name: "Tawq",
+      logoSrc: "/works/tawq-logo.svg",
+      role: "Product Designer (Full-time)",
+    },
+    visual: {
+      backgroundSrc: "/works/tawq-field.jpg",
+    },
+    sections: [
+      {
+        type: "paragraph",
+        heading: "Overview",
+        body: "Tawq is an e-bike battery subscription and swapping platform. Riders pay a subscription fee and swap depleted batteries for charged ones at network stations instead of owning and charging one themselves. I joined to design across mobile, admin, and customer-facing surfaces for a platform now in production.",
+      },
+      {
+        type: "paragraph",
+        heading: "The Problem",
+        body: "Market research and the business model were already defined before I joined. The challenge was translating a new hardware-connected model — batteries, IoT-enabled bikes, physical swap stations — into interfaces that felt simple for everyday riders and gave admins real-time control over a live fleet.",
+      },
+      {
+        type: "list",
+        heading: "Scope of Work",
+        items: [
+          "Users Mobile App: Battery status and range estimator, swap station map with live inventory, dual-wallet system (active balance + collateral), and the end-to-end battery swap flow.",
+          "Admin Dashboard: Fleet metrics, rider and wallet oversight, live GPS asset tracking, and swap station monitoring.",
+          "Customer Dashboard: Telemetry view for fleet-partner clients to track their assigned bikes and usage.",
+        ],
+      },
+      {
+        type: "paragraph",
+        heading: "Learnings and Takeaways",
+        body: "This was my first project designing for a real-time, hardware-connected system, figuring out how to make battery health instantly trustworthy for a rider, and remote actions (like disabling a bike) feel deliberate rather than risky for admins. Designing three interconnected surfaces on a two-month timeline also sharpened how I keep consistency across very different user types.",
+      },
+      {
+        type: "status",
+        label: "Status: Currently in Development",
       },
     ],
   },

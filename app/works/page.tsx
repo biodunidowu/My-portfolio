@@ -34,9 +34,9 @@ const Works = () => {
 
           <TabsContent value="personal-explorations"></TabsContent>
         </Tabs>
-          </section>
-          
-          <FooterSection/>
+      </section>
+
+      <FooterSection />
     </div>
   );
 };
