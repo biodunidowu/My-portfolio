@@ -54,7 +54,7 @@ export const caseStudies: CaseStudy[] = [
       role: "Product Designer (Full-time)",
     },
     visual: {
-      backgroundSrc: "/images/case-cwito.png",
+      backgroundSrc: "/images/case-cwito.svg",
     },
     sections: [
       {
@@ -101,11 +101,11 @@ export const caseStudies: CaseStudy[] = [
     slug: "tawq",
     brand: {
       name: "Tawq",
-      logoSrc: "/works/tawq-logo.svg",
-      role: "Product Designer (Full-time)",
+      logoSrc: "/images/tawq-logo.svg",
+      role: "Product Designer (Contract)",
     },
     visual: {
-      backgroundSrc: "/works/tawq-field.jpg",
+      backgroundSrc: "/images/case-tawq.svg",
     },
     sections: [
       {
@@ -135,6 +135,95 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "status",
         label: "Status: Currently in Development",
+      },
+    ],
+  },
+
+  {
+    slug: "rhoblo",
+    brand: {
+      name: "Rhoblo",
+      logoSrc: "/images/rhoblo-logo.svg",
+      role: "Product Designer (Contract)",
+    },
+    visual: {
+      backgroundSrc: "/images/case-rhoblo.svg",
+    },
+    sections: [
+      {
+        type: "paragraph",
+        heading: "Overview",
+        body: "Rhoblo is a food and grocery delivery platform, recently launched in Uyo, Akwa Ibom. It connects customers, local vendors, and riders on one platform covering everything from restaurant orders to grocery delivery with real-time tracking. I designed the entire product end-to-end: landing page, customer app, rider app, vendor dashboard, and admin dashboard.",
+      },
+      {
+        type: "paragraph",
+        heading: "The Problem",
+        body: "As a ground-up build, the challenge was designing four distinct, interconnected experiences — customer, vendor, rider, and admin — that each needed to feel simple on their own while working together as one coherent system, ahead of a real market launch in Uyo.",
+      },
+      {
+        type: "list",
+        heading: "Scope of Work",
+        items: [
+          "Customer App: Vendor and dish browsing, ordering and checkout, live order and rider tracking.",
+          "Rider App: Order pickups, delivery flow, and earnings/payout tracking.",
+          "Vendor Dashboard: Menu management, order handling, and performance analytics.",
+          "Admin Dashboard: Platform-wide oversight across users, vendors, and orders.",
+          "Landing Page: Marketing site for the Uyo launch, with role-segmented sign-up flows for customers, vendors, and riders.",
+        ],
+      },
+      {
+        type: "paragraph",
+        heading: "Impact",
+        body: "Rhoblo is live and operating in Uyo. Early feedback from the founding team has been positive since launch.",
+      },
+      {
+        type: "liveLink",
+        label: "Live Link",
+        href: "https://rhoblo.example.com",
+      },
+    ],
+  },
+
+  {
+    slug: "celler",
+    brand: {
+      name: "Celler",
+      logoSrc: "/images/celler-logo.svg",
+      role: "Product Designer (Contract)",
+    },
+    visual: {
+      backgroundSrc: "/images/case-celler.svg",
+    },
+    sections: [
+      {
+        type: "paragraph",
+        heading: "Overview",
+        body: "Celler is a crypto wallet platform that lets users hold, send, and manage multiple digital assets in one place. The team was preparing to release V2 — a significant upgrade to the existing product — and brought me on as a contract designer to lead the redesign.",
+      },
+      {
+        type: "paragraph",
+        heading: "The Problem",
+        body: "The team needed a V2 that felt more modern and capable than the existing product, but had a tight deadline to hit. There was no room for a long discovery phase — the challenge was translating a clear set of goals into shipped, polished screens quickly, without the redesign feeling rushed or inconsistent.",
+      },
+      {
+        type: "list",
+        heading: "Scope of Work",
+        items: [
+          "Redesigned the core wallet experience — home screen, balances, and transaction flows for V2.",
+          "Introduced a swap feature, letting users convert directly between assets (e.g. BTC to USDT) within the app, a capability the previous version lacked.",
+          "Extended the design to a web app version, ensuring consistency across mobile and desktop.",
+          "Worked within a dark-themed UI system, balancing dense financial data (multiple assets, live rates, balances) with clarity and visual hierarchy.",
+        ],
+      },
+      {
+        type: "paragraph",
+        heading: "Impact",
+        body: "While the engagement was short-term and I don't have platform-wide metrics to share, the V2 shipped successfully within the deadline — covering mobile, web, and marketing surfaces in a single fast-paced cycle. The swap feature in particular filled a functional gap in the original product, giving users a reason to manage multiple assets in one place rather than moving between apps.",
+      },
+      {
+        type: "liveLink",
+        label: "Live Link",
+        href: "https://celler.example.com",
       },
     ],
   },
