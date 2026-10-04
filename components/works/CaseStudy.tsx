@@ -7,7 +7,15 @@ import Header from "../core/Header";
 import FooterSection from "../core/Footer";
 import Link from "next/link";
 
-export default function CaseStudyPage({ caseStudy }: { caseStudy: CaseStudy }) {
+export default function CaseStudyPage({
+  caseStudy,
+  prevSlug,
+  nextSlug,
+}: {
+  caseStudy: CaseStudy;
+  prevSlug?: string;
+  nextSlug?: string;
+}) {
   return (
     <div className="bg-[#F9FAFB]">
       <Header />
@@ -27,7 +35,11 @@ export default function CaseStudyPage({ caseStudy }: { caseStudy: CaseStudy }) {
           </div>
 
           <div className="lg:sticky lg:top-16 lg:h-fit">
-            <CaseStudyVisual visual={caseStudy.visual} />
+            <CaseStudyVisual
+              visual={caseStudy.visual}
+              prevSlug={prevSlug}
+              nextSlug={nextSlug}
+            />
           </div>
         </div>
       </div>

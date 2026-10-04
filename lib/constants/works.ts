@@ -34,6 +34,17 @@ export type CaseStudy = {
   sections: CaseStudySection[];
 };
 
+export function getSiblingSlugs(slug: string) {
+  const index = caseStudies.findIndex((cs) => cs.slug === slug);
+  if (index === -1) return { prevSlug: undefined, nextSlug: undefined };
+
+  const last = caseStudies.length - 1;
+  return {
+    prevSlug: caseStudies[index === 0 ? last : index - 1].slug,
+    nextSlug: caseStudies[index === last ? 0 : index + 1].slug,
+  };
+}
+
 export const caseStudies: CaseStudy[] = [
   {
     slug: "cwito",

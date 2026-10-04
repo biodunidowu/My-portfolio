@@ -1,6 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function WorksGrid() {
+  const { push } = useRouter();
+
   return (
     <div className="flex flex-col gap-11.5">
       <div className="grid xl:grid-cols-[repeat(3,max-content)] md:grid-cols-2 gap-6 place-content-center">
@@ -14,7 +18,7 @@ export default function WorksGrid() {
           />
         </div>
 
-        <div className="cursor-pointer">
+        <div className="cursor-pointer" onClick={() => push("/works/cwito")}>
           <Image src="/images/cwito.svg" alt="cwito" height={546} width={379} />
         </div>
 

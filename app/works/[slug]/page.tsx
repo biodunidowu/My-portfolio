@@ -1,5 +1,5 @@
 import CaseStudyPage from "@/components/works/CaseStudy";
-import { caseStudies } from "@/lib/constants/works";
+import { caseStudies, getSiblingSlugs } from "@/lib/constants/works";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -11,5 +11,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const caseStudy = caseStudies.find((cs) => cs.slug === slug);
   if (!caseStudy) notFound();
 
-  return <CaseStudyPage caseStudy={caseStudy} />;
+  const { prevSlug, nextSlug } = getSiblingSlugs(slug);
+
+  return (
+    <CaseStudyPage caseStudy={caseStudy} prevSlug={prevSlug} nextSlug={nextSlug} />
+  );
 }
