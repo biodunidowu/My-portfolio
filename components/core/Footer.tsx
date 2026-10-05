@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ContactLinks from "./ContactLinks";
 import GlowOrb from "./GlowOrb";
 
@@ -10,12 +11,12 @@ const FooterSection = () => {
             Let&apos;s start a conversation about your project.
           </h2>
 
-          <a
-            href="#book-a-call"
+          <Link
+            href="/contact"
             className="rounded-[12px] shadow-sm bg-white px-3 py-5.5 font-medium uppercase underline underline-offset-2 transition-opacity hover:opacity-70 font-noodle text-2xl"
           >
             Book a call
-          </a>
+          </Link>
         </div>
 
         <ContactLinks />

@@ -5,23 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { isActiveNavLink, navLinks } from "@/lib/constants/navigation";
+import { forwardNav } from "@/lib/transitions";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Works", href: "/works" },
-  { label: "About", href: "/about" },
-  { label: "Contact me", href: "/contact" },
-];
-
-function isActive(pathname: string, href: string) {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
 
 const MobileMenu = () => {
   const pathname = usePathname();
@@ -29,14 +19,11 @@ const MobileMenu = () => {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger>
-        <button
-          type="button"
-          aria-label="Open menu"
-          className="p-2 bg-[#F9FAFB] xl:hidden"
-        >
-          <Image src="/images/menu.svg" width={24} height={24} alt="" />
-        </button>
+      <PopoverTrigger
+        aria-label="Open menu"
+        className="p-2 bg-[#F9FAFB] xl:hidden"
+      >
+        <Image src="/images/menu.svg" width={24} height={24} alt="" />
       </PopoverTrigger>
 
       <PopoverContent
@@ -45,13 +32,14 @@ const MobileMenu = () => {
         className="w-88 max-w-sm divide-y divide-[#EAECF0] overflow-hidden p-0 gap-0 rounded-none z-200 pb-4"
       >
         <div className="p-4 pb-0">
-          {NAV_LINKS.map((link) => {
-            const active = isActive(pathname, link.href);
+          {navLinks.map((link) => {
+            const active = isActiveNavLink(pathname, link.href);
 
             return (
               <Link
                 key={link.href}
                 href={link.href}
+                transitionTypes={[...forwardNav]}
                 onClick={() => setOpen(false)}
                 aria-current={active ? "page" : undefined}
                 className={cn(

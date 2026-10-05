@@ -14,6 +14,10 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const { prevSlug, nextSlug } = getSiblingSlugs(slug);
 
   return (
-    <CaseStudyPage caseStudy={caseStudy} prevSlug={prevSlug} nextSlug={nextSlug} />
+    <CaseStudyPage
+      caseStudy={caseStudy}
+      prevSlug={prevSlug}
+      nextSlug={nextSlug}
+    />
   );
 }
