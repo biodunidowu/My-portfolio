@@ -4,7 +4,7 @@ import GlowOrb from "./GlowOrb";
 
 const FooterSection = () => {
   return (
-    <footer id="contact" className="relative overflow-hidden py-10 lg:py-20">
+    <footer className="relative z-10 overflow-hidden py-10 lg:py-20 bg-[#F9FAFB]">
       <div className="relative flex md:flex-row flex-col items-start justify-between px-6 md:px-20">
         <div>
           <h2 className="max-w-sm text-2xl md:text-3xl font-medium mb-10">

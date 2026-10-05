@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/core/Header";
-import FooterSection from "@/components/core/Footer";
 
 const splineSans = Spline_Sans({
   subsets: ["latin"],
@@ -56,12 +55,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, noodle.variable, meowScript.variable, splineSans.variable, calloveya.variable, "font-sans")}
+      className={cn(
+        "h-full",
+        "antialiased",
+        geistSans.variable,
+        geistMono.variable,
+        noodle.variable,
+        meowScript.variable,
+        splineSans.variable,
+        calloveya.variable,
+        "font-sans",
+      )}
     >
       <body className="min-h-full flex flex-col bg-[#F9FAFB]">
         <Header />
         {children}
-        <FooterSection />
       </body>
     </html>
   );

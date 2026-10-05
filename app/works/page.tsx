@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WorksGrid from "@/components/works/WorkGrid";
 import { pageTransition } from "@/lib/transitions";
 import PersonalExplorations from "@/components/works/PersonalExplorations";
+import FooterSection from "@/components/core/Footer";
 
 const Works = () => {
   return (
@@ -36,6 +37,8 @@ const Works = () => {
           </TabsContent>
         </Tabs>
       </main>
+
+      <FooterSection />
     </ViewTransition>
   );
 };
