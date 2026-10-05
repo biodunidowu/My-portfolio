@@ -2,6 +2,7 @@ import { ViewTransition } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WorksGrid from "@/components/works/WorkGrid";
 import { pageTransition } from "@/lib/transitions";
+import PersonalExplorations from "@/components/works/PersonalExplorations";
 
 const Works = () => {
   return (
@@ -30,7 +31,9 @@ const Works = () => {
             <WorksGrid />
           </TabsContent>
 
-          <TabsContent value="personal-explorations"></TabsContent>
+          <TabsContent value="personal-explorations">
+            <PersonalExplorations />
+          </TabsContent>
         </Tabs>
       </main>
     </ViewTransition>

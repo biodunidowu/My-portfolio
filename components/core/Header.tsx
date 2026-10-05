@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <header
       style={{ viewTransitionName: "site-header" }}
-      className="flex items-center justify-between border-b border-[#EAECF0] xl:px-10 px-4 py-5 xl:py-0 sticky top-0 z-10 bg-white"
+      className="flex items-center justify-between border-b border-[#EAECF0] xl:px-10 px-4 py-5 xl:py-0 sticky top-0 z-100 bg-white"
     >
       <Link href="/" transitionTypes={[...forwardNav]} className="flex items-center gap-3 ">
         <Image
