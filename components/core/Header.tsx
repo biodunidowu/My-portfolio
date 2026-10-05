@@ -4,26 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { isActiveNavLink, navLinks } from "@/lib/constants/navigation";
+import { forwardNav } from "@/lib/transitions";
 import MobileMenu from "./MobileMenu";
-
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Works", href: "/works" },
-  { label: "About", href: "/about" },
-  { label: "Contact me", href: "/contact" },
-];
-
-function isActive(pathname: string, href: string) {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
 
 export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="flex items-center justify-between border-b border-[#EAECF0] xl:px-10 px-4 py-5 xl:py-0 sticky top-0 z-10 bg-white">
-      <Link href="/" className="flex items-center gap-3 ">
+    <header
+      style={{ viewTransitionName: "site-header" }}
+      className="flex items-center justify-between border-b border-[#EAECF0] xl:px-10 px-4 py-5 xl:py-0 sticky top-0 z-100 bg-white"
+    >
+      <Link href="/" transitionTypes={[...forwardNav]} className="flex items-center gap-3 ">
         <Image
           src="/images/profile-img.svg"
           alt="Abiodun"
@@ -40,13 +33,14 @@ export default function Header() {
       <MobileMenu />
 
       <nav className="hidden items-center xl:flex">
-        {NAV_LINKS.map((link) => {
-          const active = isActive(pathname, link.href);
+        {navLinks.map((link) => {
+          const active = isActiveNavLink(pathname, link.href);
 
           return (
             <Link
               key={link.href}
               href={link.href}
+              transitionTypes={[...forwardNav]}
               aria-current={active ? "page" : undefined}
               className={cn(
                 "font-noodle text-lg border-r border-r-[#EAECF0] first:border-l first:border-l-[#EAECF0] py-8 px-20 uppercase transition-colors duration-200",

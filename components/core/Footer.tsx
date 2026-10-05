@@ -1,21 +1,22 @@
+import Link from "next/link";
 import ContactLinks from "./ContactLinks";
 import GlowOrb from "./GlowOrb";
 
 const FooterSection = () => {
   return (
-    <footer id="contact" className="relative overflow-hidden py-10 lg:py-20">
+    <footer className="relative z-10 overflow-hidden py-10 lg:py-20 bg-[#F9FAFB]">
       <div className="relative flex md:flex-row flex-col items-start justify-between px-6 md:px-20">
         <div>
           <h2 className="max-w-sm text-2xl md:text-3xl font-medium mb-10">
             Let&apos;s start a conversation about your project.
           </h2>
 
-          <a
-            href="#book-a-call"
+          <Link
+            href="/contact"
             className="rounded-[12px] shadow-sm bg-white px-3 py-5.5 font-medium uppercase underline underline-offset-2 transition-opacity hover:opacity-70 font-noodle text-2xl"
           >
             Book a call
-          </a>
+          </Link>
         </div>
 
         <ContactLinks />

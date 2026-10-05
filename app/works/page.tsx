@@ -1,14 +1,14 @@
-import FooterSection from "@/components/core/Footer";
-import Header from "@/components/core/Header";
+import { ViewTransition } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WorksGrid from "@/components/works/WorkGrid";
+import { pageTransition } from "@/lib/transitions";
+import PersonalExplorations from "@/components/works/PersonalExplorations";
+import FooterSection from "@/components/core/Footer";
 
 const Works = () => {
   return (
-    <div className="bg-[#F9FAFB]">
-      <Header />
-
-      <section id="works" className="px-6 lg:py-16 py-8">
+    <ViewTransition {...pageTransition}>
+      <main id="works" className="px-6 lg:py-16 py-8">
         <Tabs defaultValue="case-studies" className="w-full">
           <div className="flex justify-center">
             <TabsList className="gap-1 rounded-[12px] p-3! h-16.25 border border-[#EAECF0] bg-white md:w-114">
@@ -32,12 +32,14 @@ const Works = () => {
             <WorksGrid />
           </TabsContent>
 
-          <TabsContent value="personal-explorations"></TabsContent>
+          <TabsContent value="personal-explorations">
+            <PersonalExplorations />
+          </TabsContent>
         </Tabs>
-          </section>
-          
-          <FooterSection/>
-    </div>
+      </main>
+
+      <FooterSection />
+    </ViewTransition>
   );
 };
 
