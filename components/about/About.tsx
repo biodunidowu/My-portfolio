@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function About({ content }: { content: AboutContent }) {
   return (
     <section className="relative bg-[#F9FAFB] pb-16">
-      <div className="relative z-10 px-6 w-[530px]">
-        <div className="bg-white px-8 py-6 shadow-sm">
+      <div className="relative z-10 px-6 lg:w-132.5">
+        <div className="bg-white px-8 py-6 shadow-sm rounded-lg">
           <h1 className="font-noodle text-2xl uppercase">About me</h1>
         </div>
       </div>
