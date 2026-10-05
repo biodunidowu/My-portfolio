@@ -43,6 +43,7 @@ export default function CaseStudyVisual({
           className={`${chevronClass} left-4`}
         >
           <ChevronLeft className="h-5 w-5" strokeWidth={1.75} />
+          
         </Link>
       ) : (
         <span
@@ -59,7 +60,7 @@ export default function CaseStudyVisual({
           transitionTypes={[...forwardNav]}
           scroll={false}
           aria-label="Next project"
-          className={`${chevronClass} right-17.5`}
+          className={`${chevronClass} right-4`}
         >
           <ChevronRight className="h-5 w-5" strokeWidth={1.75} />
         </Link>

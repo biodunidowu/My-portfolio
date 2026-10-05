@@ -30,12 +30,21 @@ export default function CaseStudyPage({
           <div className="space-y-10">
             <CaseStudyHeader brand={caseStudy.brand} />
 
+            <div className="lg:sticky lg:top-16 lg:h-fit md:hidden block">
+              <CaseStudyVisual
+                slug={caseStudy.slug}
+                visual={caseStudy.visual}
+                prevSlug={prevSlug}
+                nextSlug={nextSlug}
+              />
+            </div>
+
             {caseStudy.sections.map((section, i) => (
               <CaseStudySection key={i} section={section} />
             ))}
           </div>
 
-          <div className="lg:sticky lg:top-16 lg:h-fit">
+          <div className="lg:sticky lg:top-16 lg:h-fit hidden md:block">
             <CaseStudyVisual
               slug={caseStudy.slug}
               visual={caseStudy.visual}
