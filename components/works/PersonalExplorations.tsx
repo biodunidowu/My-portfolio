@@ -59,7 +59,7 @@ export default function PersonalExplorations() {
 
       <SheetContent
         side="bottom"
-        className=" data-[side=bottom]:max-h-screen w-full max-w-none overflow-y-auto bg-[#F9FAFB] p-0 backdrop-blur-sm"
+        className="inset-x-0 bottom-0 top-(--header-height) z-[110]! h-[calc(100dvh-var(--header-height))] max-h-none w-full max-w-none overflow-y-auto bg-[#F9FAFB] p-0"
       >
         <div className="flex items-center justify-between bg-white px-6 py-6 md:px-10">
           <SheetTitle className="font-noodle text-xl uppercase">
