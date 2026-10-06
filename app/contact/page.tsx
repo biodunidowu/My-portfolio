@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { ViewTransition } from "react";
-import ContactLinks from "@/components/core/ContactLinks";
-import CopyEmail from "@/components/home/CopyEmail";
 import { pageTransition } from "@/lib/transitions";
 import FooterSection from "@/components/core/Footer";
 

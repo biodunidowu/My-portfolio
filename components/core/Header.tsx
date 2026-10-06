@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,16 +6,25 @@ import { cn } from "@/lib/utils";
 import { isActiveNavLink, navLinks } from "@/lib/constants/navigation";
 import { forwardNav } from "@/lib/transitions";
 import MobileMenu from "./MobileMenu";
+import { useRef } from "react";
+import { useHeaderHeightVar } from "@/lib/hooks/useHeaderHeightVar";
 
 export default function Header() {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
+  useHeaderHeightVar(headerRef);
 
   return (
     <header
       style={{ viewTransitionName: "site-header" }}
+      ref={headerRef}
       className="flex items-center justify-between border-b border-[#EAECF0] xl:px-10 px-4 py-5 xl:py-0 sticky top-0 z-100 bg-white"
     >
-      <Link href="/" transitionTypes={[...forwardNav]} className="flex items-center gap-3 ">
+      <Link
+        href="/"
+        transitionTypes={[...forwardNav]}
+        className="flex items-center gap-3 "
+      >
         <Image
           src="/images/profile-img.svg"
           alt="Abiodun"
