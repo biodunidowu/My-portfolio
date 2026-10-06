@@ -42,14 +42,16 @@ function SheetContent({
   children,
   side = "right",
   showCloseButton = true,
+  overlayClassName,
   ...props
 }: SheetPrimitive.Popup.Props & {
   side?: "top" | "right" | "bottom" | "left"
   showCloseButton?: boolean
+  overlayClassName?: string
 }) {
   return (
     <SheetPortal>
-      <SheetOverlay />
+      <SheetOverlay className={overlayClassName} />
       <SheetPrimitive.Popup
         data-slot="sheet-content"
         data-side={side}
@@ -63,15 +65,15 @@ function SheetContent({
         {showCloseButton && (
           <SheetPrimitive.Close
             data-slot="sheet-close"
-            render={
-              <Button
-                variant="ghost"
-                className="absolute top-4 right-4"
-                size="icon-sm"
-              />
-            }
+            // render={
+            //   <Button
+            //     variant="ghost"
+            //     className="absolute top-4 right-4"
+            //     size="icon-sm"
+            //   />
+            // }
           >
-            <HugeiconsIcon icon={Cancel01Icon} strokeWidth={2} />
+            {/* <HugeiconsIcon icon={Cancel01Icon} strokeWidth={2} /> */}
             <span className="sr-only">Close</span>
           </SheetPrimitive.Close>
         )}

@@ -40,7 +40,7 @@ export default function PersonalExplorations() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2 mt-5">
         {explorations.map((exploration, i) => (
           <SheetTrigger
             key={exploration.id}
@@ -59,6 +59,7 @@ export default function PersonalExplorations() {
 
       <SheetContent
         side="bottom"
+        overlayClassName="z-[105]!"
         className="inset-x-0 bottom-0 top-(--header-height) z-[110]! h-[calc(100dvh-var(--header-height))] max-h-none w-full max-w-none overflow-y-auto bg-[#F9FAFB] p-0"
       >
         <div className="flex items-center justify-between bg-white px-6 py-6 md:px-10">
@@ -66,7 +67,7 @@ export default function PersonalExplorations() {
             {active.title}
           </SheetTitle>
 
-          <SheetClose className="text-sm font-semibold uppercase tracking-wide underline underline-offset-2">
+          <SheetClose className="font-semibold uppercase tracking-wide underline underline-offset-2 font-noodle text-lg">
             Close
           </SheetClose>
         </div>
