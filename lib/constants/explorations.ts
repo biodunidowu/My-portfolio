@@ -42,7 +42,7 @@ export const explorations: Exploration[] = [
     height: 581,
     category: "Interface",
     description:
-      "Inspired by a scene from Tron: Ares, imagining a real-time interface for aircraft tracking and origin tracing.\n\nBuilt around a military-grade satellite reconnaissance aesthetic — dense coordinates, grid overlays, and live flight data layered across a topographic map.\n\nThe focus is a single tracked aircraft, traced back to its point of origin, with surrounding traffic rendered as muted, secondary signals. Warm amber highlights cut through the dark UI to direct attention instantly.\n\nDeparture, arrival, and status details sit in a dense data strip at the base, balancing information density with visual clarity.\n\nThis exploration was about building tension and focus into a data-heavy interface.",
+      "Inspired by a scene from Tron: Ares, imagining a real-time interface for aircraft tracking and origin tracing.\n\nBuilt around a military-grade satellite reconnaissance aesthetic — dense coordinates, grid overlays, and live flight data layered across a topographic map.\n\nThe focus is a single tracked aircraft, traced back to its point of origin, with surrounding traffic rendered as muted, secondary signals. Warm amber highlights cut through the dark UI to direct attention instantly.\n\nDeparture, arrival, and status details sit in a dense data strip at the base, balancing information density with visual clarity.\n\nThis exploration was about building tension and focuses into a data-heavy interface.",
     liveLink: "https://figma.com/community/your-file",
   },
   {
