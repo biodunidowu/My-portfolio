@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { isActiveNavLink, navLinks } from "@/lib/constants/navigation";
 import { forwardNav } from "@/lib/transitions";
 import MobileMenu from "./MobileMenu";
+import WorkStatus from "./WorkStatus";
 import { useRef } from "react";
 import { useHeaderHeightVar } from "@/lib/hooks/useHeaderHeightVar";
 
@@ -18,29 +19,34 @@ export default function Header() {
     <header
       style={{ viewTransitionName: "site-header" }}
       ref={headerRef}
-      className="flex items-center justify-between border-b border-[#EAECF0] xl:px-10 px-4 py-5 xl:py-0 sticky top-0 z-100 bg-white"
+      className="sticky top-0 z-100 flex h-23.75 items-center justify-between border-b border-[#EAECF0] bg-white px-4 xl:px-10"
     >
       <Link
         href="/"
         transitionTypes={[...forwardNav]}
-        className="flex items-center gap-3 "
+        className="flex items-center gap-1"
       >
-        <Image
-          src="/images/profile-img.svg"
-          alt="Abiodun"
-          width={50}
-          height={50}
-          className="h-10 w-10 rounded-full object-cover"
-        />
+        <span className="relative size-12.5 shrink-0 overflow-hidden rounded-full bg-white">
+          <Image
+            src="/images/home/avatar.webp"
+            alt=""
+            width={75}
+            height={94}
+            className="absolute -top-2.5 left-1/2 h-23.5 w-18.75 max-w-none -translate-x-1/2"
+          />
+        </span>
 
-        <span className="font-script text-2xl leading-none text-[#98A2B3]">
+        <span className="font-signature text-2xl leading-5 text-[#98A2B3]">
           Abiodun
         </span>
       </Link>
 
-      <MobileMenu />
+      <MobileMenu anchorRef={headerRef} />
 
-      <nav className="hidden items-center xl:flex">
+      <nav
+        aria-label="Main"
+        className="absolute left-1/2 hidden h-full w-[calc(100%-480px)] max-w-223.25 -translate-x-1/2 grid-cols-4 xl:grid"
+      >
         {navLinks.map((link) => {
           const active = isActiveNavLink(pathname, link.href);
 
@@ -51,8 +57,8 @@ export default function Header() {
               transitionTypes={[...forwardNav]}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "font-noodle text-lg border-r border-r-[#EAECF0] first:border-l first:border-l-[#EAECF0] py-8 px-20 uppercase transition-colors duration-200",
-                active ? "text-black" : "text-[#9CA3AF] hover:text-black",
+                "flex items-center justify-center border-r border-[#EAECF0] text-base leading-7 font-medium transition-colors duration-200 first:border-l",
+                active ? "text-black" : "text-[#98A2B3] hover:text-black",
               )}
             >
               {link.label}
@@ -61,19 +67,7 @@ export default function Header() {
         })}
       </nav>
 
-      <div className="hidden xl:flex items-center gap-5">
-        <Image
-          src="/images/game-pad.svg"
-          alt="Abiodun"
-          width={24}
-          height={24}
-        />
-
-        <span className="inline-flex items-center gap-2 bg-[#F9FAFB] px-4 py-3 text-sm font-medium font-noodle">
-          <span className="h-2 w-2 rounded-full bg-[#22C55E]" />
-          Open to work
-        </span>
-      </div>
+      <WorkStatus className="hidden xl:flex" />
     </header>
   );
 }

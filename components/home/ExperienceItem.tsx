@@ -1,31 +1,29 @@
+import type { ComponentProps, ReactNode } from "react";
 import { Experience } from "@/lib/constants/experience";
 
 export default function ExperienceItem({
   company,
   period,
   points,
-}: Experience) {
+  heading,
+  ...props
+}: Experience & { heading?: ReactNode } & ComponentProps<"div">) {
   return (
-    <div className="mt-3 flex flex-col gap-1 lg:mt-4 lg:grid lg:grid-cols-[130px_1fr] lg:gap-3.5">
-      <span className="hidden text-sm text-[#667085] lg:block">{period}</span>
+    <div className="xl:grid xl:grid-cols-[117px_1fr] xl:gap-x-3.5" {...props}>
+      <div className="hidden flex-col gap-1 text-xs leading-5 text-[#667085] uppercase xl:flex">
+        {heading}
+        <span>{period}</span>
+      </div>
 
-      <div>
-        <h3 className="font-semibold">
-          {company}{" "}
-          <span className="font-normal text-[#667085] lg:hidden">
-            ({period})
-          </span>
+      <div className="flex flex-col gap-2">
+        <h3 className="flex gap-2 text-xs leading-5 whitespace-nowrap uppercase">
+          <span className="font-bold text-[#101828]">{company}</span>
+          <span className="text-[#667085] xl:hidden">({period})</span>
         </h3>
 
-        <ul className="mt-2 space-y-2.5 lg:space-y-2">
+        <ul className="ms-4.5 list-disc space-y-2 text-xs leading-5 text-[#667085] marker:text-[#667085] xl:ms-5.25 xl:text-sm xl:leading-6">
           {points.map((point) => (
-            <li
-              key={point}
-              className="flex gap-2 text-sm leading-relaxed text-[#667085]"
-            >
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#667085]" />
-              {point}
-            </li>
+            <li key={point}>{point}</li>
           ))}
         </ul>
       </div>

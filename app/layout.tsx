@@ -29,6 +29,15 @@ const calloveya = localFont({
   variable: "--font-signature",
 });
 
+const canterbury = localFont({
+  src: "./fonts/Canterbury.ttf",
+  weight: "400",
+  style: "normal",
+  display: "swap",
+  fallback: ["Old English Text MT", "serif"],
+  variable: "--font-blackletter",
+});
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -64,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         meowScript.variable,
         splineSans.variable,
         calloveya.variable,
+        canterbury.variable,
         "font-sans",
       )}
     >
