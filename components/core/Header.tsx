@@ -91,8 +91,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Figma spaces the slash unevenly ("LIGHT    /  DARK"); kept from lg up. */}
-      <ThemeSwitch className="shrink-0 gap-0 font-medium text-sm leading-5 md:font-mono md:font-normal lg:text-base lg:leading-7 [&>span>span[aria-hidden]]:mx-2.5 lg:[&>span>span[aria-hidden]]:mr-4.75 lg:[&>span>span[aria-hidden]]:ml-9.5" />
+      <ThemeSwitch className="shrink-0 gap-0 font-medium text-sm leading-5 md:font-mono md:font-normal lg:text-base lg:leading-7 [&>span>span[aria-hidden]]:mx-2.5" />
 
       {/* Right: gamepad on phones; gamepad + status from tablet up. */}
       <div className="flex flex-1 items-center justify-end">
