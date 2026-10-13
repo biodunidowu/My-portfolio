@@ -3,6 +3,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { stagger } from "@/lib/stagger";
 import { works, type Work } from "@/lib/constants/works";
+import MarqueeToggle from "./MarqueeToggle";
 
 function WorkCard({
   work,
@@ -97,6 +98,7 @@ export default function WorksMarquee() {
           />
         ))}
       </div>
+      <MarqueeToggle />
     </section>
   );
 }

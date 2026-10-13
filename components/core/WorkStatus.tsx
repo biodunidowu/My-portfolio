@@ -40,7 +40,7 @@ export default function WorkStatus({
         type="button"
         onClick={lightUp}
         className={cn(
-          "flex cursor-pointer items-center justify-center gap-2 bg-page p-2 font-mono leading-7 text-fg uppercase transition-[scale] duration-160 ease-out active:scale-97",
+          "flex cursor-pointer items-center justify-center gap-2 bg-page p-2 font-mono leading-7 text-fg uppercase btn-motion",
           menu ? "w-42.25 text-base" : "text-sm",
         )}
       >
@@ -55,7 +55,7 @@ export default function WorkStatus({
           />
           <span
             className={cn(
-              "relative size-2 rounded-full bg-[#22C55E] transition-[box-shadow,background-color] duration-300 ease-out",
+              "relative size-2 rounded-full bg-[#22C55E] transition-[box-shadow,background-color] duration-normal ease-out-quint",
               lit &&
                 "bg-[#4ADE80] shadow-[0_0_6px_2px_rgba(74,222,128,0.85),0_0_14px_4px_rgba(34,197,94,0.45)]",
             )}

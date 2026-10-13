@@ -26,11 +26,11 @@ const Works = () => {
             </TabsList>
           </HatchBand>
 
-          <TabsContent value="case-studies" className="mt-8 mb-6 px-4 md:mt-14.25 md:mb-5.5 md:px-8">
+          <TabsContent value="case-studies" className="anim-rise-in duration-normal ease-out-quart mt-8 mb-6 px-4 md:mt-14.25 md:mb-5.5 md:px-8">
             <WorksGrid />
           </TabsContent>
 
-          <TabsContent value="personal-explorations" className="mt-8 mb-6 px-4 md:mt-10 md:mb-21.25 md:px-8">
+          <TabsContent value="personal-explorations" className="anim-rise-in duration-normal ease-out-quart mt-8 mb-6 px-4 md:mt-10 md:mb-21.25 md:px-8">
             <PersonalExplorations />
           </TabsContent>
         </Tabs>

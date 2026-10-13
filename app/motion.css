@@ -1,0 +1,389 @@
+/* Motion tokens + Tailwind v4 layer (motion-system skill). Project mode: expressive
+   (data-motion-mode on <html>, see motion.config.json). The older --ease-out and
+   --ease-in-out in globals.css equal ease-out-quint and ease-in-out-quart. */
+
+
+:root {
+  /* Duration */
+  --duration-none: 0ms;
+  --duration-xshort: 75ms;
+  --duration-short: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-xslow: 600ms;
+
+  /* Easing: linear */
+  --ease-none: cubic-bezier(0, 0, 1, 1);
+
+  /* Easing: ease-in */
+  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+
+  /* Easing: ease-out */
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  /* Easing: ease-in-out */
+  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
+  --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+/*
+ * Amplitude per mode. Set data-motion-mode on <html> for the project default,
+ * and on a component to override it. Values follow references/modes.md.
+ */
+:root,
+[data-motion-mode="subtle"] {
+  --motion-shift: 4px;            /* entry translate for small/medium elements */
+  --motion-scale-from: 0.97;      /* entry scale for surfaces (popover, dialog, menu) */
+  --motion-pop-from: 0.9;         /* entry scale for small pops (badge, check, dot) */
+  --motion-overshoot: 1;          /* scale peak (1 = no overshoot) */
+  --motion-settle: 1;             /* dramatic dip after the peak */
+  --motion-overshoot-shift: 0px;  /* positional overshoot past destination */
+  --motion-rotate: 0deg;
+  --motion-press-scale: 0.98;
+  --motion-lift: 1px;
+  --motion-stagger: 0ms;
+  --stagger-cap: 0;               /* highest stagger index; items past it start with it */
+}
+
+[data-motion-mode="expressive"] {
+  --motion-shift: 8px;
+  --motion-scale-from: 0.94;
+  --motion-pop-from: 0.6;
+  --motion-overshoot: 1.03;
+  --motion-settle: 1;
+  --motion-overshoot-shift: 8px;
+  --motion-rotate: 8deg;
+  --motion-press-scale: 0.96;
+  --motion-lift: 2px;
+  --motion-stagger: 30ms;
+  --stagger-cap: 5;
+}
+
+[data-motion-mode="dramatic"] {
+  --motion-shift: 12px;
+  --motion-scale-from: 0.9;
+  --motion-pop-from: 0.4;
+  --motion-overshoot: 1.06;
+  --motion-settle: 0.99;
+  --motion-overshoot-shift: 16px;
+  --motion-rotate: 15deg;
+  --motion-press-scale: 0.94;
+  --motion-lift: 4px;
+  --motion-stagger: 50ms;
+  --stagger-cap: 7;
+}
+
+/* Reduced motion: opacity only, at duration-short. Amplitude goes neutral everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-normal: 150ms;
+    --duration-slow: 150ms;
+    --duration-xslow: 150ms;
+  }
+  *,
+  *::before,
+  *::after {
+    --motion-shift: 0px !important;
+    --motion-scale-from: 1 !important;
+    --motion-pop-from: 1 !important;
+    --motion-overshoot: 1 !important;
+    --motion-settle: 1 !important;
+    --motion-overshoot-shift: 0px !important;
+    --motion-rotate: 0deg !important;
+    --motion-press-scale: 1 !important;
+    --motion-lift: 0px !important;
+    --motion-stagger: 0ms !important;
+  }
+}
+
+/*
+ * Keyframes. Apply with the row's tokens, e.g.
+ *   animation: motion-pop-in var(--duration-normal) var(--ease-out-quint) both;
+ * Overshoot comes from the amplitude variables, so Subtle mode and reduced motion
+ * automatically play these without overshoot.
+ */
+@keyframes motion-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes motion-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Surfaces: popover, menu, dialog, tooltip */
+@keyframes motion-pop-in {
+  0% { opacity: 0; transform: scale(var(--motion-scale-from)); }
+  60% { opacity: 1; transform: scale(var(--motion-overshoot)); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Dramatic multi-stage settle */
+@keyframes motion-pop-in-settle {
+  0% { opacity: 0; transform: scale(var(--motion-scale-from)); }
+  55% { opacity: 1; transform: scale(var(--motion-overshoot)); }
+  75% { transform: scale(var(--motion-settle)); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes motion-pop-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(var(--motion-scale-from)); }
+}
+
+/* Small pops: check, badge, dot, chip icon */
+@keyframes motion-pop-small-in {
+  0% { opacity: 0; transform: scale(var(--motion-pop-from)); }
+  60% { opacity: 1; transform: scale(calc(var(--motion-overshoot) + (var(--motion-overshoot) - 1) * 2)); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes motion-pop-small-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(var(--motion-pop-from)); }
+}
+
+/* Small/medium elements rising into place: toast, card, list item */
+@keyframes motion-rise-in {
+  0% { opacity: 0; transform: translateY(var(--motion-shift)); }
+  70% { opacity: 1; transform: translateY(calc(var(--motion-overshoot-shift) * -0.25)); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes motion-rise-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(var(--motion-shift)); }
+}
+
+/* Full-travel surfaces. Swap the axis and sign for other edges. */
+@keyframes motion-slide-in-bottom {
+  0% { transform: translateY(100%); }
+  70% { transform: translateY(calc(var(--motion-overshoot-shift) * -1)); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes motion-slide-out-bottom {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+@keyframes motion-slide-in-right {
+  0% { transform: translateX(100%); }
+  70% { transform: translateX(calc(var(--motion-overshoot-shift) * -1)); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes motion-slide-out-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes motion-slide-in-left {
+  0% { transform: translateX(-100%); }
+  70% { transform: translateX(var(--motion-overshoot-shift)); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes motion-slide-out-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* Under reduced motion, full-travel slides become fades. */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes motion-slide-in-bottom { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes motion-slide-out-bottom { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes motion-slide-in-right { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes motion-slide-out-right { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes motion-slide-in-left { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes motion-slide-out-left { from { opacity: 1; } to { opacity: 0; } }
+}
+
+
+/* Tailwind v4 layer: easing utilities (ease-out-cubic, ...), duration-* token
+   utilities, and anim-* keyframe utilities that read the same duration/ease. */
+@theme {
+  --ease-none: cubic-bezier(0, 0, 1, 1);
+  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
+  --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+@utility duration-none { --tw-duration: var(--duration-none); transition-duration: var(--duration-none); }
+@utility duration-xshort { --tw-duration: var(--duration-xshort); transition-duration: var(--duration-xshort); }
+@utility duration-short { --tw-duration: var(--duration-short); transition-duration: var(--duration-short); }
+@utility duration-normal { --tw-duration: var(--duration-normal); transition-duration: var(--duration-normal); }
+@utility duration-slow { --tw-duration: var(--duration-slow); transition-duration: var(--duration-slow); }
+@utility duration-xslow { --tw-duration: var(--duration-xslow); transition-duration: var(--duration-xslow); }
+
+/* Keyframe utilities. Duration and easing come from duration-* and ease-* on the same element. */
+@utility anim-fade-in { animation: motion-fade-in var(--tw-duration, var(--duration-normal)) var(--tw-ease, var(--ease-out-cubic)) both; }
+@utility anim-fade-out { animation: motion-fade-out var(--tw-duration, var(--duration-short)) var(--tw-ease, var(--ease-in-cubic)) both; }
+@utility anim-pop-in { animation: motion-pop-in var(--tw-duration, var(--duration-normal)) var(--tw-ease, var(--ease-out-cubic)) both; }
+@utility anim-pop-in-settle { animation: motion-pop-in-settle var(--tw-duration, var(--duration-slow)) var(--tw-ease, var(--ease-out-quint)) both; }
+@utility anim-pop-out { animation: motion-pop-out var(--tw-duration, var(--duration-short)) var(--tw-ease, var(--ease-in-cubic)) both; }
+@utility anim-pop-small-in { animation: motion-pop-small-in var(--tw-duration, var(--duration-short)) var(--tw-ease, var(--ease-out-cubic)) both; }
+@utility anim-pop-small-out { animation: motion-pop-small-out var(--tw-duration, var(--duration-short)) var(--tw-ease, var(--ease-in-cubic)) both; }
+@utility anim-rise-in { animation: motion-rise-in var(--tw-duration, var(--duration-normal)) var(--tw-ease, var(--ease-out-cubic)) both; }
+@utility anim-rise-out { animation: motion-rise-out var(--tw-duration, var(--duration-short)) var(--tw-ease, var(--ease-in-cubic)) both; }
+@utility anim-slide-in-bottom { animation: motion-slide-in-bottom var(--tw-duration, var(--duration-slow)) var(--tw-ease, var(--ease-in-out-cubic)) both; }
+@utility anim-slide-out-bottom { animation: motion-slide-out-bottom var(--tw-duration, var(--duration-slow)) var(--tw-ease, var(--ease-in-out-cubic)) both; }
+@utility anim-slide-in-right { animation: motion-slide-in-right var(--tw-duration, var(--duration-slow)) var(--tw-ease, var(--ease-in-out-cubic)) both; }
+@utility anim-slide-out-right { animation: motion-slide-out-right var(--tw-duration, var(--duration-slow)) var(--tw-ease, var(--ease-in-out-cubic)) both; }
+@utility anim-slide-in-left { animation: motion-slide-in-left var(--tw-duration, var(--duration-slow)) var(--tw-ease, var(--ease-in-out-cubic)) both; }
+@utility anim-slide-out-left { animation: motion-slide-out-left var(--tw-duration, var(--duration-slow)) var(--tw-ease, var(--ease-in-out-cubic)) both; }
+
+/* Stagger: put stagger-item on children and --i: <index> inline (style={{ "--i": i }}). Honors the mode's step. */
+@utility stagger-item { animation-delay: calc(min(var(--i, 0), var(--stagger-cap, 0)) * var(--motion-stagger)); }
+
+/* ---------------------------------------------------------------------------
+ * Site recipes built on the tokens above.
+ * ------------------------------------------------------------------------- */
+
+/* Button hover + press (matrix-interaction, Button, Expressive).
+   Hover: S + ease-out-cubic, lift by --motion-lift. Press: XS + ease-out-quad,
+   scale to --motion-press-scale; release eases back over N + ease-out-quint.
+   CSS can't spring past 1 on release, so the release has no overshoot. */
+@utility btn-motion {
+  transition:
+    translate var(--duration-short) var(--ease-out-cubic),
+    scale var(--duration-normal) var(--ease-out-quint),
+    background-color var(--duration-short) var(--ease-out-cubic),
+    color var(--duration-short) var(--ease-out-cubic),
+    opacity var(--duration-short) var(--ease-out-cubic);
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      translate: 0 calc(var(--motion-lift) * -1);
+    }
+  }
+
+  &:active {
+    scale: var(--motion-press-scale);
+    transition-duration: var(--duration-short), var(--duration-xshort), var(--duration-short),
+      var(--duration-short), var(--duration-short);
+    transition-timing-function: var(--ease-out-cubic), var(--ease-out-quad), var(--ease-out-cubic),
+      var(--ease-out-cubic), var(--ease-out-cubic);
+  }
+}
+
+/* Trailing arrow on links and buttons nudges toward where it points
+   (Button hover, trailing icon). */
+@utility arrow-nudge {
+  display: inline-block;
+  transition: translate var(--duration-short) var(--ease-out-cubic);
+
+  :where(.group):hover & {
+    translate: calc(var(--motion-lift) * 1) calc(var(--motion-lift) * -1);
+  }
+}
+
+@utility arrow-nudge-up {
+  display: inline-block;
+  transition: translate var(--duration-short) var(--ease-out-cubic);
+
+  :where(.group):hover & {
+    translate: 0 calc(var(--motion-lift) * -1);
+  }
+}
+
+/* Scroll reveal: text rises in, unblurs, and settles just past its rest
+   position (Card entry, Expressive: lift + settle). */
+@keyframes motion-blur-rise {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(var(--motion-shift));
+  }
+  70% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(calc(var(--motion-overshoot-shift) * -0.25));
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* Route transition (matrix-layout, Route / Page Transition, Expressive). */
+@keyframes motion-route-out {
+  to {
+    opacity: 0;
+    transform: translateY(calc(var(--motion-shift) * -1));
+  }
+}
+
+@keyframes motion-route-in {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--motion-shift));
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(calc(var(--motion-overshoot-shift) * -0.25));
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icon swap (matrix-state, Icon Swap, Expressive): the incoming icon scales and
+   rotates in with a slight overshoot; the outgoing one scales down and turns away. */
+@keyframes motion-icon-in {
+  0% {
+    opacity: 0;
+    transform: scale(var(--motion-pop-from)) rotate(calc(var(--motion-rotate) * -1));
+  }
+  60% {
+    opacity: 1;
+    transform: scale(calc(var(--motion-overshoot) + (var(--motion-overshoot) - 1) * 2))
+      rotate(calc(var(--motion-rotate) * 0.25));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes motion-icon-out {
+  to {
+    opacity: 0;
+    transform: scale(var(--motion-pop-from)) rotate(var(--motion-rotate));
+  }
+}
+
+@utility anim-icon-in { animation: motion-icon-in var(--tw-duration, var(--duration-normal)) var(--tw-ease, var(--ease-out-quart)) both; }
+@utility anim-icon-out { animation: motion-icon-out var(--tw-duration, var(--duration-short)) var(--tw-ease, var(--ease-in-cubic)) both; }

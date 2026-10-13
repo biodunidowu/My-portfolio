@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "./motion.css";
 
 /* Dark mode is driven by data-theme on <html> (set before paint in layout.tsx). */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
@@ -45,18 +46,20 @@
 :root.theme-transitioning ::before,
 :root.theme-transitioning ::after {
   transition-property: color, background-color, border-color, outline-color, fill, stroke, box-shadow !important;
-  transition-duration: 220ms !important;
-  transition-timing-function: var(--ease-out) !important;
+  transition-duration: var(--duration-normal) !important;
+  transition-timing-function: var(--ease-out-cubic) !important;
 }
 
 /* Stronger curves than Tailwind's defaults; these replace the built-in
-   `ease-out` / `ease-in-out` utilities project-wide. */
+   `ease-out` / `ease-in-out` utilities project-wide. They equal the
+   motion tokens ease-out-quint and ease-in-out-quart (app/motion.css). */
 @theme {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
-  /* "Open to work" dot: a one-shot halo when the pill is clicked. */
-  --animate-status-halo: status-halo 900ms var(--ease-out) forwards;
+  /* "Open to work" dot: a single pulse ring when the pill is clicked
+     (Status Dot, Expressive: N + ease-out-quint). */
+  --animate-status-halo: status-halo var(--duration-normal) var(--ease-out-quint) forwards;
 
   @keyframes status-halo {
     from {
@@ -244,11 +247,14 @@
     }
   }
 
+  /* Constant motion: the 30s loop length sets the speed, so it isn't a
+     duration token. Pauses on hover and from its Pause button. */
   .marquee-track {
-    animation: marquee-scroll 30s linear infinite;
+    animation: marquee-scroll 30s var(--ease-none) infinite;
   }
 
-  .marquee-viewport:hover .marquee-track {
+  .marquee-viewport:hover .marquee-track,
+  .marquee-viewport[data-paused] .marquee-track {
     animation-play-state: paused;
   }
 
@@ -260,13 +266,6 @@
 
   /* Page-load entrance. A CSS animation rather than JS so it stays smooth
      while the page is still loading; --i sets the stagger position. */
-  @keyframes enter {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-  }
-
   @keyframes enter-fade {
     from {
       opacity: 0;
@@ -274,8 +273,8 @@
   }
 
   [data-enter] {
-    animation: enter 500ms var(--ease-out) backwards;
-    animation-delay: calc(var(--i, 0) * 60ms);
+    animation: motion-rise-in var(--duration-slow) var(--ease-out-quart) backwards;
+    animation-delay: calc(min(var(--i, 0), var(--stagger-cap)) * var(--motion-stagger));
   }
 
   /* Line drawing. Band strokes trace themselves in (pathLength=1 lets the
@@ -302,17 +301,19 @@
   .band-draw {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    animation: band-draw 900ms var(--ease-in-out) forwards;
-    animation-delay: calc(200ms + var(--i, 0) * 22ms);
+    /* Each stripe is offset 22ms so the hatch sweeps across as one stroke;
+       a decorative sweep, not a list stagger, so it isn't capped. */
+    animation: band-draw var(--duration-xslow) var(--ease-in-out-quart) forwards;
+    animation-delay: calc(var(--duration-normal) + var(--i, 0) * 22ms);
   }
 
   .band-fade {
-    animation: enter-fade 700ms var(--ease-out) 300ms backwards;
+    animation: enter-fade var(--duration-slow) var(--ease-out-quart) var(--duration-normal) backwards;
   }
 
   .line-grow {
     transform-origin: top left;
-    animation: line-grow 1200ms var(--ease-in-out) backwards;
+    animation: line-grow var(--duration-xslow) var(--ease-in-out-quart) backwards;
     animation-delay: var(--delay, 0ms);
   }
 
@@ -332,67 +333,43 @@
     }
   }
 
-  /* Second fold: text blurs in once when its section scrolls into view
-     (Reveal sets data-visible). A transition, so it never restarts. */
+  /* Text blurs in once when its section scrolls into view (Reveal sets
+     data-visible, and never removes it, so this plays once). */
   [data-blur] {
     opacity: 0;
-    filter: blur(8px);
-    transform: translateY(8px);
-    transition:
-      opacity 600ms var(--ease-out),
-      filter 600ms var(--ease-out),
-      transform 600ms var(--ease-out);
-    transition-delay: calc(var(--i, 0) * 70ms);
   }
 
   [data-visible] [data-blur] {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
+    animation: motion-blur-rise var(--duration-slow) var(--ease-out-quart) both;
+    animation-delay: calc(min(var(--i, 0), var(--stagger-cap)) * var(--motion-stagger));
   }
 
   /* The video beside it only fades: blurring a playing video is expensive. */
   [data-fade] {
     opacity: 0;
-    transition: opacity 600ms var(--ease-out);
+    transition: opacity var(--duration-slow) var(--ease-out-cubic);
   }
 
   [data-visible] [data-fade] {
     opacity: 1;
   }
 
-  /* Footer signature: wipes in once when scrolled into view (see Reveal). */
-  .reveal {
-    clip-path: inset(0 0 100% 0);
-    transition: clip-path 600ms var(--ease-in-out);
-  }
-
-  .reveal[data-visible] {
-    clip-path: inset(0 0 0 0);
-  }
-
   @media (prefers-reduced-motion: reduce) {
     [data-enter] {
       animation-name: enter-fade;
+      animation-duration: var(--duration-short);
     }
 
-    [data-blur] {
-      filter: none;
-      transform: none;
-      transition: opacity 300ms ease;
-      transition-delay: 0ms;
-    }
-
-    .reveal {
-      clip-path: none;
-      opacity: 0;
-      transition: opacity 300ms ease;
-    }
-
-    .reveal[data-visible] {
-      opacity: 1;
+    [data-visible] [data-blur] {
+      animation: enter-fade var(--duration-short) var(--ease-out-cubic) both;
     }
   }
+}
+
+/* Keyboard focus: a ring that appears instantly in every mode. */
+:where(a, button, [role="tab"], input, summary):focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
 }
 
 /* View transitions */
@@ -400,52 +377,16 @@
   pointer-events: none;
 }
 
-::view-transition-old(.nav-forward) {
-  --slide-offset: -60px;
-  animation:
-    150ms ease-in both fade reverse,
-    400ms ease-in-out both slide reverse;
-}
-
-::view-transition-new(.nav-forward) {
-  --slide-offset: 60px;
-  animation:
-    210ms ease-out 150ms both fade,
-    400ms ease-in-out both slide;
-}
-
+/* Route / Page Transition, Expressive: the old page fades and shifts up
+   (S + ease-in-cubic); the new one rises in and settles (SL + ease-out-quart). */
+::view-transition-old(.nav-forward),
 ::view-transition-old(.nav-back) {
-  --slide-offset: 60px;
-  animation:
-    150ms ease-in both fade reverse,
-    400ms ease-in-out both slide reverse;
+  animation: motion-route-out var(--duration-short) var(--ease-in-cubic) both;
 }
 
+::view-transition-new(.nav-forward),
 ::view-transition-new(.nav-back) {
-  --slide-offset: -60px;
-  animation:
-    210ms ease-out 150ms both fade,
-    400ms ease-in-out both slide;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slide {
-  from {
-    translate: var(--slide-offset);
-  }
-
-  to {
-    translate: 0;
-  }
+  animation: motion-route-in var(--duration-slow) var(--ease-out-quart) var(--duration-short) both;
 }
 
 /* Keep the header still while page content slides beneath it. */

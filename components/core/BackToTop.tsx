@@ -10,12 +10,12 @@ export default function BackToTop({ className }: { className?: string }) {
     <button
       type="button"
       onClick={handleClick}
-      className={`group inline-flex cursor-pointer items-center gap-1.5 uppercase transition-colors duration-200 hover:text-fg ${className ?? ""}`}
+      className={`group inline-flex cursor-pointer items-center gap-1.5 uppercase transition-colors duration-short ease-out-cubic hover:text-fg ${className ?? ""}`}
     >
       Back to top
       <span
         aria-hidden
-        className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5"
+        className="arrow-nudge-up"
       >
         ↑
       </span>
