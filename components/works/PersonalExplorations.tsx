@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
 import { explorations } from "@/lib/constants/explorations";
 import {
   Sheet,
@@ -10,6 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import ExplorationVisual from "./ExplorationVisual";
 
 export default function PersonalExplorations() {
   const [index, setIndex] = useState(0);
@@ -40,18 +40,18 @@ export default function PersonalExplorations() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <div className="grid gap-5 md:grid-cols-2 mt-5">
+      <div className="mx-auto grid max-w-344 gap-x-5 gap-y-8 md:grid-cols-2">
         {explorations.map((exploration, i) => (
           <SheetTrigger
             key={exploration.id}
             onClick={() => setIndex(i)}
-            className="group relative block aspect-678/596 w-full cursor-pointer "
+            aria-label={`Open ${exploration.title}`}
+            className="group block w-full cursor-pointer transition-[scale] duration-160 ease-out active:scale-[0.99]"
           >
-            <Image
-              src={exploration.src}
-              alt={exploration.title}
-              fill
-              className="object-cover"
+            <ExplorationVisual
+              exploration={exploration}
+              sizes="(min-width: 768px) 678px, 100vw"
+              preload={i < 2}
             />
           </SheetTrigger>
         ))}
@@ -73,17 +73,13 @@ export default function PersonalExplorations() {
         </div>
 
         <div className="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 gap-10 px-6 py-10 md:grid-cols-[1.3fr_1fr] md:px-10">
-          <div className="relative aspect-678/596 w-full overflow-hidden rounded-2xl">
-            <Image
-              key={active.id}
-              src={active.src}
-              alt={active.title}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 60vw"
-              className="object-cover"
-            />
-          </div>
+          <ExplorationVisual
+            key={active.id}
+            exploration={active}
+            sizes="(max-width: 768px) 100vw, 60vw"
+            preload
+            className="rounded-2xl"
+          />
 
           <div className="flex flex-col justify-between">
             <div className="space-y-5 text-[15px] leading-relaxed text-[#475467]">
