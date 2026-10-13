@@ -34,7 +34,7 @@ function WorkCard({
     <div
       aria-hidden={decorative || undefined}
       style={order}
-      className="relative order-(--order) mr-3 h-66 w-86 shrink-0 overflow-hidden bg-white md:order-(--md-order) md:mr-4 md:h-114.25 md:w-116"
+      className="relative order-(--order) mr-3 h-66 w-86 shrink-0 overflow-hidden bg-surface md:order-(--md-order) md:mr-4 md:h-114.25 md:w-116"
     >
       <Image
         src={work.backgroundSrc}
@@ -75,7 +75,7 @@ export default function WorksMarquee() {
       {...stagger(0)}
       id="works"
       aria-label="Selected work"
-      className="marquee-viewport relative mt-3.25 mb-7.5 overflow-hidden xl:mt-7.75 xl:mb-10.25"
+      className="marquee-viewport relative mt-10.5 mb-8 overflow-hidden md:mt-10.25 md:mb-10 xl:mb-0"
     >
       {/* The list is rendered twice back to back so the track can scroll
           exactly -50% and loop seamlessly; the copy is hidden from AT. */}

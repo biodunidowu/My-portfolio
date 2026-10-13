@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { experience } from "@/lib/constants/experience";
 import { BOOKING_URL, CV_URL, EMAIL } from "@/lib/constants/contact";
 import Reveal from "@/components/core/Reveal";
@@ -7,7 +8,13 @@ import VideoPanel from "./VideoPanel";
 import { blurIn } from "@/lib/stagger";
 
 const chipClass =
-  "inline-flex items-center bg-[#F2F4F7] px-3 py-2 text-xs leading-5 font-medium text-[#101828] underline hover:bg-[#EAECF0] transition-[background-color,scale] duration-160 ease-out active:scale-97";
+  "inline-flex items-center bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.48px] text-fg underline hover:bg-chip-hover transition-[background-color,scale] duration-160 ease-out active:scale-97";
+
+// Desktop grid lines (1440 frame): verticals at 120, 712 and 40px from the
+// right; a rule along the top of the video and one across its bottom.
+const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as CSSProperties;
+const vLine =
+  "line-grow pointer-events-none absolute top-0 hidden w-px bg-line xl:block";
 
 export default function ProfileShowcase() {
   return (
@@ -16,31 +23,42 @@ export default function ProfileShowcase() {
       as="section"
       id="about"
       rootMargin="0px 0px -15% 0px"
-      className="relative mb-6 grid grid-cols-1 border-[#EAECF0] xl:mb-24.5 xl:grid-cols-[592px_1fr] xl:border-b xl:pr-10 xl:pl-30"
+      className="relative mb-6 grid grid-cols-1 md:mb-16 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-10 md:px-8 xl:mb-21.5 xl:grid-cols-[592px_1fr] xl:gap-0 xl:pt-7.5 xl:pr-10 xl:pl-30"
     >
-      {/* Desktop grid line on the right edge of the content column. */}
+      <span aria-hidden style={delay(0)} className={`${vLine} bottom-0 left-30`} />
+      <span aria-hidden style={delay(120)} className={`${vLine} bottom-0 left-178`} />
+      <span aria-hidden style={delay(240)} className={`${vLine} -bottom-21.5 right-10`} />
       <span
         aria-hidden
-        className="pointer-events-none absolute top-0 right-10 -bottom-24.5 hidden w-px bg-[#EAECF0] xl:block"
+        style={delay(360)}
+        className="line-grow line-grow-x pointer-events-none absolute top-7.5 left-30 hidden h-px w-148 bg-line xl:block"
+      />
+      <span
+        aria-hidden
+        style={delay(480)}
+        className="line-grow line-grow-x pointer-events-none absolute bottom-0 left-0 hidden h-px w-full bg-line xl:block"
       />
 
       <div
         data-fade
-        className="order-2 mt-7 border-y border-[#EAECF0] px-4 md:px-10 xl:order-1 xl:mt-0 xl:border-0 xl:px-0"
+        className="order-2 mt-7 border-y border-line px-4 md:order-1 md:mt-0 md:border-0 md:px-0"
       >
         <VideoPanel />
       </div>
 
-      <div className="order-1 flex flex-col gap-8.5 px-4 md:px-10 xl:order-2 xl:gap-45 xl:pl-11.25 xl:pr-0">
-        <div className="flex w-full max-w-109 flex-col gap-3.25 xl:max-w-139">
-          <p {...blurIn(0)} className="text-xs leading-5 text-[#101828] xl:text-sm">
+      <div className="order-1 flex flex-col gap-8.5 px-4 md:order-2 md:gap-10 md:px-0 xl:grid xl:grid-rows-[283px_auto_1fr] xl:gap-0">
+        <div className="flex w-full max-w-109 flex-col gap-3.25 font-mono xl:mr-1 xl:justify-self-end">
+          <p
+            {...blurIn(0)}
+            className="text-xs leading-5 tracking-[-0.64px] text-fg md:text-sm md:tracking-normal"
+          >
             Hey I&apos;m Abiodun, a <strong>Product Designer</strong> and a{" "}
             <strong>Tinkerer.</strong>
           </p>
 
           <p
             {...blurIn(1)}
-            className="text-xs leading-5 text-[#475467] xl:text-sm xl:leading-6 xl:text-[#667085]"
+            className="text-xs leading-5 tracking-[-0.48px] text-fg-2 md:text-sm md:leading-6 md:tracking-[-0.56px] md:text-fg-3"
           >
             I help startups go from idea to MVP. Over the past 5 years,
             I&apos;ve led research and product strategy across multiple
@@ -50,7 +68,7 @@ export default function ProfileShowcase() {
 
           <div
             {...blurIn(2)}
-            className="flex flex-wrap items-start gap-3 xl:gap-3.25"
+            className="flex flex-wrap items-start gap-3 md:gap-3.25"
           >
             <CopyEmail email={EMAIL} />
             <a
@@ -64,39 +82,40 @@ export default function ProfileShowcase() {
           </div>
         </div>
 
-        <div className="flex w-full max-w-139 flex-col gap-4 xl:gap-4.25">
+        <div className="flex w-full max-w-139 flex-col gap-4 md:gap-6.25 xl:mr-2 xl:justify-self-end">
           <h2
             {...blurIn(3)}
-            className="text-sm leading-5 text-[#101828] uppercase xl:hidden"
+            className="font-mono text-sm leading-5 tracking-[-0.56px] text-fg uppercase md:hidden"
           >
             Experience
           </h2>
 
-          <div className="flex flex-col gap-6 xl:gap-6.25">
-            {experience.map((item, index) => (
-              <ExperienceItem
-                key={item.company}
-                {...item}
-                {...blurIn(4 + index)}
-                heading={
-                  index === 0 ? (
-                    <span className="text-sm text-[#101828]">Experience</span>
-                  ) : undefined
-                }
-              />
-            ))}
-          </div>
+          {experience.map((item, index) => (
+            <ExperienceItem
+              key={item.company}
+              {...item}
+              {...blurIn(4 + index)}
+              heading={
+                index === 0 ? (
+                  <span className="text-sm text-fg">Experience</span>
+                ) : undefined
+              }
+            />
+          ))}
+        </div>
 
-          <div {...blurIn(4 + experience.length)} className="xl:ml-31.5">
-            <a
-              href={CV_URL}
-              target="_blank"
-              rel="noreferrer"
-              className={chipClass}
-            >
-              Have a look at my CV
-            </a>
-          </div>
+        <div
+          {...blurIn(4 + experience.length)}
+          className="-mt-2.5 flex w-full max-w-109 items-start self-start md:-mt-3.75 xl:mt-7.25 xl:mr-1 xl:justify-self-end"
+        >
+          <a
+            href={CV_URL}
+            target="_blank"
+            rel="noreferrer"
+            className={chipClass}
+          >
+            Have a look at my CV
+          </a>
         </div>
       </div>
     </Reveal>

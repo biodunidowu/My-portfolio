@@ -8,7 +8,7 @@ export default function CaseStudySection({ section }: { section: Section }) {
         {section.heading && (
           <h2 className="text-lg font-semibold">{section.heading}</h2>
         )}
-        <p className="mt-3 text-[15px] leading-relaxed text-[#475467]">
+        <p className="mt-3 text-[15px] leading-relaxed text-fg-2">
           {section.body}
         </p>
       </div>
@@ -25,9 +25,9 @@ export default function CaseStudySection({ section }: { section: Section }) {
           {section.items.map((item) => (
             <li
               key={item}
-              className="flex gap-2 text-[15px] leading-relaxed text-[#475467]"
+              className="flex gap-2 text-[15px] leading-relaxed text-fg-2"
             >
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#667085]" />
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-fg-3" />
               <span>
                 <RichText text={item} />
               </span>
@@ -40,7 +40,7 @@ export default function CaseStudySection({ section }: { section: Section }) {
 
   if (section.type === "status") {
     return (
-      <span className="inline-block bg-[#EAECF0] px-4 py-2 text-sm font-medium text-[#344054]">
+      <span className="inline-block bg-line px-4 py-2 text-sm font-medium text-fg-2">
         {section.label}
       </span>
     );
@@ -52,7 +52,7 @@ export default function CaseStudySection({ section }: { section: Section }) {
         href={section.href}
         target="_blank"
         rel="noreferrer"
-        className="bg-[#F2F4F7] my-9 px-4 py-3 w-16 text-sm font-medium transition-opacity hover:opacity-70 underline"
+        className="bg-chip my-9 px-4 py-3 w-16 text-sm font-medium transition-opacity hover:opacity-70 underline"
       >
         {section.label}
       </a>

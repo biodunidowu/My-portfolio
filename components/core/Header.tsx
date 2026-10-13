@@ -2,13 +2,46 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { isActiveNavLink, navLinks } from "@/lib/constants/navigation";
-import { forwardNav } from "@/lib/transitions";
-import MobileMenu from "./MobileMenu";
-import WorkStatus from "./WorkStatus";
 import { useRef } from "react";
+import { cn } from "@/lib/utils";
+import { isActiveNavLink } from "@/lib/constants/navigation";
+import { forwardNav } from "@/lib/transitions";
 import { useHeaderHeightVar } from "@/lib/hooks/useHeaderHeightVar";
+import GameLauncher from "@/components/game/GameLauncher";
+import MobileMenu from "./MobileMenu";
+import ThemeSwitch from "./ThemeSwitch";
+import WorkStatus from "./WorkStatus";
+
+// The desktop bar only carries Works and About; the logo goes home and the
+// mobile menu lists every page.
+const desktopLinks = [
+  { label: "Works", href: "/works" },
+  { label: "About", href: "/about" },
+];
+
+export function Logo() {
+  return (
+    <Link
+      href="/"
+      transitionTypes={[...forwardNav]}
+      aria-label="biodun, home"
+      className="flex shrink-0 items-center gap-1"
+    >
+      <span className="relative size-12.5 shrink-0 overflow-hidden rounded-full bg-surface">
+        <Image
+          src="/images/home/avatar.webp"
+          alt=""
+          width={75}
+          height={94}
+          className="absolute -top-2.5 left-1/2 h-23.5 w-18.75 max-w-none -translate-x-1/2"
+        />
+      </span>
+      <span className="font-signature text-2xl leading-5 text-fg-muted">
+        biodun
+      </span>
+    </Link>
+  );
+}
 
 export default function Header() {
   const pathname = usePathname();
@@ -19,55 +52,50 @@ export default function Header() {
     <header
       style={{ viewTransitionName: "site-header" }}
       ref={headerRef}
-      className="sticky top-0 z-100 flex h-23.75 items-center justify-between border-b border-[#EAECF0] bg-white px-4 xl:px-10"
+      className="sticky top-0 z-100 flex h-18.5 items-center border-b border-line bg-surface px-4 py-3 md:h-18.75 md:px-8"
     >
-      <Link
-        href="/"
-        transitionTypes={[...forwardNav]}
-        className="flex items-center gap-1"
-      >
-        <span className="relative size-12.5 shrink-0 overflow-hidden rounded-full bg-white">
-          <Image
-            src="/images/home/avatar.webp"
-            alt=""
-            width={75}
-            height={94}
-            className="absolute -top-2.5 left-1/2 h-23.5 w-18.75 max-w-none -translate-x-1/2"
-          />
-        </span>
+      {/* Left: menu trigger on phones; logo + nav from tablet up. */}
+      <div className="flex flex-1 items-center gap-6">
+        <MobileMenu className="md:hidden" />
+        <div className="hidden items-center gap-6 md:flex">
+          <Logo />
+          <nav aria-label="Main" className="flex items-center gap-6">
+            {desktopLinks.map((link) => {
+              const active = isActiveNavLink(pathname, link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  transitionTypes={[...forwardNav]}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "group flex flex-col gap-0.5 font-mono text-base leading-7 uppercase transition-colors duration-200",
+                    active ? "text-fg" : "text-fg-muted hover:text-fg",
+                  )}
+                >
+                  {link.label}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "h-px w-full origin-left bg-fg transition-transform duration-300 ease-out",
+                      active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+                    )}
+                  />
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      </div>
 
-        <span className="font-signature text-2xl leading-5 text-[#98A2B3]">
-          Abiodun
-        </span>
-      </Link>
+      {/* Figma spaces the slash unevenly ("LIGHT    /  DARK"); kept from lg up. */}
+      <ThemeSwitch className="shrink-0 gap-0 font-medium text-sm leading-5 md:font-mono md:font-normal lg:text-base lg:leading-7 [&>span>span[aria-hidden]]:mx-2.5 lg:[&>span>span[aria-hidden]]:mr-4.75 lg:[&>span>span[aria-hidden]]:ml-9.5" />
 
-      <MobileMenu anchorRef={headerRef} />
-
-      <nav
-        aria-label="Main"
-        className="absolute left-1/2 hidden h-full w-[calc(100%-480px)] max-w-223.25 -translate-x-1/2 grid-cols-4 xl:grid"
-      >
-        {navLinks.map((link) => {
-          const active = isActiveNavLink(pathname, link.href);
-
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              transitionTypes={[...forwardNav]}
-              aria-current={active ? "page" : undefined}
-              className={cn(
-                "flex items-center justify-center border-r border-[#EAECF0] text-base leading-7 font-medium transition-colors duration-200 first:border-l",
-                active ? "text-black" : "text-[#98A2B3] hover:text-black",
-              )}
-            >
-              {link.label}
-            </Link>
-          );
-        })}
-      </nav>
-
-      <WorkStatus className="hidden xl:flex" />
+      {/* Right: gamepad on phones; gamepad + status from tablet up. */}
+      <div className="flex flex-1 items-center justify-end">
+        <GameLauncher className="flex md:hidden" />
+        <WorkStatus className="hidden md:flex" />
+      </div>
     </header>
   );
 }

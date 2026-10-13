@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Meow_Script, Spline_Sans } from "next/font/google";
+import {
+  Anton,
+  Geist,
+  Geist_Mono,
+  Meow_Script,
+  Spline_Sans,
+  Spline_Sans_Mono,
+} from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -9,6 +16,29 @@ const splineSans = Spline_Sans({
   subsets: ["latin"],
   weight: "variable",
   variable: "--font-sans",
+});
+
+const splineSansMono = Spline_Sans_Mono({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-spline-mono",
+});
+
+// Footer type toy ("TYPE SOMETHING").
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-anton",
+});
+
+// About page movie quote. Telma by Indian Type Foundry, from Fontshare.
+const telma = localFont({
+  src: "./fonts/Telma-Light.woff2",
+  weight: "300",
+  style: "normal",
+  display: "swap",
+  fallback: ["Georgia", "serif"],
+  variable: "--font-quote",
 });
 
 const noodle = localFont({
@@ -60,6 +90,8 @@ export const metadata: Metadata = {
     "Product designer working on crypto and fintech products. Selected case studies and explorations.",
 };
 
+const themeScript = `(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})()`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -74,10 +106,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         splineSans.variable,
         calloveya.variable,
         canterbury.variable,
+        splineSansMono.variable,
+        anton.variable,
+        telma.variable,
         "font-sans",
       )}
+      data-theme="light"
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-[#F9FAFB]">
+      <head>
+        {/* Runs before first paint: saved choice, else the OS setting. */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-page">
         <Header />
         {children}
       </body>

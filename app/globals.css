@@ -2,20 +2,92 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+/* Dark mode is driven by data-theme on <html> (set before paint in layout.tsx). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Site colour tokens. Light values are the original palette; dark values
+   follow the reference dark theme (page #0d0d0d, surfaces #000, text
+   #fff / #e5e5e5 / #b3b3b3 / #4c4c4c, lines #333). */
+:root,
+[data-theme="light"] {
+  --page: #f9fafb;
+  --surface: #ffffff;
+  --chip: #f2f4f7;
+  --chip-hover: #eaecf0;
+  --line: #eaecf0;
+  --line-subtle: #f3f4f6;
+  --fg: #101828;
+  --fg-2: #475467;
+  --fg-3: #667085;
+  --fg-muted: #98a2b3;
+  --on-fg: #ffffff;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --page: #0d0d0d;
+  --surface: #000000;
+  --chip: #1a1a1a;
+  --chip-hover: #333333;
+  --line: #262626;
+  --line-subtle: #1a1a1a;
+  --fg: #ffffff;
+  --fg-2: #e5e5e5;
+  --fg-3: #b3b3b3;
+  --fg-muted: #4c4c4c;
+  --on-fg: #1a1a1a;
+  color-scheme: dark;
+}
+
+/* Smooth colour change while the theme flips (class added by ThemeSwitch). */
+:root.theme-transitioning,
+:root.theme-transitioning *,
+:root.theme-transitioning ::before,
+:root.theme-transitioning ::after {
+  transition-property: color, background-color, border-color, outline-color, fill, stroke, box-shadow !important;
+  transition-duration: 220ms !important;
+  transition-timing-function: var(--ease-out) !important;
+}
 
 /* Stronger curves than Tailwind's defaults; these replace the built-in
    `ease-out` / `ease-in-out` utilities project-wide. */
 @theme {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* "Open to work" dot: a one-shot halo when the pill is clicked. */
+  --animate-status-halo: status-halo 900ms var(--ease-out) forwards;
+
+  @keyframes status-halo {
+    from {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(3.2);
+    }
+  }
 }
 
 @theme inline {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-chip: var(--chip);
+  --color-chip-hover: var(--chip-hover);
+  --color-line: var(--line);
+  --color-line-subtle: var(--line-subtle);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-fg-muted: var(--fg-muted);
+  --color-on-fg: var(--on-fg);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-spline-mono);
+  --font-display: var(--font-anton);
+  --font-quote: var(--font-quote);
   --font-heading: var(--font-sans);
   --font-noodle: var(--font-noodle);
   --font-script: var(--font-script);
@@ -94,7 +166,8 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
+.dark,
+[data-theme="dark"] {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -140,8 +213,8 @@
   }
 
   body {
-    background: var(--color-bg);
-    color: var(--color-text);
+    background: var(--page);
+    color: var(--fg);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
@@ -156,8 +229,8 @@
   }
 
   ::selection {
-    background: var(--color-text);
-    color: var(--color-bg);
+    background: var(--fg);
+    color: var(--page);
   }
 
   /* Marquee */
@@ -203,6 +276,60 @@
   [data-enter] {
     animation: enter 500ms var(--ease-out) backwards;
     animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  /* Line drawing. Band strokes trace themselves in (pathLength=1 lets the
+     dash run 1 → 0 whatever the length); grid lines grow along their axis.
+     ease-in-out because the line is moving across the screen. */
+  @keyframes band-draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes line-grow {
+    from {
+      scale: var(--line-from, 1 0);
+    }
+    to {
+      scale: 1 1;
+    }
+  }
+
+  .band-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: band-draw 900ms var(--ease-in-out) forwards;
+    animation-delay: calc(200ms + var(--i, 0) * 22ms);
+  }
+
+  .band-fade {
+    animation: enter-fade 700ms var(--ease-out) 300ms backwards;
+  }
+
+  .line-grow {
+    transform-origin: top left;
+    animation: line-grow 1200ms var(--ease-in-out) backwards;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  .line-grow-x {
+    --line-from: 0 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .band-draw {
+      stroke-dashoffset: 0;
+      animation: none;
+    }
+
+    .band-fade,
+    .line-grow {
+      animation: none;
+    }
   }
 
   /* Second fold: text blurs in once when its section scrolls into view
