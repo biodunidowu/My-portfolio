@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <ViewTransition {...pageTransition}>
-      <main id="about" className="px-4 md:px-12 py-10 lg:py-12">
+      <main id="about" className="overflow-x-clip">
         <About content={about} />
       </main>
     </ViewTransition>

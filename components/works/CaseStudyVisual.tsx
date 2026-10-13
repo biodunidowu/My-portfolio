@@ -6,7 +6,7 @@ import { CaseStudy } from "@/lib/constants/works";
 import { backNav, forwardNav } from "@/lib/transitions";
 
 const chevronClass =
-  "absolute top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg transition-transform hover:scale-105 disabled:pointer-events-none disabled:opacity-40";
+  "absolute top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-surface shadow-lg transition-transform hover:scale-105 disabled:pointer-events-none disabled:opacity-40";
 
 export default function CaseStudyVisual({
   slug,
@@ -75,7 +75,7 @@ export default function CaseStudyVisual({
           href={`/works/${nextSlug}`}
           transitionTypes={[...forwardNav]}
           scroll={false}
-          className="absolute -bottom-8 right-0 shadow-sm hover:shadow-md transition-all duration-300 rounded-[12px] bg-white px-5 py-5 text-2xl font-noodle uppercase underline underline-offset-2"
+          className="absolute -bottom-8 right-0 shadow-sm hover:shadow-md transition-all duration-300 rounded-[12px] bg-surface px-5 py-5 text-2xl font-noodle uppercase underline underline-offset-2"
         >
           Next project
         </Link>

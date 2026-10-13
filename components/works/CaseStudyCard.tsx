@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ViewTransition } from "react";
 import RichText from "@/lib/richText";
+import HoverVideo from "./HoverVideo";
 import { cn } from "@/lib/utils";
 import { forwardNav } from "@/lib/transitions";
 import { hasCaseStudy, type CaseCard } from "@/lib/constants/caseCards";
@@ -40,6 +41,7 @@ function Brand({ brand, name }: { brand: NonNullable<CaseCard["brand"]>; name: s
         width={brand.wordmark.width}
         height={brand.wordmark.height}
         style={{ width: px(brand.wordmark.width), height: px(brand.wordmark.height) }}
+        className={cn(brand.invertOnDark && "dark:invert dark:hue-rotate-180")}
       />
     </div>
   );
@@ -48,11 +50,14 @@ function Brand({ brand, name }: { brand: NonNullable<CaseCard["brand"]>; name: s
 export default function CaseStudyCard({ card }: { card: CaseCard }) {
   const published = hasCaseStudy(card.slug);
   const isPreview = card.shots.length === 1;
+  const featured = card.featured ?? 0;
 
   const vars = {
     "--card-h": px(card.height),
     "--panel-w": px(card.panelWidth ?? 263),
-    ...(card.panelHeight && { "--panel-h": px(card.panelHeight) }),
+    "--panel-h": px(card.panelHeight),
+    "--panel-r": px(card.panelRadius ?? 12),
+    "--panel-gap": px(card.panelGap ?? 12),
   } as CSSProperties;
 
   return (
@@ -60,32 +65,34 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
       style={vars}
       aria-label={card.name}
       className={cn(
-        "relative mx-auto flex w-full max-w-300 flex-col items-center gap-6 overflow-hidden px-4 py-6 md:px-8 md:py-8 xl:h-(--card-h) xl:flex-row xl:justify-center xl:gap-10 xl:px-7 xl:py-0",
+        "relative mx-auto flex w-full max-w-344 flex-col items-center gap-6 overflow-hidden px-4 py-6 md:flex-row md:justify-center md:gap-8 md:px-8 md:py-10 xl:h-(--card-h) xl:gap-10 xl:px-10.5 xl:py-0",
         card.shadow &&
           "shadow-[0_1px_3px_0_rgba(47,43,67,0.1),inset_0_-1px_0_0_rgba(47,43,67,0.1)]",
       )}
     >
       <ViewTransition name={`work-${card.slug}`} share="morph" default="none">
-        <div aria-hidden className="absolute inset-0 bg-white">
+        <div aria-hidden className="absolute inset-0 bg-surface">
           <Image
             src={card.backgroundSrc}
             alt=""
             fill
-            sizes="(min-width: 1200px) 1200px, 100vw"
+            sizes="(min-width: 1376px) 1376px, 100vw"
             className="object-cover"
           />
+          {card.backgroundVideoSrc && (
+            <HoverVideo src={card.backgroundVideoSrc} />
+          )}
         </div>
       </ViewTransition>
 
+      {/* Phones and tablets show one screen (the featured one); desktop shows all. */}
       <div
         className={cn(
-          "relative flex max-w-full xl:shrink-0",
-          isPreview
-            ? "w-full justify-center xl:w-auto"
-            : "gap-3 overflow-x-auto md:gap-6 xl:gap-10 xl:overflow-visible",
+          "relative flex max-w-full justify-center xl:shrink-0",
+          isPreview ? "w-full md:w-auto md:flex-1 xl:flex-none" : "xl:gap-10",
         )}
       >
-        {card.shots.map((shot) => (
+        {card.shots.map((shot, i) => (
           <div
             key={shot.src}
             style={
@@ -98,9 +105,10 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
             }
             className={cn(
               "relative shrink-0 overflow-hidden",
+              i !== featured && "hidden xl:block",
               isPreview
                 ? "w-full max-w-(--w) xl:w-(--w)"
-                : "h-90 md:h-105 xl:h-(--h)",
+                : "h-105 md:h-112 xl:h-(--h)",
             )}
           >
             <Image
@@ -114,34 +122,31 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
         ))}
       </div>
 
-      <div
-        className={cn(
-          "relative flex w-full flex-col gap-3 border-b border-[#EAECF0] bg-white px-3 py-4 md:max-w-80 xl:w-(--panel-w) xl:max-w-none xl:shrink-0",
-          card.panelHeight && "xl:h-(--panel-h) xl:justify-between",
-        )}
-      >
-        {card.brand && <Brand brand={card.brand} name={card.name} />}
+      <div className="relative flex w-full flex-col justify-between gap-6 overflow-hidden rounded-(--panel-r) border-b border-line bg-surface px-3 py-4 md:w-(--panel-w) md:shrink-0 xl:h-(--panel-h)">
+        <div className="flex flex-col gap-(--panel-gap)">
+          {card.brand && <Brand brand={card.brand} name={card.name} />}
 
-        <div className="flex flex-col gap-2">
-          <h2 className="text-base leading-5 font-medium text-[#101828]">
-            Overview
-          </h2>
-          <p className="text-xs leading-5 text-[#667085]">
-            <RichText text={card.overview} />
-          </p>
+          <div className="flex flex-col gap-2 font-mono">
+            <h2 className="text-base leading-5 font-medium text-fg uppercase">
+              Overview
+            </h2>
+            <p className="text-xs leading-5 tracking-[-0.48px] text-fg-3 [&_strong]:font-bold">
+              <RichText text={card.overview} />
+            </p>
+          </div>
         </div>
 
         {published ? (
           <Link
             href={`/works/${card.slug}`}
             transitionTypes={[...forwardNav]}
-            className="self-start border border-[#F3F4F6] bg-[#F3F4F6] px-3 py-2 text-xs leading-7 font-medium text-black transition-[background-color,scale] duration-160 ease-out hover:bg-[#EAECF0] active:scale-97"
+            className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.48px] text-fg uppercase transition-[background-color,scale] duration-160 ease-out hover:bg-chip-hover active:scale-97"
           >
             Read Case-study
             <span className="sr-only">: {card.name}</span>
           </Link>
         ) : (
-          <span className="self-start border border-[#F3F4F6] bg-[#F3F4F6] px-3 py-2 text-xs leading-7 font-medium text-[#667085]">
+          <span className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.48px] text-fg-3 uppercase">
             Case study coming soon
           </span>
         )}

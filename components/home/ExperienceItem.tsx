@@ -1,4 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
+import RichText from "@/lib/richText";
 import { Experience } from "@/lib/constants/experience";
 
 export default function ExperienceItem({
@@ -9,21 +10,26 @@ export default function ExperienceItem({
   ...props
 }: Experience & { heading?: ReactNode } & ComponentProps<"div">) {
   return (
-    <div className="xl:grid xl:grid-cols-[117px_1fr] xl:gap-x-3.5" {...props}>
-      <div className="hidden flex-col gap-1 text-xs leading-5 text-[#667085] uppercase xl:flex">
+    <div
+      className="font-mono md:grid md:grid-cols-[117px_1fr] md:gap-x-3.5"
+      {...props}
+    >
+      <div className="hidden flex-col gap-1 text-xs leading-5 text-fg-3 uppercase md:flex">
         {heading}
         <span>{period}</span>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <h3 className="flex gap-2 text-xs leading-5 whitespace-nowrap uppercase">
-          <span className="font-bold text-[#101828]">{company}</span>
-          <span className="text-[#667085] xl:hidden">({period})</span>
+      <div className="flex flex-col gap-1.25 md:gap-2">
+        <h3 className="flex gap-1.25 text-xs leading-5 tracking-[-0.48px] whitespace-nowrap uppercase md:tracking-normal">
+          <span className="font-bold text-fg">{company}</span>
+          <span className="text-fg-3 md:hidden">({period})</span>
         </h3>
 
-        <ul className="ms-4.5 list-disc space-y-2 text-xs leading-5 text-[#667085] marker:text-[#667085] xl:ms-5.25 xl:text-sm xl:leading-6">
+        <ul className="ms-4.5 list-disc space-y-2 text-xs leading-5 tracking-[-0.48px] text-fg-3 marker:text-fg-3 md:ms-5.25 md:text-sm md:leading-6 md:tracking-[-0.56px] [&_strong]:font-bold [&_strong]:text-fg">
           {points.map((point) => (
-            <li key={point}>{point}</li>
+            <li key={point}>
+              <RichText text={point} />
+            </li>
           ))}
         </ul>
       </div>

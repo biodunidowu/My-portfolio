@@ -22,7 +22,7 @@ export default function ExplorationVisual({
   return (
     <div
       className={cn(
-        "relative aspect-678/546 w-full overflow-hidden bg-white",
+        "relative aspect-678/546 w-full overflow-hidden bg-surface",
         className,
       )}
     >

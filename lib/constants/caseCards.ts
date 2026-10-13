@@ -19,6 +19,8 @@ export type CaseCardBrand = {
   wordmark: Size & { src: string };
   /** Space between the tile and the wordmark. */
   gap: number;
+  /** Dark wordmarks are flipped to light (keeping their hue) on dark panels. */
+  invertOnDark?: boolean;
 };
 
 export type CaseCard = {
@@ -27,14 +29,21 @@ export type CaseCard = {
   /** Overview copy; `**bold**` is supported. */
   overview: string;
   backgroundSrc: string;
+  /** Optional clip that plays over the background while hovered. */
+  backgroundVideoSrc?: string;
   /** Card height on desktop. */
   height: number;
   /** Phone screens (three) or a single desktop preview. */
   shots: CaseCardShot[];
   brand?: CaseCardBrand;
-  /** Fixed overview-panel height; content is spread top to bottom. */
-  panelHeight?: number;
+  /** Overview panel height on desktop; brand + copy sit top, button bottom. */
+  panelHeight: number;
   panelWidth?: number;
+  panelRadius?: number;
+  /** Gap between the brand row and the copy. */
+  panelGap?: number;
+  /** The one screen shown on phones, where the card is single-column. */
+  featured?: number;
   shadow?: boolean;
 };
 
@@ -65,6 +74,7 @@ export const caseCards: CaseCard[] = [
     name: "Cwito",
     overview: overviewOf("cwito"),
     backgroundSrc: BASE + "cwito-bg.webp",
+    backgroundVideoSrc: "/videos/cwito-bg.mp4",
     height: 590,
     shots: [
       phone("cwito-1.webp", "Cwito rewards unlock prompt over the home screen", 246, 533),
@@ -76,14 +86,20 @@ export const caseCards: CaseCard[] = [
       mark: { src: BASE + "cwito-icon.svg", width: 18, height: 18 },
       wordmark: { src: BASE + "cwito-wordmark.svg", width: 49, height: 16 },
       gap: 12,
+      invertOnDark: true,
     },
-    panelHeight: 282,
+    panelHeight: 534,
+    panelRadius: 16,
+    panelGap: 16,
+    featured: 1,
   },
   {
     slug: "gambit",
     name: "Gambit",
     overview:
-      "Gambit is a competitive gaming platform built around three core games — **WordQuake**, **Trigon**, and **CG Draw** — designed to bring real-time, skill-based competition to a mobile-first audience. I joined as product designer early in the engagement, owning strategy and execution from the ground up: conducting UX research (including a trust audit of platforms like Bet9ja and Ludo King), defining the full site map and navigation architecture across 105 screens, and building a complete design system from scratch.",
+      "Gambit is a competitive gaming platform built around three core games — **WordQuake**, **Trigon**, and **CG Draw** — designed to bring real-time, skill-based competition to a mobile-first audience.",
+    panelHeight: 498,
+    featured: 2,
     backgroundSrc: BASE + "gambit-bg.webp",
     height: 546,
     shots: [
@@ -116,7 +132,8 @@ export const caseCards: CaseCard[] = [
       wordmark: { src: BASE + "celler-wordmark.svg", width: 47, height: 11.05 },
       gap: 8,
     },
-    panelHeight: 322,
+    panelHeight: 498,
+    featured: 1,
   },
   {
     slug: "rhoblo",
@@ -138,7 +155,9 @@ export const caseCards: CaseCard[] = [
       mark: { src: BASE + "rhoblo-logomark.svg", width: 32, height: 32 },
       wordmark: { src: BASE + "rhoblo-wordmark.svg", width: 78, height: 18 },
       gap: 8,
+      invertOnDark: true,
     },
+    panelHeight: 462,
   },
   {
     slug: "tawq",
@@ -162,5 +181,6 @@ export const caseCards: CaseCard[] = [
       gap: 12,
     },
     panelWidth: 280,
+    panelHeight: 462,
   },
 ];

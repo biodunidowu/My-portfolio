@@ -7,11 +7,11 @@ export default function CaseStudyHeader({
   brand: CaseStudy["brand"];
 }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#EAECF0] bg-white py-4 px-3 shadow-xs">
+    <div className="flex items-center justify-between border-b border-line bg-surface py-4 px-3 shadow-xs">
       <Image src={brand.logoSrc} alt="" width={103} height={42} />
 
-      <p className="text-sm text-[#475467]">
-        Role: <span className="font-medium text-[#101828]">{brand.role}</span>
+      <p className="text-sm text-fg-2">
+        Role: <span className="font-medium text-fg">{brand.role}</span>
       </p>
     </div>
   );

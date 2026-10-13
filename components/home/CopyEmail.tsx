@@ -25,7 +25,7 @@ export default function CopyEmail({ email }: { email: string }) {
     <div className="inline-flex items-center gap-2.5 px-3 py-2">
       <a
         href={`mailto:${email}`}
-        className="text-xs leading-5 font-medium text-[#101828] underline"
+        className="font-mono text-xs leading-5 font-medium tracking-[-0.48px] text-fg underline md:tracking-normal"
       >
         {email}
       </a>
@@ -42,7 +42,7 @@ export default function CopyEmail({ email }: { email: string }) {
           alt=""
           width={20}
           height={20}
-          className={cn(iconSwap, copied && "scale-90 opacity-0 blur-[2px]")}
+          className={cn(iconSwap, "dark:invert", copied && "scale-90 opacity-0 blur-[2px]")}
         />
         <Check
           className={cn(
