@@ -6,7 +6,7 @@ import RichText from "@/lib/richText";
 import HoverVideo from "./HoverVideo";
 import { cn } from "@/lib/utils";
 import { forwardNav } from "@/lib/transitions";
-import { hasCaseStudy, type CaseCard } from "@/lib/constants/caseCards";
+import type { CaseCard } from "@/lib/constants/caseCards";
 
 const px = (value: number) => `${value}px`;
 
@@ -48,7 +48,8 @@ function Brand({ brand, name }: { brand: NonNullable<CaseCard["brand"]>; name: s
 }
 
 export default function CaseStudyCard({ card }: { card: CaseCard }) {
-  const published = hasCaseStudy(card.slug);
+  const href = card.caseStudyHref;
+  const external = href !== undefined && !href.startsWith("/");
   const isPreview = card.shots.length === 1;
   const featured = card.featured ?? 0;
 
@@ -136,10 +137,12 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
           </div>
         </div>
 
-        {published ? (
+        {href ? (
           <Link
-            href={`/works/${card.slug}`}
-            transitionTypes={[...forwardNav]}
+            href={href}
+            {...(external
+              ? { target: "_blank", rel: "noreferrer" }
+              : { transitionTypes: [...forwardNav] })}
             className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.48px] text-fg uppercase transition-[background-color,scale] duration-160 ease-out hover:bg-chip-hover active:scale-97"
           >
             Read Case-study
@@ -147,7 +150,7 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
           </Link>
         ) : (
           <span className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.48px] text-fg-3 uppercase">
-            Case study coming soon
+            Case-study coming soon
           </span>
         )}
       </div>

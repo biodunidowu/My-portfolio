@@ -45,6 +45,11 @@ export type CaseCard = {
   /** The one screen shown on phones, where the card is single-column. */
   featured?: number;
   shadow?: boolean;
+  /**
+   * Where "Read Case-study" goes: a site path ("/works/cwito") or a full URL.
+   * Leave unset to show "Case-study coming soon" with no link.
+   */
+  caseStudyHref?: string;
 };
 
 function overviewOf(slug: string) {
@@ -53,11 +58,6 @@ function overviewOf(slug: string) {
     (s) => s.type === "paragraph" && s.heading === "Overview",
   );
   return section && section.type === "paragraph" ? section.body : "";
-}
-
-/** Whether the card links to a published case study page. */
-export function hasCaseStudy(slug: string) {
-  return caseStudies.some((cs) => cs.slug === slug);
 }
 
 const phone = (src: string, alt: string, width: number, height: number, radius = 12) => ({
