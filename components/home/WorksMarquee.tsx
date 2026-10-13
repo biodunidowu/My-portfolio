@@ -1,29 +1,100 @@
-import { works } from "@/lib/constants/works";
+import type { CSSProperties } from "react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { stagger } from "@/lib/stagger";
+import { works, type Work } from "@/lib/constants/works";
 
-export default function WorksMarquee() {
-  // Render the list twice back to back so the track can scroll exactly
-  // -50% and loop seamlessly into itself.
-  const trackItems = [...works, ...works];
+function WorkCard({
+  work,
+  index,
+  decorative,
+}: {
+  work: Work;
+  index: number;
+  decorative: boolean;
+}) {
+  // Mobile and desktop carousels use different card orders in the design;
+  // CSS order swaps them per breakpoint, offset so the copy stays second.
+  const offset = decorative ? works.length : 0;
+  const order = {
+    "--order": offset + (work.mobileOrder ?? index + 1),
+    "--md-order": offset + index + 1,
+  } as CSSProperties;
+
+  const shotSize = {
+    "--w": `${work.mobile.width}px`,
+    "--h": `${work.mobile.height}px`,
+    "--md-w": `${work.desktop.width}px`,
+    "--md-h": `${work.desktop.height}px`,
+  } as CSSProperties;
 
   return (
+    // Spacing is a right margin rather than a flex gap so both copies of the
+    // list are exactly the same width and the -50% loop has no seam.
+    <div
+      aria-hidden={decorative || undefined}
+      style={order}
+      className="relative order-(--order) mr-3 h-66 w-86 shrink-0 overflow-hidden bg-white md:order-(--md-order) md:mr-4 md:h-114.25 md:w-116"
+    >
+      <Image
+        src={work.backgroundSrc}
+        alt=""
+        fill
+        sizes="(min-width: 768px) 464px, 344px"
+        className="object-cover"
+      />
+
+      <div
+        style={shotSize}
+        className={cn(
+          "absolute top-1/2 left-1/2 h-(--h) w-(--w) -translate-1/2 md:h-(--md-h) md:w-(--md-w)",
+          work.frame === "shadow" &&
+            "shadow-[0_4px_8px_0_rgba(47,43,67,0.1),inset_0_-1px_0_0_rgba(47,43,67,0.1)]",
+        )}
+      >
+        <Image
+          src={work.src}
+          alt={decorative ? "" : work.title}
+          fill
+          sizes="(min-width: 768px) 445px, 320px"
+          loading={decorative ? "lazy" : "eager"}
+          unoptimized={work.animated}
+          className={cn(
+            "object-cover",
+            work.frame === "rounded" && "rounded-xl",
+          )}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default function WorksMarquee() {
+  return (
     <section
+      {...stagger(0)}
       id="works"
       aria-label="Selected work"
-      className="marquee-viewport overflow-hidden my-7.5"
+      className="marquee-viewport relative mt-3.25 mb-7.5 overflow-hidden xl:mt-7.75 xl:mb-10.25"
     >
-      <div className="marquee-track flex gap-4 w-max">
-        {trackItems.map((work, index) => (
-          <div key={`${work.id}-${index}`} className="relative shrink-0">
-            <Image
-              src={work.src}
-              alt={work.title}
-              width={463}
-              height={356}
-              className="h-65.75 w-auto object-contain md:h-auto"
-              priority={index < works.length}
-            />
-          </div>
+      {/* The list is rendered twice back to back so the track can scroll
+          exactly -50% and loop seamlessly; the copy is hidden from AT. */}
+      <div className="marquee-track flex w-max">
+        {works.map((work, index) => (
+          <WorkCard
+            key={work.id}
+            work={work}
+            index={index}
+            decorative={false}
+          />
+        ))}
+        {works.map((work, index) => (
+          <WorkCard
+            key={`copy-${work.id}`}
+            work={work}
+            index={index}
+            decorative
+          />
         ))}
       </div>
     </section>

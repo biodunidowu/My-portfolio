@@ -1,18 +1,89 @@
+type Size = { width: number; height: number };
+
 export type Work = {
   id: number;
   title: string;
+  /** Foreground shot, centred on the card. */
   src: string;
+  /** Painting behind the shot; decorative. */
+  backgroundSrc: string;
+  /** Rendered size of the shot on a 344×264 card (below md). */
+  mobile: Size;
+  /** Rendered size of the shot on a 464×457 card (md and up). */
+  desktop: Size;
+  /** Extra treatment for shots that are UI cards or phone frames. */
+  frame?: "shadow" | "rounded";
+  /** Position in the mobile carousel when it differs from desktop. */
+  mobileOrder?: number;
+  /**
+   * Animated shot. Served as-is: the image optimizer re-encodes to a single
+   * still frame, so these files are pre-compressed instead.
+   */
+  animated?: boolean;
 };
 
 export const works: Work[] = [
-  { id: 1, title: "Image 1", src: "/images/Frame 15.png" },
-  { id: 2, title: "Image 2", src: "/images/Frame 16.png" },
-  { id: 3, title: "Image 3", src: "/images/Frame 17.png" },
-  { id: 4, title: "Image 4", src: "/images/Frame 18.png" },
-  { id: 5, title: "Image 5", src: "/images/Frame 19.png" },
-  { id: 6, title: "Image 6", src: "/images/Frame 20.png" },
-  { id: 7, title: "Image 7", src: "/images/Frame 21.png" },
-  { id: 8, title: "Image 8", src: "/images/Frame 22.png" },
+  {
+    id: 1,
+    title: "Event poster with a sunburst headdress on a green gradient",
+    src: "/images/home/work-1.webp",
+    backgroundSrc: "/images/home/work-1-bg.webp",
+    mobile: { width: 193, height: 242 },
+    desktop: { width: 328, height: 410 },
+  },
+  {
+    id: 2,
+    title: "Gauntlet X vehicle stats screen from a game interface",
+    src: "/images/home/work-2.webp",
+    backgroundSrc: "/images/home/work-2-bg.webp",
+    mobile: { width: 295, height: 210 },
+    desktop: { width: 444, height: 316 },
+  },
+  {
+    id: 3,
+    title: "Flagged-transaction summary card from a fraud monitoring dashboard",
+    src: "/images/home/work-3.webp",
+    backgroundSrc: "/images/home/work-3-bg.webp",
+    mobile: { width: 197, height: 190 },
+    desktop: { width: 266, height: 257 },
+    frame: "shadow",
+    mobileOrder: 4,
+  },
+  {
+    id: 4,
+    title: "Skill tree screen from a game interface",
+    src: "/images/home/work-4.webp",
+    backgroundSrc: "/images/home/work-4-bg.webp",
+    mobile: { width: 320, height: 200 },
+    desktop: { width: 445, height: 279 },
+    mobileOrder: 3,
+  },
+  {
+    id: 5,
+    title: "Animated “Gauntlet” poster with a wireframe vehicle render",
+    src: "/images/home/work-5.webp",
+    animated: true,
+    backgroundSrc: "/images/home/work-5-bg.webp",
+    mobile: { width: 185, height: 232 },
+    desktop: { width: 324, height: 405 },
+  },
+  {
+    id: 6,
+    title: "Aircraft scan screen from a sci-fi game HUD",
+    src: "/images/home/work-6.webp",
+    backgroundSrc: "/images/home/work-6-bg.webp",
+    mobile: { width: 300, height: 170 },
+    desktop: { width: 419, height: 237 },
+  },
+  {
+    id: 7,
+    title: "Player profile screen from a mobile gaming app",
+    src: "/images/home/work-7.webp",
+    backgroundSrc: "/images/home/work-7-bg.webp",
+    mobile: { width: 103, height: 223 },
+    desktop: { width: 181, height: 390 },
+    frame: "rounded",
+  },
 ];
 
 export type CaseStudySection =

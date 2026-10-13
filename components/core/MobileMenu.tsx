@@ -1,70 +1,70 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type RefObject } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Popover } from "@base-ui/react/popover";
 import { cn } from "@/lib/utils";
 import { isActiveNavLink, navLinks } from "@/lib/constants/navigation";
 import { forwardNav } from "@/lib/transitions";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import WorkStatus from "./WorkStatus";
 
-const MobileMenu = () => {
+const MobileMenu = ({
+  anchorRef,
+}: {
+  /** The header, so the menu drops down at its full width. */
+  anchorRef: RefObject<HTMLElement | null>;
+}) => {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger
-        aria-label="Open menu"
-        className="p-2 bg-[#F9FAFB] xl:hidden"
+    <Popover.Root open={open} onOpenChange={setOpen}>
+      <Popover.Trigger
+        aria-label={open ? "Close menu" : "Open menu"}
+        className="bg-[#F9FAFB] p-2 transition-[scale] duration-160 ease-out active:scale-97 xl:hidden"
       >
         <Image src="/images/menu.svg" width={24} height={24} alt="" />
-      </PopoverTrigger>
+      </Popover.Trigger>
 
-      <PopoverContent
-        align="end"
-        sideOffset={2}
-        className="w-88 max-w-sm divide-y divide-[#EAECF0] overflow-hidden p-0 gap-0 rounded-none z-200 pb-4"
-      >
-        <div className="p-4 pb-0">
-          {navLinks.map((link) => {
-            const active = isActiveNavLink(pathname, link.href);
+      <Popover.Portal>
+        <Popover.Positioner
+          anchor={anchorRef}
+          side="bottom"
+          align="start"
+          sideOffset={0}
+          collisionPadding={0}
+          className="isolate z-200"
+        >
+          <Popover.Popup className="w-(--anchor-width) border-b border-[#EAECF0] bg-white px-4 py-3 outline-hidden duration-150 data-closed:animate-out data-closed:fade-out-0 data-closed:slide-out-to-top-2 data-open:animate-in data-open:fade-in-0 data-open:slide-in-from-top-2 xl:hidden">
+            <nav aria-label="Main" className="flex flex-col border-x border-[#EAECF0]">
+              {navLinks.map((link) => {
+                const active = isActiveNavLink(pathname, link.href);
 
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                transitionTypes={[...forwardNav]}
-                onClick={() => setOpen(false)}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "font-noodle block py-4.5 text-center text-2xl uppercase transition-colors duration-200 border-b border-x border-[#EAECF0] first:border-t",
-                  active ? "text-black" : "text-[#9CA3AF] hover:text-black",
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </div>
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    transitionTypes={[...forwardNav]}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex h-24.5 items-center justify-center border-b border-[#EAECF0] text-base leading-7 transition-colors duration-200 first:border-t",
+                      active ? "text-black" : "text-[#98A2B3] hover:text-black",
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
 
-        <div className="grid grid-cols-[auto_1fr] px-4">
-          <div className="flex items-center justify-center border-r border-r-[#EAECF0] bg-[#F3F4F6] px-8 py-2.5">
-            <Image src="/images/game-pad.svg" width={24} height={24} alt="" />
-          </div>
-
-          <div className="font-noodle flex items-center justify-center gap-2 px-4 py-5.5 text-xl font-medium bg-[#F9FAFB]">
-            <span className="h-2 w-2 rounded-full bg-[#22C55E]" />
-            Open to work
-          </div>
-        </div>
-      </PopoverContent>
-    </Popover>
+            <WorkStatus variant="menu" className="h-11" />
+          </Popover.Popup>
+        </Popover.Positioner>
+      </Popover.Portal>
+    </Popover.Root>
   );
 };
 

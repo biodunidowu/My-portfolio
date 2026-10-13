@@ -1,20 +1,36 @@
+import type { CSSProperties } from "react";
 import { contactLinks } from "@/lib/constants/contact";
+
+// The mobile design lists X last; desktop keeps the source order.
+const mobileLast = "X.com";
 
 export default function ContactLinks() {
   return (
-    <div className="flex md:flex-col flex-row justify-between gap-3 w-full md:w-fit text-xs font-medium uppercase tracking-wide text-black md:mt-0 mt-20">
-      {contactLinks.map((link) => (
-        <span key={link.label}>
-          <a
-            href={link.href}
-            target={link.href.startsWith("http") ? "_blank" : undefined}
-            rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-            className="transition-opacity hover:opacity-60"
+    <ul className="flex w-full flex-row justify-between gap-3 text-xs leading-5 font-medium text-black uppercase md:w-73.75 md:flex-col">
+      {contactLinks.map((link, index) => {
+        const external = link.href.startsWith("http");
+        const order = {
+          "--order": link.label === mobileLast ? contactLinks.length : index,
+          "--md-order": index,
+        } as CSSProperties;
+
+        return (
+          <li
+            key={link.label}
+            style={order}
+            className="order-(--order) md:order-(--md-order)"
           >
-            {link.label}.
-          </a>
-        </span>
-      ))}
-    </div>
+            <a
+              href={link.href}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noreferrer" : undefined}
+              className="transition-opacity hover:opacity-60"
+            >
+              {link.label}.
+            </a>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

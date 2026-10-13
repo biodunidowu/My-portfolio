@@ -17,7 +17,7 @@ export const experience: Experience[] = [
     period: "Jan 2026 – Feb 2026",
     points: [
       "Contributed to the V2 redesign of a crypto product, improving overall usability and feature clarity.",
-      "Designed a new swap feature, enabling users to seamlessly exchange crypto assets within the app.",
+      "Designed a new Swap feature, enabling users to seamlessly exchange crypto assets within the app.",
     ],
   },
 ];
