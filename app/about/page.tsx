@@ -3,6 +3,7 @@ import { ViewTransition } from "react";
 import { pageTransition } from "@/lib/transitions";
 import { about } from "@/lib/constants/about";
 import About from "@/components/about/About";
+import FooterSection from "@/components/core/Footer";
 
 export const metadata: Metadata = {
   title: "About — Idowu Abiodun",
@@ -16,6 +17,8 @@ export default function AboutPage() {
       <main id="about" className="overflow-x-clip">
         <About content={about} />
       </main>
+
+      <FooterSection />
     </ViewTransition>
   );
 }
