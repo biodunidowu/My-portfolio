@@ -69,7 +69,7 @@ export default function Header() {
                   transitionTypes={[...forwardNav]}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "group flex flex-col gap-0.5 font-mono text-base leading-7 uppercase transition-colors duration-200",
+                    "group flex flex-col gap-0.5 font-mono text-base leading-7 uppercase transition-colors duration-short ease-out-cubic",
                     active ? "text-fg" : "text-fg-muted hover:text-fg",
                   )}
                 >
@@ -77,8 +77,11 @@ export default function Header() {
                   <span
                     aria-hidden
                     className={cn(
-                      "h-px w-full origin-left bg-fg transition-transform duration-300 ease-out",
-                      active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+                      "h-px w-full bg-fg transition-transform duration-short ease-out-cubic motion-reduce:transition-none",
+                      // Grows from the left on hover and retracts to the right on leave.
+                      active
+                        ? "scale-x-100"
+                        : "origin-right scale-x-0 group-hover:origin-left group-hover:scale-x-100",
                     )}
                   />
                 </Link>

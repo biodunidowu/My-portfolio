@@ -8,7 +8,7 @@ import VideoPanel from "./VideoPanel";
 import { blurIn } from "@/lib/stagger";
 
 const chipClass =
-  "inline-flex items-center bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.48px] text-fg underline hover:bg-chip-hover transition-[background-color,scale] duration-160 ease-out active:scale-97";
+  "inline-flex items-center bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.48px] text-fg underline hover:bg-chip-hover btn-motion";
 
 // Desktop grid lines (1440 frame): verticals at 120, 712 and 40px from the
 // right; a rule along the top of the video and one across its bottom.

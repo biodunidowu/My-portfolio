@@ -2,24 +2,34 @@
 
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const iconSwap =
-  "absolute inset-0 transition-[opacity,scale,filter] duration-200 ease-out motion-reduce:scale-100 motion-reduce:blur-none";
+// Icon Swap (Expressive): the incoming icon turns and pops in past full size,
+// the outgoing one shrinks and turns away. "idle" is the first render, before
+// any copy, so nothing animates on page load.
+type Phase = "idle" | "copied" | "reset";
+
+const icon = "absolute inset-0 size-5";
 
 export default function CopyEmail({ email }: { email: string }) {
-  const [copied, setCopied] = useState(false);
+  const [phase, setPhase] = useState<Phase>("idle");
+  const timer = useRef<number | undefined>(undefined);
+
+  useEffect(() => () => window.clearTimeout(timer.current), []);
 
   async function handleCopy() {
     try {
       await navigator.clipboard.writeText(email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      setPhase("copied");
+      window.clearTimeout(timer.current);
+      timer.current = window.setTimeout(() => setPhase("reset"), 1800);
     } catch {
       // Clipboard permission denied — fail silently, the mailto link still works.
     }
   }
+
+  const copied = phase === "copied";
 
   return (
     <div className="inline-flex items-center gap-2.5 px-3 py-2">
@@ -34,21 +44,28 @@ export default function CopyEmail({ email }: { email: string }) {
         type="button"
         onClick={handleCopy}
         aria-label={copied ? "Email address copied" : "Copy email address"}
-        className="relative size-5 cursor-pointer transition-[scale] duration-160 ease-out active:scale-95"
+        className="relative size-5 cursor-pointer btn-motion"
       >
-        {/* Both icons stay mounted so the swap is a crossfade, not a pop. */}
         <Image
           src="/images/copy.svg"
           alt=""
           width={20}
           height={20}
-          className={cn(iconSwap, "dark:invert", copied && "scale-90 opacity-0 blur-[2px]")}
+          className={cn(
+            icon,
+            "dark:invert",
+            copied && "anim-icon-out duration-short ease-in-cubic",
+            phase === "reset" && "anim-icon-in duration-normal ease-out-quart",
+          )}
         />
         <Check
           className={cn(
-            iconSwap,
-            "size-5",
-            !copied && "scale-90 opacity-0 blur-[2px]",
+            icon,
+            copied
+              ? "anim-icon-in duration-normal ease-out-quart"
+              : phase === "reset"
+                ? "anim-icon-out duration-short ease-in-cubic"
+                : "opacity-0",
           )}
           strokeWidth={1.75}
         />

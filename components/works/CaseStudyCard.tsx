@@ -143,7 +143,7 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
             {...(external
               ? { target: "_blank", rel: "noreferrer" }
               : { transitionTypes: [...forwardNav] })}
-            className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.48px] text-fg uppercase transition-[background-color,scale] duration-160 ease-out hover:bg-chip-hover active:scale-97"
+            className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.48px] text-fg uppercase btn-motion hover:bg-chip-hover"
           >
             Read Case-study
             <span className="sr-only">: {card.name}</span>

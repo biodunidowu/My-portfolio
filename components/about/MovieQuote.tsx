@@ -24,10 +24,10 @@ export default function MovieQuote({ quotes }: { quotes: string[] }) {
           key={quote}
           aria-hidden={i !== index}
           className={
-            "col-start-1 row-start-1 transition-[opacity,filter,translate] duration-300 ease-out motion-reduce:transition-opacity " +
+            "col-start-1 row-start-1 transition-[opacity,filter,translate] duration-normal ease-out-quart motion-reduce:transition-opacity motion-reduce:duration-short " +
             (i === index
               ? "translate-y-0 opacity-100 blur-0"
-              : "pointer-events-none translate-y-1 opacity-0 blur-[3px] motion-reduce:translate-y-0 motion-reduce:blur-0")
+              : "pointer-events-none translate-y-2 opacity-0 blur-[3px] motion-reduce:translate-y-0 motion-reduce:blur-0")
           }
         >
           {quote}

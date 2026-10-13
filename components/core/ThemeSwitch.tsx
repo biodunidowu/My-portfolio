@@ -61,7 +61,7 @@ export default function ThemeSwitch({ className }: { className?: string }) {
             type="button"
             aria-pressed={theme === choice}
             onClick={() => applyTheme(choice)}
-            className="cursor-pointer text-fg-muted uppercase transition-opacity duration-140 hover:opacity-65 aria-pressed:text-fg"
+            className="cursor-pointer text-fg-muted uppercase transition-[opacity,color] duration-short ease-out-cubic hover:opacity-65 aria-pressed:text-fg"
           >
             {choice}
           </button>

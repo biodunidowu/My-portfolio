@@ -73,7 +73,7 @@ export default function About({ content }: { content: AboutContent }) {
                   target="_blank"
                   rel="noreferrer"
                   title={project.name}
-                  className="flex w-full items-center justify-center bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.96px] text-fg underline transition-[background-color,scale] duration-160 ease-out hover:bg-chip-hover active:scale-97"
+                  className="flex w-full items-center justify-center bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.96px] text-fg underline btn-motion hover:bg-chip-hover"
                 >
                   Check me out
                   <span className="sr-only">: {project.name}</span>

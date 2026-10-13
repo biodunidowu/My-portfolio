@@ -62,7 +62,7 @@ export default function HoverVideo({ src }: { src: string }) {
       preload="none"
       aria-hidden
       className={cn(
-        "absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out",
+        "absolute inset-0 h-full w-full object-cover transition-opacity duration-slow ease-out-quart",
         playing ? "opacity-100" : "opacity-0",
       )}
     />

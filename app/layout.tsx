@@ -96,6 +96,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-motion-mode="expressive"
       className={cn(
         "h-full",
         "antialiased",
