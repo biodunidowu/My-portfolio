@@ -318,11 +318,13 @@
 }
 
 /* Scroll reveal: text rises in, unblurs, and settles just past its rest
-   position (Card entry, Expressive: lift + settle). */
+   position (Card entry, Expressive: lift + settle). The blur stays small:
+   it plays on many text blocks at once, mid-scroll, and blur cost grows
+   with radius (Safari especially). */
 @keyframes motion-blur-rise {
   0% {
     opacity: 0;
-    filter: blur(8px);
+    filter: blur(4px);
     transform: translateY(var(--motion-shift));
   }
   70% {

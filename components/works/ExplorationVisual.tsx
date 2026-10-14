@@ -46,7 +46,7 @@ export default function ExplorationVisual({
           }}
         >
           {shot.video ? (
-            <AutoplayVideo src={shot.src} label={title} />
+            <AutoplayVideo src={shot.src} label={title} className="bg-[#0A0A0A]" />
           ) : shot.crop ? (
             <Image
               src={shot.src}
