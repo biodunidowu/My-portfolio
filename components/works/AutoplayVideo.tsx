@@ -1,18 +1,26 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 /**
  * Silent looping clip that starts on its own. Browsers only allow autoplay
- * when muted; `playsInline` keeps iOS from opening it full screen. Visitors
- * who ask for reduced motion get it paused instead.
+ * when muted; `playsInline` keeps iOS from opening it full screen. It only
+ * plays while on screen, so it isn't decoding frames while the visitor
+ * scrolls elsewhere, and visitors who ask for reduced motion get it paused.
+ * Without a `label` it's treated as decoration and hidden from screen readers.
  */
 export default function AutoplayVideo({
   src,
   label,
+  poster,
+  className,
 }: {
   src: string;
-  label: string;
+  label?: string;
+  /** Still frame shown before playback and while paused. */
+  poster?: string;
+  className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -21,27 +29,37 @@ export default function AutoplayVideo({
     if (!video) return;
 
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let onScreen = false;
+
     const sync = () => {
-      if (query.matches) video.pause();
-      else video.play().catch(() => {});
+      if (onScreen && !query.matches) video.play().catch(() => {});
+      else video.pause();
     };
 
-    sync();
+    const observer = new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      sync();
+    });
+    observer.observe(video);
     query.addEventListener("change", sync);
-    return () => query.removeEventListener("change", sync);
+    return () => {
+      observer.disconnect();
+      query.removeEventListener("change", sync);
+    };
   }, []);
 
   return (
     <video
       ref={ref}
       src={src}
+      poster={poster}
       aria-label={label}
-      autoPlay
+      aria-hidden={label ? undefined : true}
       muted
       loop
       playsInline
       preload="metadata"
-      className="absolute inset-0 h-full w-full bg-[#0A0A0A] object-cover"
+      className={cn("absolute inset-0 h-full w-full object-cover", className)}
     />
   );
 }

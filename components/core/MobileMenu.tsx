@@ -12,7 +12,7 @@ import ThemeSwitch from "./ThemeSwitch";
 import WorkStatus from "./WorkStatus";
 
 const toggleClass =
-  "cursor-pointer text-sm leading-5 font-medium text-fg-muted transition-colors hover:text-fg";
+  "-my-2 cursor-pointer py-2 text-sm leading-5 font-medium text-fg-muted transition-colors duration-short ease-out-cubic hover:text-fg";
 
 /**
  * Phone menu. The panel drops 18px into place as it fades in, over a blurred

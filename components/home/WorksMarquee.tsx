@@ -35,7 +35,7 @@ function WorkCard({
     <div
       aria-hidden={decorative || undefined}
       style={order}
-      className="relative order-(--order) mr-3 h-66 w-86 shrink-0 overflow-hidden bg-surface md:order-(--md-order) md:mr-4 md:h-114.25 md:w-116"
+      className="relative order-(--order) mr-3 h-66 w-86 shrink-0 overflow-hidden bg-surface contain-layout contain-paint md:order-(--md-order) md:mr-4 md:h-114.25 md:w-116"
     >
       <Image
         src={work.backgroundSrc}
@@ -51,6 +51,9 @@ function WorkCard({
           "absolute top-1/2 left-1/2 h-(--h) w-(--w) -translate-1/2 md:h-(--md-h) md:w-(--md-w)",
           work.frame === "shadow" &&
             "shadow-[0_4px_8px_0_rgba(47,43,67,0.1),inset_0_-1px_0_0_rgba(47,43,67,0.1)]",
+          // Animated shots repaint every frame; their own layer keeps that
+          // from redrawing the whole moving strip.
+          work.animated && "will-change-transform",
         )}
       >
         <Image

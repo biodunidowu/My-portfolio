@@ -61,7 +61,8 @@ export default function ThemeSwitch({ className }: { className?: string }) {
             type="button"
             aria-pressed={theme === choice}
             onClick={() => applyTheme(choice)}
-            className="cursor-pointer text-fg-muted uppercase transition-[opacity,color] duration-short ease-out-cubic hover:opacity-65 aria-pressed:text-fg"
+            // -my-2 + py-2 grows the tap target to 36px without moving the text.
+            className="-my-2 cursor-pointer py-2 text-fg-muted uppercase transition-[opacity,color] duration-short ease-out-cubic hover:opacity-65 aria-pressed:text-fg"
           >
             {choice}
           </button>
