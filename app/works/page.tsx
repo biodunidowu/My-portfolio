@@ -1,5 +1,7 @@
 import { ViewTransition } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import WorksTabs from "@/components/works/WorksTabs";
+import { EXPLORATIONS_TAB } from "@/components/works/ExplorationDetail";
 import WorksGrid from "@/components/works/WorkGrid";
 import { pageTransition } from "@/lib/transitions";
 import PersonalExplorations from "@/components/works/PersonalExplorations";
@@ -13,14 +15,14 @@ const Works = () => {
   return (
     <ViewTransition {...pageTransition}>
       <main id="works" className="overflow-x-clip pt-8">
-        <Tabs defaultValue="case-studies" className="w-full gap-0">
+        <WorksTabs className="w-full gap-0">
           <HatchBand>
             <TabsList className="relative h-full w-full max-w-114 rounded-xl border-b border-line bg-surface p-0 px-3">
               <TabsTrigger value="case-studies" className={tabClass}>
                 Case-Studies
               </TabsTrigger>
 
-              <TabsTrigger value="personal-explorations" className={tabClass}>
+              <TabsTrigger value={EXPLORATIONS_TAB} className={tabClass}>
                 Personal Explorations
               </TabsTrigger>
             </TabsList>
@@ -30,10 +32,10 @@ const Works = () => {
             <WorksGrid />
           </TabsContent>
 
-          <TabsContent value="personal-explorations" className="anim-rise-in duration-normal ease-out-quart mt-8 mb-6 px-4 md:mt-10 md:mb-21.25 md:px-8">
+          <TabsContent value={EXPLORATIONS_TAB} className="anim-rise-in duration-normal ease-out-quart mt-8 mb-6 px-4 md:mt-10 md:mb-21.25 md:px-8">
             <PersonalExplorations />
           </TabsContent>
-        </Tabs>
+        </WorksTabs>
       </main>
 
       <FooterSection />
