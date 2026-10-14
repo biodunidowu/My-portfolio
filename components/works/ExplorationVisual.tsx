@@ -10,11 +10,14 @@ export default function ExplorationVisual({
   exploration,
   sizes,
   preload,
+  hero = false,
   className,
 }: {
   exploration: Exploration;
   sizes: string;
   preload?: boolean;
+  /** On the exploration's own page, which may sit on a different painting. */
+  hero?: boolean;
   className?: string;
 }) {
   const { tile, title } = exploration;
@@ -27,7 +30,7 @@ export default function ExplorationVisual({
       )}
     >
       <Image
-        src={tile.backgroundSrc}
+        src={(hero && tile.heroBackgroundSrc) || tile.backgroundSrc}
         alt=""
         fill
         sizes={sizes}
