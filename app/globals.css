@@ -248,12 +248,13 @@
   }
 
   /* Constant motion: the 30s loop length sets the speed, so it isn't a
-     duration token. Pauses on hover and from its Pause button. */
+     duration token. Pauses only from its Pause button (and off screen): a
+     hover pause kept it stopped after Play, since the button sits inside
+     the strip, and on touch screens the tap's hover sticks. */
   .marquee-track {
     animation: marquee-scroll 30s var(--ease-none) infinite;
   }
 
-  .marquee-viewport:hover .marquee-track,
   .marquee-viewport[data-paused] .marquee-track {
     animation-play-state: paused;
   }
@@ -333,9 +334,11 @@
     }
   }
 
-  /* Text blurs in once when its section scrolls into view (Reveal sets
-     data-visible, and never removes it, so this plays once). */
-  [data-blur] {
+  /* Text blurs in once when its section scrolls into view. Content is only
+     hidden once Reveal has run (data-reveal), so with slow, failed or blocked
+     JavaScript it simply shows. Reveal then sets data-visible, and never
+     removes it, so this plays once. */
+  [data-reveal]:not([data-visible]) :is([data-blur], [data-fade]) {
     opacity: 0;
   }
 
@@ -346,12 +349,7 @@
 
   /* The video beside it only fades: blurring a playing video is expensive. */
   [data-fade] {
-    opacity: 0;
     transition: opacity var(--duration-slow) var(--ease-out-cubic);
-  }
-
-  [data-visible] [data-fade] {
-    opacity: 1;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -409,5 +407,59 @@
   ::view-transition-group(*) {
     animation-duration: 0s !important;
     animation-delay: 0s !important;
+  }
+}
+/* Skeleton: a frame that holds the place of images still loading, so a slow
+   connection shows calm grey blocks instead of holes. It pulses underneath
+   and the image simply covers it once loaded; the pulse stops by itself
+   after ~13s so it doesn't keep running under finished images. Opacity-only
+   pulse on a pseudo-element: no repaint per frame. The frame must be
+   positioned (relative / absolute). */
+@utility skeleton {
+  background-color: var(--chip);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--chip-hover);
+    opacity: 0;
+    pointer-events: none;
+    animation: skeleton-pulse 1.6s ease-in-out 8;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      animation: none;
+    }
+  }
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Loading-screen placeholder block: the same pulse, always on (it only
+   exists while a page is loading). */
+@utility skeleton-block {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--chip);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--chip-hover);
+    opacity: 0;
+    animation: skeleton-pulse 1.6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      animation: none;
+    }
   }
 }

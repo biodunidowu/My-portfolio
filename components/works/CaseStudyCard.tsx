@@ -72,7 +72,7 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
       )}
     >
       <ViewTransition name={`work-${card.slug}`} share="morph" default="none">
-        <div aria-hidden className="absolute inset-0 bg-surface">
+        <div aria-hidden className="skeleton absolute inset-0">
           <Image
             src={card.backgroundSrc}
             alt=""

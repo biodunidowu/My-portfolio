@@ -317,6 +317,25 @@
   }
 }
 
+/* Straight arrows: → slides forward, ← slides back. */
+@utility arrow-nudge-x {
+  display: inline-block;
+  transition: translate var(--duration-short) var(--ease-out-cubic);
+
+  :where(.group):hover & {
+    translate: var(--motion-lift) 0;
+  }
+}
+
+@utility arrow-nudge-back {
+  display: inline-block;
+  transition: translate var(--duration-short) var(--ease-out-cubic);
+
+  :where(.group):hover & {
+    translate: calc(var(--motion-lift) * -1) 0;
+  }
+}
+
 /* Scroll reveal: text rises in, unblurs, and settles just past its rest
    position (Card entry, Expressive: lift + settle). The blur stays small:
    it plays on many text blocks at once, mid-scroll, and blur cost grows
