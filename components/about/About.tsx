@@ -38,7 +38,7 @@ export default function About({ content }: { content: AboutContent }) {
       </div>
 
       <div className="relative bg-surface px-5 py-6 md:row-span-3 xl:col-start-2 xl:row-span-1 xl:row-start-4 xl:aspect-543/774">
-        <div className="relative aspect-503/726 w-full overflow-hidden xl:aspect-auto xl:h-full">
+        <div className="skeleton relative aspect-503/726 w-full overflow-hidden xl:aspect-auto xl:h-full">
           <Image
             src={content.photoSrc}
             alt={content.photoAlt}

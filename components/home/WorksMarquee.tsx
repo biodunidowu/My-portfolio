@@ -35,7 +35,7 @@ function WorkCard({
     <div
       aria-hidden={decorative || undefined}
       style={order}
-      className="relative order-(--order) mr-3 h-66 w-86 shrink-0 overflow-hidden bg-surface contain-layout contain-paint md:order-(--md-order) md:mr-4 md:h-114.25 md:w-116"
+      className="skeleton relative order-(--order) mr-3 h-66 w-86 shrink-0 overflow-hidden contain-layout contain-paint md:order-(--md-order) md:mr-4 md:h-114.25 md:w-116"
     >
       <Image
         src={work.backgroundSrc}

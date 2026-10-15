@@ -6,6 +6,9 @@ import ExplorationDetail from "@/components/works/ExplorationDetail";
 import { explorations, getExploration } from "@/lib/constants/explorations";
 import { pageTransition } from "@/lib/transitions";
 
+// Only the known slugs exist; anything else is a real 404 (not a streamed 200).
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return explorations.map((ex) => ({ slug: ex.id }));
 }
