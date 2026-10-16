@@ -20,6 +20,11 @@ export type Work = {
    * still frame, so these files are pre-compressed instead.
    */
   animated?: boolean;
+  /**
+   * Looping clip played instead of the image (`src` becomes its poster).
+   * It's cropped to the phone, so the frame rounds its corners to the phone's.
+   */
+  videoSrc?: string;
 };
 
 export const works: Work[] = [
@@ -93,6 +98,17 @@ export const works: Work[] = [
     // 440×859 source; the shot includes the phone's shadow.
     mobile: { width: 127, height: 248 },
     desktop: { width: 220, height: 430 },
+  },
+  {
+    id: 9,
+    title: "Wallet home screen on an iPhone, showing wallet and collateral balances and recent transactions",
+    // The phone only, cropped from the showreel's resting shots (no zooms or
+    // captions); 404×928, so its corners are rounded in CSS to the phone's.
+    src: "/images/home/work-9-poster.webp",
+    videoSrc: "/videos/wallet-phone.mp4",
+    backgroundSrc: "/images/home/work-9-bg.webp",
+    mobile: { width: 108, height: 248 },
+    desktop: { width: 187, height: 430 },
   },
 ];
 

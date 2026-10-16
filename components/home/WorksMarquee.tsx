@@ -3,6 +3,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { stagger } from "@/lib/stagger";
 import { works, type Work } from "@/lib/constants/works";
+import AutoplayVideo from "@/components/works/AutoplayVideo";
 import MarqueeToggle from "./MarqueeToggle";
 
 function WorkCard({
@@ -53,21 +54,34 @@ function WorkCard({
             "shadow-[0_4px_8px_0_rgba(47,43,67,0.1),inset_0_-1px_0_0_rgba(47,43,67,0.1)]",
           // Animated shots repaint every frame; their own layer keeps that
           // from redrawing the whole moving strip.
-          work.animated && "will-change-transform",
+          (work.animated || work.videoSrc) && "will-change-transform",
+          // Phone-shaped clip: the radius matches the handset's corners
+          // (≈64px on the 404×928 source), so none of the video's
+          // background shows around it.
+          work.videoSrc &&
+            "overflow-hidden rounded-[15.8%/6.9%] shadow-[0_10px_28px_rgba(20,30,25,0.3)]",
         )}
       >
-        <Image
-          src={work.src}
-          alt={decorative ? "" : work.title}
-          fill
-          sizes="(min-width: 768px) 445px, 320px"
-          loading={decorative ? "lazy" : "eager"}
-          unoptimized={work.animated}
-          className={cn(
-            "object-cover",
-            work.frame === "rounded" && "rounded-xl",
-          )}
-        />
+        {work.videoSrc ? (
+          <AutoplayVideo
+            src={work.videoSrc}
+            poster={work.src}
+            label={decorative ? undefined : work.title}
+          />
+        ) : (
+          <Image
+            src={work.src}
+            alt={decorative ? "" : work.title}
+            fill
+            sizes="(min-width: 768px) 445px, 320px"
+            loading={decorative ? "lazy" : "eager"}
+            unoptimized={work.animated}
+            className={cn(
+              "object-cover",
+              work.frame === "rounded" && "rounded-xl",
+            )}
+          />
+        )}
       </div>
     </div>
   );
