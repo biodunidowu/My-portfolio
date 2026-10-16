@@ -84,6 +84,16 @@ export const works: Work[] = [
     desktop: { width: 181, height: 390 },
     frame: "rounded",
   },
+  {
+    id: 8,
+    title: "Animated Tawq EV rider dashboard on an iPhone, completing its onboarding steps",
+    src: "/images/home/work-8.webp",
+    animated: true,
+    backgroundSrc: "/images/home/work-8-bg.webp",
+    // 440×859 source; the shot includes the phone's shadow.
+    mobile: { width: 127, height: 248 },
+    desktop: { width: 220, height: 430 },
+  },
 ];
 
 export type CaseStudySection =
