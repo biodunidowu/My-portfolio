@@ -110,6 +110,16 @@ export const works: Work[] = [
     mobile: { width: 108, height: 248 },
     desktop: { width: 187, height: 430 },
   },
+  {
+    id: 10,
+    title: "Nine game achievement badges unlocking one after another, each with its own animation",
+    src: "/images/home/work-10.webp",
+    animated: true,
+    backgroundSrc: "/images/home/work-10-bg.webp",
+    // 760×681 source; the dark panel sits inside a margin for its shadow.
+    mobile: { width: 277, height: 248 },
+    desktop: { width: 420, height: 376 },
+  },
 ];
 
 export type CaseStudySection =
