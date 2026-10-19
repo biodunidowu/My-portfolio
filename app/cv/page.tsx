@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ViewTransition } from "react";
 import FooterSection from "@/components/core/Footer";
+import CloseButton from "@/components/core/CloseButton";
 import HatchBand from "@/components/core/HatchBand";
 import { EMAIL } from "@/lib/constants/contact";
 import { CV_PDF, cv } from "@/lib/constants/cv";
@@ -53,9 +54,7 @@ export default function CvPage() {
             {...stagger(0)}
             className="mb-6 flex flex-wrap items-center justify-between gap-3 print:hidden"
           >
-            <p className="font-mono text-xs leading-5 tracking-[-0.48px] text-fg-3">
-              Read it here, or take a copy with you.
-            </p>
+            <CloseButton />
             <div className="flex flex-wrap gap-2">
               <a
                 href={CV_PDF}
