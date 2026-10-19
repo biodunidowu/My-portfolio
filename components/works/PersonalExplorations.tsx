@@ -20,7 +20,11 @@ export default function PersonalExplorations() {
             <ExplorationVisual
               exploration={exploration}
               sizes="(min-width: 768px) 678px, 100vw"
-              preload={i < 2}
+              // The tab stays mounted while hidden (app/works/page.tsx), so
+              // the first two rows download quietly in the background while
+              // visitors look at case studies; the rest load on scroll.
+              preload={i < 4}
+              fetchPriority={i < 4 ? "low" : undefined}
             />
             {/* Pointer-only hint (Tailwind's hover: is gated to fine pointers). */}
             <span

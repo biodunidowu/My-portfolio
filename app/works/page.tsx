@@ -32,7 +32,7 @@ const Works = () => {
             <WorksGrid />
           </TabsContent>
 
-          <TabsContent value={EXPLORATIONS_TAB} className="anim-rise-in duration-normal ease-out-quart mt-8 mb-6 px-4 md:mt-10 md:mb-21.25 md:px-8">
+          <TabsContent keepMounted value={EXPLORATIONS_TAB} className="anim-rise-in duration-normal ease-out-quart mt-8 mb-6 px-4 md:mt-10 md:mb-21.25 md:px-8">
             <PersonalExplorations />
           </TabsContent>
         </WorksTabs>
