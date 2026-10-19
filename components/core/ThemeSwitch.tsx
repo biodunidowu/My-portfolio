@@ -26,6 +26,16 @@ function applyTheme(theme: Theme) {
   // keep their own timing.
   if (animate) root.classList.add("theme-transitioning");
   root.dataset.theme = theme;
+  // Status bar colour follows the chosen theme, not just the OS setting:
+  // our own tag, first in <head>, wins over the per-scheme ones in layout.tsx.
+  let meta = document.getElementById("theme-color-choice") as HTMLMetaElement | null;
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.name = "theme-color";
+    meta.id = "theme-color-choice";
+    document.head.prepend(meta);
+  }
+  meta.content = theme === "dark" ? "#000000" : "#ffffff";
   try {
     localStorage.setItem("theme", theme);
   } catch {

@@ -364,6 +364,27 @@
   }
 }
 
+/* Phones. No grey/blue flash over tapped links (each control has its own
+   press state instead), no font inflation in landscape, and controls answer
+   the tap at once: they never double-tap-zoom, so the browser needn't wait. */
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+:where(a, button, [role="button"], [role="tab"], summary, label) {
+  touch-action: manipulation;
+}
+
+/* Touch press feedback for plain links and buttons, replacing the tap flash
+   (btn-motion and others add their own press scale on top). */
+@media (pointer: coarse) {
+  :where(a, button, [role="tab"], summary):active {
+    opacity: 0.6;
+  }
+}
+
 /* Keyboard focus: a ring that appears instantly in every mode. */
 :where(a, button, [role="tab"], input, summary):focus-visible {
   outline: 2px solid var(--fg);
