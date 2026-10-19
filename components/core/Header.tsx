@@ -52,7 +52,7 @@ export default function Header() {
     <header
       style={{ viewTransitionName: "site-header" }}
       ref={headerRef}
-      className="sticky top-0 z-100 flex h-18.5 items-center border-b border-line bg-surface px-4 py-3 md:h-18.75 md:px-8"
+      className="sticky top-0 z-100 flex h-18.5 items-center print:hidden border-b border-line bg-surface px-4 py-3 md:h-18.75 md:px-8"
     >
       {/* Left: menu trigger on phones; logo + nav from tablet up. */}
       <div className="flex flex-1 items-center gap-6">
