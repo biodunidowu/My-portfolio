@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Anton,
   Geist,
@@ -90,7 +90,18 @@ export const metadata: Metadata = {
     "Product designer working on crypto and fintech products. Selected case studies and explorations.",
 };
 
-const themeScript = `(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"})()`;
+// Phone status bar / browser chrome colour: the header's surface per scheme.
+// A saved light/dark choice overrides the OS: themeScript / ThemeSwitch put
+// their own tag first in <head> (browsers use the first match), leaving these
+// React-managed tags untouched.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
+
+const themeScript = `(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.dataset.theme=t==="light"||t==="dark"?t:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";if(t==="light"||t==="dark"){var m=document.createElement("meta");m.name="theme-color";m.id="theme-color-choice";m.content=t==="dark"?"#000000":"#ffffff";document.head.prepend(m)}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

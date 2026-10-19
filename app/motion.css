@@ -303,8 +303,10 @@
   display: inline-block;
   transition: translate var(--duration-short) var(--ease-out-cubic);
 
-  :where(.group):hover & {
-    translate: calc(var(--motion-lift) * 1) calc(var(--motion-lift) * -1);
+  @media (hover: hover) and (pointer: fine) {
+    :where(.group):hover & {
+      translate: calc(var(--motion-lift) * 1) calc(var(--motion-lift) * -1);
+    }
   }
 }
 
@@ -312,8 +314,10 @@
   display: inline-block;
   transition: translate var(--duration-short) var(--ease-out-cubic);
 
-  :where(.group):hover & {
-    translate: 0 calc(var(--motion-lift) * -1);
+  @media (hover: hover) and (pointer: fine) {
+    :where(.group):hover & {
+      translate: 0 calc(var(--motion-lift) * -1);
+    }
   }
 }
 
@@ -322,8 +326,10 @@
   display: inline-block;
   transition: translate var(--duration-short) var(--ease-out-cubic);
 
-  :where(.group):hover & {
-    translate: var(--motion-lift) 0;
+  @media (hover: hover) and (pointer: fine) {
+    :where(.group):hover & {
+      translate: var(--motion-lift) 0;
+    }
   }
 }
 
@@ -331,8 +337,10 @@
   display: inline-block;
   transition: translate var(--duration-short) var(--ease-out-cubic);
 
-  :where(.group):hover & {
-    translate: calc(var(--motion-lift) * -1) 0;
+  @media (hover: hover) and (pointer: fine) {
+    :where(.group):hover & {
+      translate: calc(var(--motion-lift) * -1) 0;
+    }
   }
 }
 
