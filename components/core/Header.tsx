@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { isActiveNavLink } from "@/lib/constants/navigation";
 import { forwardNav } from "@/lib/transitions";
 import { useHeaderHeightVar } from "@/lib/hooks/useHeaderHeightVar";
+import { useTrackSiteHistory } from "@/lib/hooks/useSiteHistory";
 import GameLauncher from "@/components/game/GameLauncher";
 import MobileMenu from "./MobileMenu";
 import ThemeSwitch from "./ThemeSwitch";
@@ -47,6 +48,7 @@ export default function Header() {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   useHeaderHeightVar(headerRef);
+  useTrackSiteHistory();
 
   return (
     <header
