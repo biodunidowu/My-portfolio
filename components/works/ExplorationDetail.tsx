@@ -69,6 +69,7 @@ export default function ExplorationDetail({
           exploration={exploration}
           sizes="(min-width: 768px) 60vw, 100vw"
           preload
+          fetchPriority="high"
           hero
         />
 

@@ -10,12 +10,16 @@ export default function ExplorationVisual({
   exploration,
   sizes,
   preload,
+  fetchPriority,
   hero = false,
   className,
 }: {
   exploration: Exploration;
   sizes: string;
+  /** Load now rather than when scrolled near (all of the tile's images). */
   preload?: boolean;
+  /** "low" for tiles loaded ahead in the background (a hidden tab). */
+  fetchPriority?: "high" | "low" | "auto";
   /** On the exploration's own page, which may sit on a different painting. */
   hero?: boolean;
   className?: string;
@@ -31,6 +35,8 @@ export default function ExplorationVisual({
     >
       <Image
         src={(hero && tile.heroBackgroundSrc) || tile.backgroundSrc}
+        loading={preload ? "eager" : "lazy"}
+        fetchPriority={fetchPriority}
         alt=""
         fill
         sizes={sizes}
@@ -58,6 +64,7 @@ export default function ExplorationVisual({
               height={1200}
               sizes="(min-width: 768px) 25vw, 50vw"
               loading={preload ? "eager" : "lazy"}
+              fetchPriority={fetchPriority}
               className="absolute top-0 max-w-none"
               style={{
                 width: `${shot.crop.w}%`,
@@ -72,6 +79,7 @@ export default function ExplorationVisual({
               fill
               sizes={sizes}
               loading={preload ? "eager" : "lazy"}
+              fetchPriority={fetchPriority}
               className="object-cover"
             />
           )}
