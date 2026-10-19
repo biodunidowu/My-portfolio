@@ -1,6 +1,8 @@
+import Link from "next/link";
+import { forwardNav } from "@/lib/transitions";
 import type { CSSProperties } from "react";
 import { experience } from "@/lib/constants/experience";
-import { BOOKING_URL, CV_URL, EMAIL } from "@/lib/constants/contact";
+import { BOOKING_URL, EMAIL } from "@/lib/constants/contact";
 import Reveal from "@/components/core/Reveal";
 import CopyEmail from "./CopyEmail";
 import ExperienceItem from "./ExperienceItem";
@@ -108,14 +110,13 @@ export default function ProfileShowcase() {
           {...blurIn(4 + experience.length)}
           className="-mt-2.5 flex w-full max-w-109 items-start self-start md:-mt-3.75 xl:mt-7.25 xl:mr-1 xl:justify-self-end"
         >
-          <a
-            href={CV_URL}
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            href="/cv"
+            transitionTypes={[...forwardNav]}
             className={chipClass}
           >
             Have a look at my CV
-          </a>
+          </Link>
         </div>
       </div>
     </Reveal>

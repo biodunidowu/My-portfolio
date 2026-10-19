@@ -484,3 +484,17 @@ html {
     }
   }
 }
+
+/* Printing (the CV page, and its PDF): white A4 with even margins; pages
+   hide their own chrome with print:hidden. */
+@page {
+  size: A4;
+  margin: 14mm 16mm;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+  }
+}
