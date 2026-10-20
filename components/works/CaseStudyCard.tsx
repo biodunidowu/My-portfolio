@@ -129,6 +129,7 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
 
           <div className="flex flex-col gap-2 font-mono">
             <h2 className="text-base leading-5 font-medium text-fg uppercase">
+              <span className="sr-only">{card.name}: </span>
               Overview
             </h2>
             <p className="text-xs leading-5 tracking-[-0.48px] text-fg-3 [&_strong]:font-bold">

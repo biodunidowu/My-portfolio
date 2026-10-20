@@ -15,6 +15,7 @@ const Works = () => {
   return (
     <ViewTransition {...pageTransition}>
       <main id="works" className="overflow-x-clip pt-8">
+        <h1 className="sr-only">Works</h1>
         <WorksTabs className="w-full gap-0">
           <HatchBand>
             <TabsList className="relative h-full w-full max-w-114 rounded-xl border-b border-line bg-surface p-0 px-3">
@@ -28,11 +29,11 @@ const Works = () => {
             </TabsList>
           </HatchBand>
 
-          <TabsContent value="case-studies" className="anim-rise-in duration-normal ease-out-quart mt-8 mb-6 px-4 md:mt-14.25 md:mb-5.5 md:px-8">
+          <TabsContent value="case-studies" className="anim-fade-in duration-short ease-out-cubic mt-8 mb-6 px-4 md:mt-14.25 md:mb-5.5 md:px-8">
             <WorksGrid />
           </TabsContent>
 
-          <TabsContent keepMounted value={EXPLORATIONS_TAB} className="anim-rise-in duration-normal ease-out-quart mt-8 mb-6 px-4 md:mt-10 md:mb-21.25 md:px-8">
+          <TabsContent keepMounted value={EXPLORATIONS_TAB} className="anim-fade-in duration-short ease-out-cubic mt-8 mb-6 px-4 md:mt-10 md:mb-21.25 md:px-8">
             <PersonalExplorations />
           </TabsContent>
         </WorksTabs>

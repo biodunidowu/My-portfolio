@@ -12,6 +12,7 @@ export default function ContactPage() {
   return (
     <ViewTransition {...pageTransition}>
       <main className="relative p-9">
+        <h1 className="sr-only">Contact Idowu Abiodun</h1>
         <div
           aria-hidden
           className="fixed inset-0 z-0 bg-[url(/images/contact-bg.jpg)] bg-cover bg-center"
