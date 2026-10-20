@@ -9,6 +9,7 @@ export default function Home() {
   return (
     <ViewTransition {...pageTransition}>
       <main id="home" className="relative overflow-x-clip">
+        <h1 className="sr-only">Idowu Abiodun — Product Designer</h1>
         <HatchBand className="mt-5.75 md:mt-6.5" />
         <WorksMarquee />
         <ProfileShowcase />

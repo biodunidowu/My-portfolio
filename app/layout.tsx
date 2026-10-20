@@ -85,6 +85,7 @@ const meowScript = Meow_Script({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.biodunidowu.xyz"),
   title: "Idowu Abiodun — Product Designer",
   description:
     "Product designer working on crypto and fintech products. Selected case studies and explorations.",

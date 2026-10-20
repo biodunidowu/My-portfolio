@@ -20,7 +20,7 @@
   --fg: #101828;
   --fg-2: #475467;
   --fg-3: #667085;
-  --fg-muted: #98a2b3;
+  --fg-muted: #6a7385; /* 4.56:1 on page, 4.77:1 on surface (WCAG AA) */
   --on-fg: #ffffff;
   color-scheme: light;
 }
@@ -35,7 +35,7 @@
   --fg: #ffffff;
   --fg-2: #e5e5e5;
   --fg-3: #b3b3b3;
-  --fg-muted: #4c4c4c;
+  --fg-muted: #808080; /* 4.92:1 on page, 5.32:1 on surface (WCAG AA) */
   --on-fg: #1a1a1a;
   color-scheme: dark;
 }
