@@ -13,7 +13,7 @@ const columns =
 const lines = [34, 577, 711, 939, 1182, 1373];
 
 const prose =
-  "space-y-6 font-mono text-sm leading-6 tracking-[-0.56px] text-fg-3";
+  "space-y-6 font-mono text-sm leading-6 tracking-[-0.14px] text-fg-3";
 
 export default function About({ content }: { content: AboutContent }) {
   return (
@@ -73,7 +73,7 @@ export default function About({ content }: { content: AboutContent }) {
                   target="_blank"
                   rel="noreferrer"
                   title={project.name}
-                  className="flex w-full items-center justify-center bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.96px] text-fg underline btn-motion hover:bg-chip-hover"
+                  className="flex w-full items-center justify-center bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.24px] text-fg underline btn-motion hover:bg-chip-hover"
                 >
                   Check me out
                   <span className="sr-only">: {project.name}</span>

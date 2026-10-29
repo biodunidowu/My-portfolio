@@ -20,12 +20,12 @@ export default function ExperienceItem({
       </div>
 
       <div className="flex flex-col gap-1.25 md:gap-2">
-        <h3 className="flex gap-1.25 text-xs leading-5 tracking-[-0.48px] whitespace-nowrap uppercase md:tracking-normal">
+        <h3 className="flex gap-1.25 text-xs leading-5 tracking-[-0.12px] whitespace-nowrap uppercase md:tracking-normal">
           <span className="font-bold text-fg">{company}</span>
           <span className="text-fg-3 md:hidden">({period})</span>
         </h3>
 
-        <ul className="ms-4.5 list-disc space-y-2 text-xs leading-5 tracking-[-0.48px] text-fg-3 marker:text-fg-3 md:ms-5.25 md:text-sm md:leading-6 md:tracking-[-0.56px] [&_strong]:font-bold [&_strong]:text-fg">
+        <ul className="ms-4.5 list-disc space-y-2 text-xs leading-5 tracking-[-0.12px] text-fg-3 marker:text-fg-3 md:ms-5.25 md:text-sm md:leading-6 md:tracking-[-0.14px] [&_strong]:font-bold [&_strong]:text-fg">
           {points.map((point) => (
             <li key={point}>
               <RichText text={point} />

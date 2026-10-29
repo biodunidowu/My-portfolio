@@ -5,7 +5,6 @@ import {
   Geist_Mono,
   Meow_Script,
   Spline_Sans,
-  Spline_Sans_Mono,
 } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -16,12 +15,6 @@ const splineSans = Spline_Sans({
   subsets: ["latin"],
   weight: "variable",
   variable: "--font-sans",
-});
-
-const splineSansMono = Spline_Sans_Mono({
-  subsets: ["latin"],
-  weight: "variable",
-  variable: "--font-spline-mono",
 });
 
 // Footer type toy ("TYPE SOMETHING").
@@ -119,7 +112,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         splineSans.variable,
         calloveya.variable,
         canterbury.variable,
-        splineSansMono.variable,
         anton.variable,
         telma.variable,
         "font-sans",

@@ -132,7 +132,7 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
               <span className="sr-only">{card.name}: </span>
               Overview
             </h2>
-            <p className="text-xs leading-5 tracking-[-0.48px] text-fg-3 [&_strong]:font-bold">
+            <p className="text-xs leading-5 tracking-[-0.12px] text-fg-3 [&_strong]:font-bold">
               <RichText text={card.overview} />
             </p>
           </div>
@@ -144,13 +144,13 @@ export default function CaseStudyCard({ card }: { card: CaseCard }) {
             {...(external
               ? { target: "_blank", rel: "noreferrer" }
               : { transitionTypes: [...forwardNav] })}
-            className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.48px] text-fg uppercase btn-motion hover:bg-chip-hover"
+            className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.12px] text-fg uppercase btn-motion hover:bg-chip-hover"
           >
             Read Case-study
             <span className="sr-only">: {card.name}</span>
           </Link>
         ) : (
-          <span className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.48px] text-fg-3 uppercase">
+          <span className="self-start border border-chip bg-chip px-3 py-2 font-mono text-xs leading-7 font-medium tracking-[-0.12px] text-fg-3 uppercase">
             Case-study coming soon
           </span>
         )}

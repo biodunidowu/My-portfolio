@@ -74,7 +74,7 @@ export default function ExplorationDetail({
         />
 
         <div className="flex flex-col items-start gap-4">
-          <div className="space-y-5 font-mono text-sm leading-5 tracking-[-0.56px] whitespace-pre-line text-fg-3">
+          <div className="space-y-5 font-mono text-sm leading-5 tracking-[-0.14px] whitespace-pre-line text-fg-3">
             {exploration.description.split("\n\n").map((text) => (
               <Paragraph key={text} text={text} />
             ))}
@@ -85,7 +85,7 @@ export default function ExplorationDetail({
               href={exploration.liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.96px] text-fg underline btn-motion hover:bg-chip-hover"
+              className="bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.24px] text-fg underline btn-motion hover:bg-chip-hover"
             >
               Check it out
               <span className="sr-only"> (opens in a new tab)</span>

@@ -34,7 +34,7 @@ export default function GameLauncher({ className }: { className?: string }) {
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 z-300 bg-black/40 backdrop-blur-md transition-opacity duration-normal ease-out-cubic data-ending-style:opacity-0 data-starting-style:opacity-0" />
         <Dialog.Popup className="fixed top-1/2 left-1/2 z-310 flex h-[min(680px,calc(100dvh-32px))] w-[min(960px,calc(100vw-32px))] -translate-1/2 flex-col overflow-hidden rounded-2xl border border-white/10 bg-black text-white shadow-2xl outline-hidden data-open:anim-pop-in data-open:duration-slow data-open:ease-out-quint data-closed:anim-pop-out data-closed:duration-normal data-closed:ease-in-cubic">
-          <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 font-mono text-xs tracking-[-0.48px] uppercase">
+          <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 font-mono text-xs tracking-[-0.12px] uppercase">
             <Dialog.Title className="text-white">Starfall</Dialog.Title>
             <Dialog.Description className="hidden text-white/50 md:block">
               Move: ← → / A D or drag · Pause: P · Sound: M

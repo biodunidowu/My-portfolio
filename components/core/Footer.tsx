@@ -11,7 +11,7 @@ import TypeToy from "./TypeToy";
 
 const socialLinks = contactLinks.filter((link) => link.href.startsWith("http"));
 
-const label = "font-mono text-[11px] leading-4 tracking-[-0.22px] text-fg-3 uppercase";
+const label = "font-mono text-[11px] leading-4 tracking-[-0.11px] text-fg-3 uppercase";
 
 const linkClass =
   "group inline-flex items-center gap-1.5 font-mono text-sm leading-5 font-medium text-fg uppercase transition-opacity duration-short ease-out-cubic hover:opacity-60";
@@ -44,7 +44,7 @@ const FooterSection = () => {
           <p {...blurIn(0)} className={label}>
             ( Get in touch )
           </p>
-          <h2 {...blurIn(1)} className="max-w-115 font-mono text-[28px] leading-9 font-medium tracking-[-0.56px] text-fg md:text-[32px] md:leading-10 md:tracking-[-0.64px]">
+          <h2 {...blurIn(1)} className="max-w-115 font-mono text-[28px] leading-9 font-medium tracking-[-0.14px] text-fg md:text-[32px] md:leading-10 md:tracking-[-0.16px]">
             Let&apos;s start a conversation about your project.
           </h2>
           <div {...blurIn(2)} className="flex flex-col items-start gap-3">
