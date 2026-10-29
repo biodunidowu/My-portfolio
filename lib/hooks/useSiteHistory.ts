@@ -22,8 +22,21 @@ export function useTrackSiteHistory() {
   }, [pathname]);
 }
 
+type NavigationLike = {
+  currentEntry: { index: number } | null;
+  entries: () => { url: string | null }[];
+};
+
 /** True when an earlier page of this site is behind the current one. */
 export function hasSiteHistory() {
+  // Ask the tab's real history where the browser can tell us. The counter
+  // alone is fooled by a case study opened in a new tab (the tab inherits the
+  // counter but has nothing to go back to), or by a return from another site.
+  const nav = (window as Window & { navigation?: NavigationLike }).navigation;
+  if (nav?.currentEntry) {
+    const prev = nav.entries()[nav.currentEntry.index - 1];
+    return !!prev?.url && new URL(prev.url).origin === location.origin;
+  }
   try {
     return Number(sessionStorage.getItem(KEY) ?? "0") > 1;
   } catch {
