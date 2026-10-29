@@ -92,6 +92,7 @@ export const caseCards: CaseCard[] = [
     panelRadius: 16,
     panelGap: 16,
     featured: 1,
+    caseStudyHref: "/works/cwito",
   },
   {
     slug: "gambit",

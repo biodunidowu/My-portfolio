@@ -22,6 +22,9 @@
   --fg-3: #667085;
   --fg-muted: #6a7385; /* 4.56:1 on page, 4.77:1 on surface (WCAG AA) */
   --on-fg: #ffffff;
+  /* Case study accents (Cwito teal): labels and Before/After tags. */
+  --cs-accent: #023436;
+  --cs-tag: #1f6f8b;
   color-scheme: light;
 }
 
@@ -37,6 +40,8 @@
   --fg-3: #b3b3b3;
   --fg-muted: #808080; /* 4.92:1 on page, 5.32:1 on surface (WCAG AA) */
   --on-fg: #1a1a1a;
+  --cs-accent: #6ccfc4;
+  --cs-tag: #7cc4dd;
   color-scheme: dark;
 }
 
@@ -85,6 +90,8 @@
   --color-fg-3: var(--fg-3);
   --color-fg-muted: var(--fg-muted);
   --color-on-fg: var(--on-fg);
+  --color-cs-accent: var(--cs-accent);
+  --color-cs-tag: var(--cs-tag);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
