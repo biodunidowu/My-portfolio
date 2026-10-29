@@ -38,7 +38,7 @@ export default function MarqueeToggle() {
       onClick={() => setPaused((p) => !p)}
       aria-pressed={paused}
       aria-label={paused ? "Play the work carousel" : "Pause the work carousel"}
-      className="btn-motion absolute right-3 bottom-3 z-10 bg-surface px-2 py-1 font-mono text-[11px] leading-4 tracking-[-0.22px] text-fg-3 uppercase hover:text-fg motion-reduce:hidden md:right-4 md:bottom-4"
+      className="btn-motion absolute right-3 bottom-3 z-10 bg-surface px-2 py-1 font-mono text-[11px] leading-4 tracking-[-0.11px] text-fg-3 uppercase hover:text-fg motion-reduce:hidden md:right-4 md:bottom-4"
     >
       {paused ? "Play" : "Pause"}
     </button>

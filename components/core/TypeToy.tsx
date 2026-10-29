@@ -285,7 +285,7 @@ export default function TypeToy({ className }: { className?: string }) {
 
       <div
         onClick={(e) => e.stopPropagation()}
-        className="absolute right-3 bottom-3 left-3 flex items-center justify-between font-mono text-[11px] leading-4 tracking-[-0.44px] text-fg-muted uppercase"
+        className="absolute right-3 bottom-3 left-3 flex items-center justify-between font-mono text-[11px] leading-4 tracking-[-0.11px] text-fg-muted uppercase"
       >
         <span>
           {text.length}/{MAX_CHARS}

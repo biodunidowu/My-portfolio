@@ -29,7 +29,7 @@ export default function PersonalExplorations() {
             {/* Pointer-only hint (Tailwind's hover: is gated to fine pointers). */}
             <span
               aria-hidden
-              className="pointer-events-none absolute bottom-3 left-3 bg-surface px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.48px] text-fg underline opacity-0 transition-[opacity,translate] duration-short ease-out-cubic translate-y-1 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
+              className="pointer-events-none absolute bottom-3 left-3 bg-surface px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.12px] text-fg underline opacity-0 transition-[opacity,translate] duration-short ease-out-cubic translate-y-1 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:translate-y-0"
             >
               View exploration
             </span>

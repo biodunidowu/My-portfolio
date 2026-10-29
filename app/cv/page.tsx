@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const sectionLabel =
-  "font-mono text-xs leading-5 tracking-[-0.48px] text-fg-muted uppercase print:text-[#667085]";
+  "font-mono text-xs leading-5 tracking-[-0.12px] text-fg-muted uppercase print:text-[#667085]";
 
 function Section({
   title,
@@ -80,11 +80,11 @@ export default function CvPage() {
             className="flex flex-col gap-8 border border-line bg-surface px-5 py-8 md:px-12 md:py-12 print:gap-5 print:border-0 print:bg-white print:p-0 print:text-black"
           >
             <header className="flex flex-col gap-3">
-              <h1 className="font-mono text-[28px] leading-9 font-medium tracking-[-0.56px] text-fg md:text-[32px] md:leading-10 print:text-[24px] print:leading-8 print:text-black">
+              <h1 className="font-mono text-[28px] leading-9 font-medium tracking-[-0.14px] text-fg md:text-[32px] md:leading-10 print:text-[24px] print:leading-8 print:text-black">
                 {cv.name}
                 <span className="text-fg-muted print:text-[#667085]"> · {cv.role}</span>
               </h1>
-              <ul className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs leading-5 tracking-[-0.48px]">
+              <ul className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs leading-5 tracking-[-0.12px]">
                 {cv.links.map((link) => (
                   <li key={link.href}>
                     <a
@@ -116,12 +116,12 @@ export default function CvPage() {
                         )}
                       </h3>
                       {job.dates && (
-                        <p className="font-mono text-xs leading-5 tracking-[-0.48px] text-fg-3 print:text-[#667085]">
+                        <p className="font-mono text-xs leading-5 tracking-[-0.12px] text-fg-3 print:text-[#667085]">
                           {job.dates}
                         </p>
                       )}
                     </div>
-                    <p className="font-mono text-xs leading-5 tracking-[-0.48px] text-fg-3 print:text-[#667085]">
+                    <p className="font-mono text-xs leading-5 tracking-[-0.12px] text-fg-3 print:text-[#667085]">
                       {job.title} — {job.terms}
                     </p>
                     <ul className="mt-3 flex list-disc flex-col gap-1.5 pl-4 text-sm leading-6 text-fg-2 marker:text-fg-muted print:mt-1.5 print:gap-0.5 print:text-[11.5px] print:leading-[17px] print:text-[#344054]">
@@ -152,7 +152,7 @@ export default function CvPage() {
                     <span>
                       <span className="text-fg print:text-black">{c.name}</span> — {c.issuer}
                     </span>
-                    <span className="font-mono text-xs leading-6 tracking-[-0.48px] text-fg-3 print:text-[#667085]">
+                    <span className="font-mono text-xs leading-6 tracking-[-0.12px] text-fg-3 print:text-[#667085]">
                       {c.year}
                     </span>
                   </li>
@@ -169,7 +169,7 @@ export default function CvPage() {
                     · {cv.education.place}
                   </span>
                 </h3>
-                <p className="font-mono text-xs leading-5 tracking-[-0.48px] text-fg-3 print:text-[#667085]">
+                <p className="font-mono text-xs leading-5 tracking-[-0.12px] text-fg-3 print:text-[#667085]">
                   {cv.education.date}
                 </p>
               </div>

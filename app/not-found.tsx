@@ -47,21 +47,21 @@ export default function NotFound() {
           <span className="font-display text-[120px] leading-none tracking-[-2px] text-fg md:text-[180px]">
             404
           </span>
-          <span className="absolute bottom-3 left-4 font-mono text-[11px] leading-4 tracking-[-0.22px] text-fg-muted uppercase">
+          <span className="absolute bottom-3 left-4 font-mono text-[11px] leading-4 tracking-[-0.11px] text-fg-muted uppercase">
             ( no frame here )
           </span>
         </div>
 
         <h1
           {...stagger(1)}
-          className="mt-10 font-mono text-[28px] leading-9 font-medium tracking-[-0.56px] text-balance text-fg md:text-[32px] md:leading-10 md:tracking-[-0.64px]"
+          className="mt-10 font-mono text-[28px] leading-9 font-medium tracking-[-0.14px] text-balance text-fg md:text-[32px] md:leading-10 md:tracking-[-0.16px]"
         >
           We all get lost sometimes.
         </h1>
 
         <p
           {...stagger(2)}
-          className="mt-4 max-w-110 font-mono text-sm leading-6 tracking-[-0.56px] text-fg-3"
+          className="mt-4 max-w-110 font-mono text-sm leading-6 tracking-[-0.14px] text-fg-3"
         >
           The link may be out of date, or this page has moved. The work is
           still where you left it.
@@ -90,7 +90,7 @@ export default function NotFound() {
           aria-label="Suggested pages"
           className="mt-14 w-full border-t border-line pt-6 text-left"
         >
-          <p className="font-mono text-xs leading-5 tracking-[-0.48px] text-fg-muted uppercase">
+          <p className="font-mono text-xs leading-5 tracking-[-0.12px] text-fg-muted uppercase">
             ( Or try one of these )
           </p>
           <ul className="mt-3 divide-y divide-line border-b border-line">

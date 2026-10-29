@@ -191,7 +191,7 @@ export default function SpaceShooter() {
     ).matches;
     const font =
       getComputedStyle(document.documentElement)
-        .getPropertyValue("--font-spline-mono")
+        .getPropertyValue("--font-sans")
         .trim() || "monospace";
 
     const synth = new Synth();

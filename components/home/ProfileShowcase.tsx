@@ -10,7 +10,7 @@ import VideoPanel from "./VideoPanel";
 import { blurIn } from "@/lib/stagger";
 
 const chipClass =
-  "inline-flex items-center bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.48px] text-fg underline hover:bg-chip-hover btn-motion";
+  "inline-flex items-center bg-chip px-3 py-2 font-mono text-xs leading-5 font-medium tracking-[-0.12px] text-fg underline hover:bg-chip-hover btn-motion";
 
 // Desktop grid lines (1440 frame): verticals at 120, 712 and 40px from the
 // right; a rule along the top of the video and one across its bottom.
@@ -52,7 +52,7 @@ export default function ProfileShowcase() {
         <div className="flex w-full max-w-109 flex-col gap-3.25 font-mono xl:mr-1 xl:justify-self-end">
           <p
             {...blurIn(0)}
-            className="text-xs leading-5 tracking-[-0.64px] text-fg md:text-sm md:tracking-normal"
+            className="text-xs leading-5 tracking-[-0.16px] text-fg md:text-sm md:tracking-normal"
           >
             Hey I&apos;m Abiodun, a <strong>Product Designer</strong> and a{" "}
             <strong>Tinkerer.</strong>
@@ -60,7 +60,7 @@ export default function ProfileShowcase() {
 
           <p
             {...blurIn(1)}
-            className="text-xs leading-5 tracking-[-0.48px] text-fg-2 md:text-sm md:leading-6 md:tracking-[-0.56px] md:text-fg-3"
+            className="text-xs leading-5 tracking-[-0.12px] text-fg-2 md:text-sm md:leading-6 md:tracking-[-0.14px] md:text-fg-3"
           >
             I help startups go from idea to MVP. Over the past 5 years,
             I&apos;ve led research and product strategy across multiple
@@ -84,10 +84,12 @@ export default function ProfileShowcase() {
           </div>
         </div>
 
-        <div className="flex w-full max-w-139 flex-col gap-4 md:gap-6.25 xl:mr-2 xl:justify-self-end">
+        {/* On narrow xl screens the column is under 556px; cap the width
+            (minus the right inset and a gap) so it never slides under the video. */}
+        <div className="flex w-full max-w-139 flex-col gap-4 md:gap-6.25 xl:mr-2 xl:max-w-[min(34.75rem,calc(100%-1.5rem))] xl:justify-self-end">
           <h2
             {...blurIn(3)}
-            className="font-mono text-sm leading-5 tracking-[-0.56px] text-fg uppercase md:hidden"
+            className="font-mono text-sm leading-5 tracking-[-0.14px] text-fg uppercase md:hidden"
           >
             Experience
           </h2>
