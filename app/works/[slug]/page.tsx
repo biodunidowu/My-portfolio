@@ -6,7 +6,10 @@ import { notFound } from "next/navigation";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return caseStudies.map((cs) => ({ slug: cs.slug }));
+  // Cwito has its own page (app/works/cwito), which takes the URL.
+  return caseStudies
+    .filter((cs) => cs.slug !== "cwito")
+    .map((cs) => ({ slug: cs.slug }));
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {

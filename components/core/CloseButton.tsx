@@ -9,13 +9,18 @@ import { hasSiteHistory } from "@/lib/hooks/useSiteHistory";
 /**
  * "/ Close" for page-like overlays (the CV). Goes back to where the visitor
  * came from on this site; arriving from elsewhere (a shared link), it goes to
- * `fallback` instead of leaving the site. Escape does the same.
+ * `fallback` instead of leaving the site. Escape does the same, unless
+ * `closeOnEscape` is off (long reading pages, where Escape shouldn't eject).
  */
 export default function CloseButton({
   fallback = "/",
+  label = "/ Close",
+  closeOnEscape = true,
   className,
 }: {
   fallback?: string;
+  label?: string;
+  closeOnEscape?: boolean;
   className?: string;
 }) {
   const router = useRouter();
@@ -26,6 +31,7 @@ export default function CloseButton({
   }, [router, fallback]);
 
   useEffect(() => {
+    if (!closeOnEscape) return;
     const onKey = (e: KeyboardEvent) => {
       // A dialog open on top (the game, the menu) gets Escape first.
       if (e.key !== "Escape" || e.defaultPrevented) return;
@@ -34,7 +40,7 @@ export default function CloseButton({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [close]);
+  }, [close, closeOnEscape]);
 
   return (
     <button
@@ -45,7 +51,7 @@ export default function CloseButton({
         className,
       )}
     >
-      / Close
+      {label}
     </button>
   );
 }
