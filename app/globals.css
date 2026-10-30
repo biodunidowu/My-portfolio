@@ -384,6 +384,13 @@ html {
   touch-action: manipulation;
 }
 
+/* A long press on a control shouldn't select its label. Links stay
+   selectable and keep their preview: most of them are content. */
+:where(button, [role="button"], [role="tab"], summary) {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* Touch press feedback for plain links and buttons, replacing the tap flash
    (btn-motion and others add their own press scale on top). */
 @media (pointer: coarse) {

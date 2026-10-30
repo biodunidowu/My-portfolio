@@ -279,8 +279,12 @@ export default function TypeToy({ className }: { className?: string }) {
         maxLength={MAX_CHARS}
         autoComplete="off"
         spellCheck={false}
+        autoCorrect="off"
+        autoCapitalize="characters"
+        enterKeyHint="done"
         onChange={(e) => setText(e.target.value.toUpperCase())}
-        className="absolute inset-0 h-full w-full cursor-text opacity-0"
+        // 16px: under that, iOS zooms the page when the input takes focus.
+        className="absolute inset-0 h-full w-full cursor-text text-base opacity-0"
       />
 
       <div
