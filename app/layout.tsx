@@ -1,44 +1,41 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Anton,
-  Geist,
-  Geist_Mono,
-  Meow_Script,
-  Spline_Sans,
-} from "next/font/google";
 import localFont from "next/font/local";
+import {
+  antonCore,
+  antonExt,
+  meowScriptCore,
+  meowScriptExt,
+  splineSansCore,
+  splineSansExt,
+} from "./fonts/subset";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/core/Header";
 
-const splineSans = Spline_Sans({
-  subsets: ["latin"],
-  weight: "variable",
-  variable: "--font-sans",
-});
-
-// Footer type toy ("TYPE SOMETHING").
-const anton = Anton({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-anton",
-});
+// Spline Sans (site text), Anton (footer type toy, 404) and Meow Script are
+// subset by scripts/subset-fonts.mjs; their family stacks are in globals.css.
+// The rest ship as downloaded: their licences don't allow modified copies.
 
 // About page movie quote. Telma by Indian Type Foundry, from Fontshare.
+// Not preloaded: it's on one page, and a preload here would load it on all
+// of them (Next also preloads the fonts of every route it prefetches).
 const telma = localFont({
   src: "./fonts/Telma-Light.woff2",
   weight: "300",
   style: "normal",
   display: "swap",
+  preload: false,
   fallback: ["Georgia", "serif"],
   variable: "--font-quote",
 });
 
+// Older case-study pages (Back / Next project). Not preloaded, as above.
 const noodle = localFont({
   src: "./fonts/BigNoodleTitling-Regular.woff2",
   weight: "400",
   style: "normal",
   display: "swap",
+  preload: false,
   fallback: ["Arial Narrow", "Arial", "sans-serif"],
   variable: "--font-noodle",
 });
@@ -52,29 +49,15 @@ const calloveya = localFont({
   variable: "--font-signature",
 });
 
+// Not on any page today, so not preloaded.
 const canterbury = localFont({
-  src: "./fonts/Canterbury.ttf",
+  src: "./fonts/Canterbury.woff2",
   weight: "400",
   style: "normal",
   display: "swap",
+  preload: false,
   fallback: ["Old English Text MT", "serif"],
   variable: "--font-blackletter",
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const meowScript = Meow_Script({
-  variable: "--font-script",
-  subsets: ["latin"],
-  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -105,15 +88,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={cn(
         "h-full",
         "antialiased",
-        geistSans.variable,
-        geistMono.variable,
-        noodle.variable,
-        meowScript.variable,
-        splineSans.variable,
+        splineSansCore.variable,
+        splineSansExt.variable,
+        antonCore.variable,
+        antonExt.variable,
+        meowScriptCore.variable,
+        meowScriptExt.variable,
         calloveya.variable,
         canterbury.variable,
-        anton.variable,
         telma.variable,
+        noodle.variable,
         "font-sans",
       )}
       data-theme="light"

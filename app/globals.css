@@ -141,6 +141,45 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Subset fonts (app/fonts/subset, from scripts/subset-fonts.mjs). Each is a
+   core file plus an extended file with its own unicode-range; the fallback
+   comes after both, or it would draw the extended characters first. These
+   fallback faces are the ones next/font/google generated for the full fonts,
+   kept as they were. Unlayered, so they win over the theme layer's
+   self-references (--font-sans: var(--font-sans)). */
+@font-face {
+  font-family: "Spline Sans Fallback";
+  src: local("Arial");
+  ascent-override: 95.03%;
+  descent-override: 23.33%;
+  line-gap-override: 0%;
+  size-adjust: 101.39%;
+}
+
+@font-face {
+  font-family: "Anton Fallback";
+  src: local("Arial");
+  ascent-override: 129.7%;
+  descent-override: 36.29%;
+  line-gap-override: 0%;
+  size-adjust: 90.69%;
+}
+
+@font-face {
+  font-family: "Meow Script Fallback";
+  src: local("Arial");
+  ascent-override: 114.56%;
+  descent-override: 51.07%;
+  line-gap-override: 0%;
+  size-adjust: 72.45%;
+}
+
+:root {
+  --font-sans: var(--font-splineSans-core), var(--font-splineSans-ext), "Spline Sans Fallback";
+  --font-anton: var(--font-anton-core), var(--font-anton-ext), "Anton Fallback";
+  --font-script: var(--font-meowScript-core), var(--font-meowScript-ext), "Meow Script Fallback";
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
