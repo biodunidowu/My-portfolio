@@ -82,16 +82,6 @@ export const cwitoCaseStudy = {
     { label: "Team", value: "PM, mobile, web and backend engineers, support, and me" },
     { label: "Timeline", value: "2 weeks" },
   ],
-  hero: {
-    layout: "row",
-    gap: 40,
-    height: 800,
-    shots: [
-      phone("hero-prompt.webp", "Launch prompt over the Cwito home screen: “You can now earn rewards on Cwito”", 326, 706),
-      phone("hero-center.webp", "Reward Center with cashback and points balances, three ways to earn, and tasks", 326, 706),
-      phone("hero-spin.webp", "Spin and win wheel with cashback and points prizes", 332, 718),
-    ],
-  } satisfies Visual,
   tldr: {
     body: "Cwito lets people buy and sell crypto and get paid straight to their bank. To grow and keep users, I designed a Reward Center: cashback for trading, and points for referrals, streaks and spin. Version one felt overly designed, so I simplified it before launch.",
     resultLead: "The result:",
