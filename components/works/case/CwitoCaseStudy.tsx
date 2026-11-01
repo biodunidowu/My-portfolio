@@ -11,6 +11,7 @@ import {
   type Section,
 } from "@/lib/constants/cwitoCaseStudy";
 import SectionRail from "./SectionRail";
+import CwitoHeroDemo from "./CwitoHeroDemo";
 import ShotPanel from "./ShotPanel";
 
 const eyebrow = "font-mono text-xs leading-normal font-medium tracking-[0.48px] text-fg-muted uppercase";
@@ -161,7 +162,7 @@ export default function CwitoCaseStudy() {
       </header>
 
       <div {...stagger(5)} className="mx-auto mt-10 w-full max-w-282 px-4 md:px-8 lg:px-0">
-        <ShotPanel visual={cs.hero} priority panelClassName="rounded-2xl" />
+        <CwitoHeroDemo />
       </div>
 
       <div className="mt-10 flex flex-col gap-10 md:gap-12">
